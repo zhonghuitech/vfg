@@ -9,7 +9,7 @@
           <div v-for="(element, index) in group.eles" :key="index" class="components-item"
             @click="addComponent(element)">
             <div class="components-body">
-              <svg-icon class-name="search-icon" icon-class="search" />
+              <svg-icon :icon-class="element.tagIcon" />
               {{ element.name }}
             </div>
           </div>

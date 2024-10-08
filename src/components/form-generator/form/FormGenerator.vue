@@ -32,10 +32,6 @@
               <delete />
             </el-icon>清空
           </div>
-          <div class="btn" @click="clearn()">
-            <svg-icon icon-class="component" />输入型组件
-          </div>
-
           <div class="btn">
             <el-switch v-model="device" active-text="电脑模式" inactive-text="手机模式" active-value="pc"
               inactive-value="mobile" />

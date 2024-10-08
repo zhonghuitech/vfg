@@ -27,6 +27,7 @@ app.use(FormBuilder)
 app.component("draggable", VueDraggableNext);
 app.component("draggable-warp", DraggableWarp);
 app.component("option-input", OptionInput);
+import 'virtual:svg-icons-register'
 app.use(elementIcons)
 app.component("svg-icon", SvgIcon);
 app.component("upload-warp", UploadWarp);
