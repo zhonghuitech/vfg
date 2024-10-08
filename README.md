@@ -1,6 +1,17 @@
 # form-generator
 
-This template should help get you started developing with Vue 3 in Vite.
+This package vue3 element-plus form generator.
+
+## How to dev
+```
+pnpm install
+pnpm dev
+```
+
+## Install
+```
+pnpm install @zhc/form-generator
+```
 
 ## Recommended IDE Setup
 
