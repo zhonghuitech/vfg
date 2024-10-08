@@ -1,11 +1,12 @@
 import TestButton from "./button/index.vue";
+import FormGenerator from "./form/FormGenerator.vue"
 
 // 按需引入
-export { TestButton };
+export { TestButton, FormGenerator };
 
-const component = [TestButton];
+const component = [TestButton, FormGenerator];
 
-const FormGenerator = {
+const FormBuilder = {
     install(App) {
         component.forEach((item) => {
             App.component(item.name, item);
@@ -13,4 +14,4 @@ const FormGenerator = {
     },
 };
 
-export default FormGenerator;
+export default FormBuilder;
