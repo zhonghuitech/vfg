@@ -1,5 +1,5 @@
 <template>
-  <TestButton size="large" type="primary">我是测试组件</TestButton>
+  <DemoButton size="large" type="primary">我是测试组件</DemoButton>
 </template>
 
 <script lang="ts" setup>

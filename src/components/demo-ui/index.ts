@@ -1,14 +1,14 @@
-import TestButton from "./button/index.vue";
+import DemoButton from "./button/index.vue";
 
 // 按需引入
-export { TestButton };
+export { DemoButton };
 
-const component = [TestButton];
+const component = [DemoButton];
 
 const FormGenerator = {
     install(App) {
         component.forEach((item) => {
-            App.component(item.name, item);
+            App.component(item.name, DemoButton);
         });
     },
 };
