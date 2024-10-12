@@ -1,4 +1,5 @@
 import DemoButton from "./button/index.vue";
+import type { App, Plugin } from 'vue';
 
 // 按需引入
 export { DemoButton };
@@ -6,9 +7,9 @@ export { DemoButton };
 const component = [DemoButton];
 
 const FormGenerator = {
-    install(App) {
-        component.forEach((item) => {
-            App.component(item.name, DemoButton);
+    install(app: App) {
+        component.forEach((item: any) => {
+            app.component(item.name, DemoButton as any);
         });
     },
 };

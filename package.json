@@ -1,6 +1,7 @@
 {
   "name": "@zhc/vfg",
   "version": "0.0.1",
+  "description": "vue3 form generator.",
   "private": true,
   "type": "module",
   "scripts": {

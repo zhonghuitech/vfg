@@ -24,13 +24,13 @@ app.use(ElementPlus, {
 app.use(DemoUI)
 app.use(FormBuilder)
 
-app.component("draggable", VueDraggableNext);
-app.component("draggable-warp", DraggableWarp);
-app.component("option-input", OptionInput);
+app.component("draggable", VueDraggableNext as any);
+app.component("draggable-warp", DraggableWarp as any);
+app.component("option-input", OptionInput as any);
 import 'virtual:svg-icons-register'
 app.use(elementIcons)
-app.component("svg-icon", SvgIcon);
-app.component("upload-warp", UploadWarp);
+app.component("svg-icon", SvgIcon as any);
+app.component("upload-warp", UploadWarp as any);
 
 app.directive('highlight', function (el) {
     let blocks = el.querySelectorAll('pre code');

@@ -5,7 +5,10 @@
     "vitest.config.*",
     "cypress.config.*",
     "nightwatch.conf.*",
-    "playwright.config.*"
+    "playwright.config.*",
+    "src/**/*.ts",
+    "vite/**/*.ts",
+    "src/**/*.vue"
   ],
   "compilerOptions": {
     "composite": true,
