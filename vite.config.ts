@@ -12,9 +12,8 @@ export default defineConfig(({ mode, command }) => {
   return {
     plugins: createVitePlugins(env, mode, command === "build"),
     build: {
-      outDir: 'vfg',
       lib: {
-        entry: path.resolve(__dirname, "./src/components/form-generator/index.ts"), //指定组件编译入口文件
+        entry: path.resolve(__dirname, "./src/components/VFG/index.ts"), //指定组件编译入口文件
         name: "vfg",
         fileName: "vfg",
       },
