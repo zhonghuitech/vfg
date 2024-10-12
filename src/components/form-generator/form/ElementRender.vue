@@ -23,7 +23,7 @@
     </el-form-item>
   </template>
 
-  <template v-else>
+  <template v-else-if="tag == 'el-button'">
     <div :style="hightLight(__ID)">
       <component :is="tag" v-bind="attrs" v-model="vm" v-on="events">
         <template v-for="(son, index) in childrens" :key="'son' + index">
@@ -36,6 +36,18 @@
       </component>
     </div>
   </template>
+
+  <template v-else>
+    <component :is="tag" v-bind="attrs" v-model="vm" v-on="events" :style="hightLight(__ID)">
+      <template v-for="(son, index) in childrens" :key="'son' + index">
+        <element-render :currentID="currentID" v-bind="son" @update="changeValue" @click.stop="selected(son.__ID)">
+        </element-render>
+      </template>
+      <template v-for="(val, name) in slots" v-slot:[name]>
+        {{ val }}
+      </template>
+    </component>
+  </template>
 </template>
 
 <script>
@@ -45,7 +57,6 @@ import { CopyDocument, Delete } from "@element-plus/icons-vue";;
 export default defineComponent({
   name: "element-render",
   components: { InputIcon, CopyDocument, Delete },
-
   emits: ["update", "updateChild", "rm", "deleteItem", "copyItem"],
   props: {
     eleName: String,

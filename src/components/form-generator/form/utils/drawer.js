@@ -80,7 +80,7 @@ const _clone = function (obj) {
         }
     }
 
-    if (Object.keys(obj).indexOf("events") > -1 && Object.keys(obj.events)) {
+    if (obj && Object.keys(obj).indexOf("events") > -1 && Object.keys(obj.events)) {
         _c.events = obj.events;
     }
 
