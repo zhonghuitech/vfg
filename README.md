@@ -7,13 +7,7 @@
 
 Vue3 element-plus form generator.
 
-## How to dev
-```
-pnpm install
-pnpm dev
-```
-
-## Install
+## Usage
 ```
 pnpm install vfg
 ```
@@ -21,23 +15,23 @@ pnpm install vfg
 ## Project Setup
 
 ```sh
-npm install
+pnpm install
 ```
 
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+pnpm dev
 ```
 
 ### Type-Check, Compile and Minify for Production
 
 ```sh
-npm run build
+pnpm build
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
-npm run test:unit
+pnpm test:unit
 ```
