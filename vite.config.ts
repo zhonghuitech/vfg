@@ -15,7 +15,7 @@ export default defineConfig(({ mode, command }) => {
       lib: {
         entry: path.resolve(__dirname, "./src/components/VFG/index.ts"), //指定组件编译入口文件
         name: "vfg",
-        fileName: "vfg",
+        fileName: (format) => `lib.${format}.js`
       },
       rollupOptions: {
         // 确保外部化处理那些你不想打包进库的依赖

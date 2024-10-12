@@ -1,9 +1,18 @@
 {
   "name": "vfg",
-  "version": "0.0.1",
-  "description": "vue3 form generator.",
+  "version": "0.0.2",
+  "description": "vue3 form generator (element-plus).",
   "private": false,
-  "main": "vfg.js",
+  "main": "dist/lib.umd.js",
+  "module": "dist/lib.es.js",
+  "style": "dist/style.css",
+  "exports": {
+    ".": {
+      "import": "dist/lib.es.js",
+      "require": "dist/lib.umd.js"
+    },
+    "./*": "./*"
+  },
   "type": "module",
   "repository": {
     "type": "git",
@@ -13,7 +22,8 @@
     "vue",
     "form",
     "vue3",
-    "generator"
+    "generator",
+    "element-plus"
   ],
   "author": "Aborn Jiang",
   "license": "MIT",
