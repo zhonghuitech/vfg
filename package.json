@@ -2,6 +2,10 @@
   "name": "vfg",
   "version": "0.0.2",
   "description": "vue3 form generator (element-plus).",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
   "private": false,
   "main": "dist/lib.umd.js",
   "module": "dist/lib.es.js",
@@ -13,7 +17,6 @@
     },
     "./*": "./*"
   },
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zhonghuitech/form-generator.git"

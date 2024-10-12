@@ -13,7 +13,6 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/googlecode.css' //样式文件
 
-import DemoUI from "./components/demo-ui"; //导入
 import { VFG } from "./components/VFG"
 
 const app = createApp(App);
@@ -21,7 +20,6 @@ app.use(ElementPlus, {
     locale: zhCn,
 });
 
-app.use(DemoUI)
 app.use(VFG)
 
 app.component("draggable", VueDraggableNext as any);
