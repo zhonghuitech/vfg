@@ -1,5 +1,5 @@
 {
-  "name": "@zhc/form-generator",
+  "name": "@zhc/vfg",
   "version": "0.0.1",
   "private": true,
   "type": "module",

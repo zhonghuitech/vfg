@@ -10,7 +10,7 @@ pnpm dev
 
 ## Install
 ```
-pnpm install @zhc/form-generator
+pnpm install @zhc/vfg
 ```
 
 ## Recommended IDE Setup
