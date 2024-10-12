@@ -1,6 +1,6 @@
 {
   "name": "vfg",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "vue3 form generator (element-plus).",
   "type": "module",
   "files": [
@@ -37,10 +37,12 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
+    "bd": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force"
+    "type-check": "vue-tsc --build --force",
+    "pub": "npm publish --access public"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
