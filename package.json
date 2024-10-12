@@ -1,9 +1,26 @@
 {
-  "name": "@zhc/vfg",
+  "name": "vfg",
   "version": "0.0.1",
   "description": "vue3 form generator.",
-  "private": true,
+  "private": false,
+  "main": "vfg.js",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhonghuitech/form-generator.git"
+  },
+  "keywords": [
+    "nanta",
+    "antd",
+    "vue3",
+    "nanta-ui"
+  ],
+  "author": "Aborn Jiang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhonghuitech/form-generator/issues"
+  },
+  "homepage": "https://github.com/zhonghuitech/form-generator#readme",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
