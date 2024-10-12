@@ -6,7 +6,6 @@ const elCol = {
     __openRules: false,
     tagIcon: 'row',
     __ID: '',
-
     defaultvalue: [],
     attrs: {
         span: helper.input_range("列数", 1, 24, 8),
@@ -71,7 +70,6 @@ export default {
             value: 'space-between'
         }
         ], "start"),
-
         align: helper.input_radio("align", [{
             key: 'top',
             value: 'top'
@@ -81,7 +79,7 @@ export default {
         }, {
             key: 'bottom',
             value: 'bottom'
-        }]),
+        }], "middle"),
     },
 
     actions: {
