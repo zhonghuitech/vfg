@@ -10,10 +10,10 @@
     "url": "git+https://github.com/zhonghuitech/form-generator.git"
   },
   "keywords": [
-    "nanta",
-    "antd",
+    "vue",
+    "form",
     "vue3",
-    "nanta-ui"
+    "generator"
   ],
   "author": "Aborn Jiang",
   "license": "MIT",
