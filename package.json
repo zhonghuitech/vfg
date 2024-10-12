@@ -1,6 +1,6 @@
 {
   "name": "vfg",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "vue3 form generator (element-plus).",
   "type": "module",
   "files": [
