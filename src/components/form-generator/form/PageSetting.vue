@@ -19,8 +19,7 @@
 
               <el-divider>验证规则</el-divider>
               <rules-input :openRule="currentItem.__openRules" v-if="currentItem.tag !== 'draggable'"
-                :fieldName="currentItem.attrs.fieldName.__val__" v-model="modelValue.formConf.__rules"></rules-input>
-
+                :fieldName="currentItem.attrs.fieldName && currentItem.attrs.fieldName.__val__" v-model="modelValue.formConf.__rules"></rules-input>
               <el-button type="primary" @click="deleteItem(currentItem.__ID)">删除
               </el-button>
             </template>

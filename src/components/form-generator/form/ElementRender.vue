@@ -24,15 +24,17 @@
   </template>
 
   <template v-else>
-    <component :is="tag" v-bind="attrs" v-model="vm" v-on="events" :style="hightLight(__ID)">
-      <template v-for="(son, index) in childrens" :key="'son' + index">
-        <element-render :currentID="currentID" v-bind="son" @update="changeValue" @click.stop="selected(son.__ID)">
-        </element-render>
-      </template>
-      <template v-for="(val, name) in slots" v-slot:[name]>
-        {{ val }}
-      </template>
-    </component>
+    <div :style="hightLight(__ID)">
+      <component :is="tag" v-bind="attrs" v-model="vm" v-on="events">
+        <template v-for="(son, index) in childrens" :key="'son' + index">
+          <element-render :currentID="currentID" v-bind="son" @update="changeValue" @click.stop="selected(son.__ID)">
+          </element-render>
+        </template>
+        <template v-for="(val, name) in slots" v-slot:[name]>
+          {{ val }}
+        </template>
+      </component>
+    </div>
   </template>
 </template>
 
@@ -62,7 +64,6 @@ export default defineComponent({
     slots: Object,
     ctrlBtn: Boolean,
     currentID: String,
-
     childrens: Array,
     defaultvalue: {
       default: undefined,
@@ -84,10 +85,9 @@ export default defineComponent({
 
     watch(vm, () => {
       if (props.tag == "draggable") {
-        console.log(vm.value, "====", props.__ID);
-
+        // console.log(vm.value, "====", props.__ID);
         updateChild(vm.value, props.__ID);
-        ///拖拽组件 触发更新子组件事件
+        // 拖拽组件 触发更新子组件事件
         return;
       }
       context.emit("update", vm.value, props.eleName, props.__ID);

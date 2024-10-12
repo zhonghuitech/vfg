@@ -72,7 +72,7 @@ export default defineComponent({
       let ini = {};
 
       for (let attr in props.modelValue.formConf.attrs) {
-        if (attr.substr(0, 2) != "__") {
+        if (attr.substring(0, 2) != "__") {
           ini[attr] = props.modelValue.formConf.attrs[attr].__val__;
         }
       }
