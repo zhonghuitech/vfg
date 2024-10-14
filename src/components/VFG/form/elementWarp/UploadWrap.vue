@@ -42,7 +42,7 @@
 import { computed, defineComponent, ref } from "vue";
 import { Plus } from "@element-plus/icons-vue";
 export default defineComponent({
-  name: "UploadWarp",
+  name: "UploadWrap",
   emits: ["update:modelValue"],
   components: { Plus },
   props: {

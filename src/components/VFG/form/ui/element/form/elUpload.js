@@ -2,7 +2,7 @@ import helper from "../../helper.js";
 
 export default {
         '__ID': '',
-        tag: "upload-warp",
+        tag: "upload-wrap",
         name: "上传文件",
         __openRules: false,
         tagIcon: "input",

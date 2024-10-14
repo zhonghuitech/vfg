@@ -7,7 +7,7 @@ import * as ElIcon from '@element-plus/icons-vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
 import OptionInput from "@/components/VFG/form/OptionInput.vue";
-import UploadWarp from "@/components/VFG/form/elementWarp/UploadWarp.vue";
+import UploadWrap from "@/components/VFG/form/elementWarp/UploadWrap.vue";
 
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
 import hljs from 'highlight.js';
@@ -28,7 +28,7 @@ Object.keys(ElIcon).forEach((key) => {
     app.component(key, ElIcon[key as keyof typeof ElIcon])
 })
 app.component("svg-icon", SvgIcon as any);
-app.component("upload-warp", UploadWarp as any);
+app.component("upload-wrap", UploadWrap as any);
 
 app.directive('highlight', function (el) {
     let blocks = el.querySelectorAll('pre code');
