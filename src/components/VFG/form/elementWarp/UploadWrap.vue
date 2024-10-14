@@ -1,46 +1,48 @@
 <template>
-  <template v-if="uploadType == 'image'">
-    <el-upload class="avatar-uploader" v-bind="attrs" :file-list="files">
-      <template v-if="attrs.limit == 1">
-        <template v-if="files.length > 0">
-          <img v-for="f in files" :src="f.url" class="avatar" :key="f.url" />
+  <div>
+    <template v-if="uploadType == 'image'">
+      <el-upload class="avatar-uploader" v-bind="attrs" :file-list="files">
+        <template v-if="attrs.limit == 1">
+          <template v-if="files.length > 0">
+            <img v-for="f in files" :src="f.url" class="avatar" :key="f.url" />
+          </template>
+
+          <el-icon v-else class="avatar-uploader-icon">
+            <plus />
+          </el-icon>
         </template>
+        <i v-else class="el-icon-upload">
+          <div class="el-upload__text" style="font-size: 14px">
+            <span v-if="drag"> 拖拽或者 </span><em>点击上传</em>
+          </div>
+          <div class="el-upload__tip" v-if="tip">
+            {{ tip }}
+          </div>
+        </i>
+      </el-upload>
+    </template>
 
-        <el-icon v-else class="avatar-uploader-icon">
-          <plus />
-        </el-icon>
-      </template>
-      <i v-else class="el-icon-upload">
-        <div class="el-upload__text" style="font-size: 14px">
-          <span v-if="drag"> 拖拽或者 </span><em>点击上传</em>
-        </div>
-        <div class="el-upload__tip" v-if="tip">
-          {{ tip }}
-        </div>
-      </i>
-    </el-upload>
-  </template>
+    <template v-else-if="uploadType == 'file'" :file-list="files">
+      <el-upload v-bind="attrs">
+        <el-button size="small" type="primary">Click to upload</el-button>
+        <template #tip>
+          <div class="el-upload__tip">
+            {{ tip }}
+          </div>
+        </template>
+      </el-upload>
+    </template>
 
-  <template v-else-if="uploadType == 'file'" :file-list="files">
-    <el-upload v-bind="attrs">
-      <el-button size="small" type="primary">Click to upload</el-button>
-      <template #tip>
-        <div class="el-upload__tip">
-          {{ tip }}
-        </div>
-      </template>
-    </el-upload>
-  </template>
-
-  <el-dialog v-model="dialogVisible">
-    <img style="width: 100%" :src="dialogImageUrl" alt="" />
-  </el-dialog>
+    <el-dialog v-model="dialogVisible">
+      <img style="width: 100%" :src="dialogImageUrl" alt="" />
+    </el-dialog>
+  </div>
 </template>
 <script>
 import { computed, defineComponent, ref } from "vue";
 import { Plus } from "@element-plus/icons-vue";
 export default defineComponent({
-  name: "UploadWarp",
+  name: "UploadWrap",
   emits: ["update:modelValue"],
   components: { Plus },
   props: {

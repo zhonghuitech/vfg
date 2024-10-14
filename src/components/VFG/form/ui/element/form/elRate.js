@@ -5,7 +5,7 @@ export default {
         name: "Rate 评分",
         __openRules: true,
         tagIcon: "rate",
-        defaultvalue: "",
+        defaultvalue: 0,
         ctrlBtn: true,
         formItem: {
                 showLabel: helper.input_boolean("显示 label", true),

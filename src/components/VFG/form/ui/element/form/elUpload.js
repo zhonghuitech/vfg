@@ -2,12 +2,12 @@ import helper from "../../helper.js";
 
 export default {
         '__ID': '',
-        tag: "upload-warp",
+        tag: "upload-wrap",
         name: "上传文件",
         __openRules: false,
         tagIcon: "input",
         ctrlBtn: true,
-        defaultvalue: "",
+        defaultvalue: [],
         formItem: {
                 showLabel: helper.input_boolean("显示 label", true),
                 labelWidth: helper.input_number("label 宽", 100),
@@ -15,14 +15,11 @@ export default {
         },
         attrs: {
                 fieldName: helper.input_text("字段名", "字段名"),
-
                 'uploadType': helper.input_radio('上传类型', [{ "value": "图片", "key": "image" }, { "value": "文件", "key": "file" }], 'image'),
-
                 'action': helper.input_text('上传接口', 'https://www.vkandian.cn/index.php/index/upload'),
                 'multiple': helper.input_boolean('多文件上传', ''),
                 'name': helper.input_text('文件字段名', 'file'),
                 'tip': helper.input_text('上传提示', ''),
-
                 'show-file-list': helper.input_boolean('是否显示文件列表', true),
                 'drag': helper.input_boolean('拖拽上传', false),
                 'accept': helper.input_text('文件类型', ''),
@@ -36,11 +33,4 @@ export default {
         },
         props: {},
         childrens: []
-
-
-
-
-
-
-
 }

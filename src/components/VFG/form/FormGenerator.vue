@@ -5,7 +5,7 @@
         <div class="logo-wrapper">
           <div class="logo">
             Vue3 Form Generator
-            <a class="github" href="https://github.com/zhonghuitech/form-generator" target="_blank">
+            <a class="github" href="https://github.com/zhonghuitech/vfg" target="_blank">
               <img src="https://github.githubassets.com/pinned-octocat.svg" alt />
             </a>
           </div>
@@ -135,9 +135,9 @@ export default defineComponent({
     const settings = reactive(loadSetting());
 
     const update = function (e, ele) {
-      if (ele && ele.element) {
+      if (ele) {
         // 选中当前
-        settings.current = ele.element.__ID
+        settings.current = ele.__ID
       }
       settings.formConf = e.formConf;
       settings.drawingList = e.drawingList;
