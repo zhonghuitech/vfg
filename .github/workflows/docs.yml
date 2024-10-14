@@ -33,7 +33,7 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install @root dependencies.
-        run: pnpm install
+        run: pnpm install && pnpm up vfg
 
       - name: Install @playground dependencies
         run: pnpm install
