@@ -1,13 +1,14 @@
 <template>
   <el-col v-bind="$attrs">
-    <draggable v-bind="ini" :modelValue="vm" @update:modelValue="update">
+    <VueDraggable v-bind="ini" :modelValue="vm" @update:modelValue="update">
       <slot></slot>
-    </draggable>
+    </VueDraggable>
   </el-col>
 </template>
 
 <script>
 import { defineComponent, inject, reactive, ref, watch } from "vue";
+import { VueDraggable } from 'vue-draggable-plus'
 
 export default defineComponent({
   name: "DraggableWarp",

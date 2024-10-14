@@ -4,7 +4,6 @@ import ElementPlus from 'element-plus'; // 三方依赖
 import 'element-plus/theme-chalk/index.css';
 import SvgIcon from '@/components/SvgIcon/index.vue'
 import * as ElIcon from '@element-plus/icons-vue'
-import { VueDraggableNext } from "vue-draggable-next";
 import DraggableWarp from "@/components/VFG/form/DraggableWarp.vue";
 import OptionInput from "@/components/VFG/form/OptionInput.vue";
 import UploadWarp from "@/components/VFG/form/elementWarp/UploadWarp.vue";
@@ -22,7 +21,6 @@ app.use(ElementPlus, {
 
 app.use(VFG)
 
-app.component("draggable", VueDraggableNext as any);
 app.component("draggable-warp", DraggableWarp as any);
 app.component("option-input", OptionInput as any);
 import 'virtual:svg-icons-register'
