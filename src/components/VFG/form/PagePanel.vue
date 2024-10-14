@@ -3,8 +3,9 @@
     <div>
       <template v-for="(group, name) in elements" :key="name">
         <el-divider> {{ group.title }} </el-divider>
-        <draggable class="components-draggable" v-model="group.eles"
-          :group="{ name: 'componentsGroup', pull: 'clone', put: false }" :clone="copy" draggable=".components-item"
+        <draggable class="components-draggable" v-model="group.eles" animation="300" ghostClass="ghost"
+          :group="{ name: 'componentsGroup', pull: 'clone', put: false }" :clone="copy" 
+          :sort="true"
            @end="onEnd">
           <div v-for="(element, index) in group.eles" :key="index" class="components-item"
             @click="addComponent(element)">
