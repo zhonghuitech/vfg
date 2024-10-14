@@ -2,14 +2,13 @@
   <!-- {{ modelValue.drawingList }} -->
 
   <el-form :model="formModel" v-bind="formSetting" :gutter="modelValue.formConf.gutter">
-    <VueDraggable class="drawing-board" style="padding: 10px; height: 100%" :list="modelValue.drawingList" :animation="340"
+    <draggable class="drawing-board" style="padding: 10px; height: 100%" :list="modelValue.drawingList" :animation="340"
       group="componentsGroup" @change="onEnd">
       <template v-for="(item, index) in conf.drawingList" :key="item.__ID + index">
         <!-- {{item}} -->
-        <element-render @click.stop="selected(item.__ID)" @update="changeValue" :currentID="modelValue.current" style="padding-top: 10px;padding-bottom: 10px;"
-          v-bind="item" class="item-tool-box"></element-render>
+        <element-render @click.stop="selected(item.__ID)" @update="changeValue" :currentID="modelValue.current"
+          style="padding-top: 10px;padding-bottom: 10px;" v-bind="item" class="item-tool-box"></element-render>
       </template>
-
       <el-empty v-if="conf.drawingList.length < 1" description="从左侧拖入或点选组件进行表单设计"></el-empty>
 
       <template v-else>
@@ -18,7 +17,7 @@
           <el-button>取消</el-button>
         </el-form-item>
       </template>
-    </VueDraggable>
+    </draggable>
   </el-form>
 </template>
 
@@ -28,14 +27,13 @@ import { deepClone, isObjectArray } from "./utils/func.js";
 import { defineComponent, reactive, computed, inject, watch } from "vue";
 import { initRender } from "./utils/drawer.js";
 import ElementRender from "./ElementRender.vue";
-import { VueDraggable } from 'vue-draggable-plus'
 
 export default defineComponent({
   name: "PageGenerator",
   props: ["modelValue"],
   emits: ["update:modelValue"],
 
-  components: { ElementRender, VueDraggable },
+  components: { ElementRender },
 
   setup(props, context) {
     const selected = inject("selected");
