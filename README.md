@@ -11,13 +11,13 @@ VFG: Vue3 Form Generator (based on Element-Plus).
 
 ## Usage
 
-Install vfg
+1. Install `vfg`
 
 ```sh
 pnpm install vfg
 ```
 
-Config `main.js`
+2. Config `main.js`
 
 ```js
 import { createApp } from "vue";
@@ -61,7 +61,20 @@ app.directive("highlight", function (el) {
 app.mount("#app");
 ```
 
-example: [vfg-usage-demo](https://github.com/zhonghuitech/vfg-usage-demo)
+3. Page use vfg
+```vue
+<template>
+  <div>
+    <FormGenerator device="pc" />
+  </div>
+</template>
+
+<script lang="ts" setup>
+</script>
+``` 
+
+4. Full example
+[vfg-usage-demo](https://github.com/zhonghuitech/vfg-usage-demo)
 
 ## Project Setup
 
