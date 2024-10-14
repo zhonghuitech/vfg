@@ -1,4 +1,5 @@
 # VFG
+[![docs](https://github.com/zhonghuitech/vfg/actions/workflows/docs.yml/badge.svg)](https://github.com/zhonghuitech/vfg/actions/workflows/docs.yml)
 <p>
      <a href="https://www.npmjs.com/package/vfg"><img src="https://badgen.net/npm/dm/vfg" alt="Download"></a>
      <a href="https://www.npmjs.com/package/vfg"><img src="https://badgen.net/npm/v/vfg" alt="Version"></a>
