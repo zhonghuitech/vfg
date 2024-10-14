@@ -135,9 +135,9 @@ export default defineComponent({
     const settings = reactive(loadSetting());
 
     const update = function (e, ele) {
-      if (ele && ele.element) {
+      if (ele) {
         // 选中当前
-        settings.current = ele.element.__ID
+        settings.current = ele.__ID
       }
       settings.formConf = e.formConf;
       settings.drawingList = e.drawingList;

@@ -2,7 +2,7 @@
   <!-- {{ modelValue.drawingList }} -->
 
   <el-form :model="formModel" v-bind="formSetting" :gutter="modelValue.formConf.gutter">
-    <draggable class="drawing-board" style="padding: 10px; height: 100%" :list="modelValue.drawingList" :animation="340"
+    <draggable class="drawing-board" style="padding: 10px; height: 100%" v-model="modelValue.drawingList" :animation="340"
       group="componentsGroup" @change="onEnd">
       <template v-for="(item, index) in conf.drawingList" :key="item.__ID + index">
         <!-- {{item}} -->
@@ -39,7 +39,9 @@ export default defineComponent({
     const selected = inject("selected");
     const updateDefaultValue = inject("updateDefaultValue");
     const onEnd = function (e) {
-      context.emit("update:modelValue", props.modelValue, e.added);
+      console.log('onEnd...')
+      console.log(props.modelValue)
+      context.emit("update:modelValue", props.modelValue, e.clonedData);
     };
     const conf = initRender(props.modelValue);
     const formModel = reactive({});
