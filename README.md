@@ -31,7 +31,7 @@ import zhCn from "element-plus/es/locale/lang/zh-cn";
 import hljs from "highlight.js";
 import "highlight.js/styles/googlecode.css"; // hl style.
 
-import { VFG, SvgIcon, DraggableWarp, OptionInput, UploadWarp } from "vfg";
+import { VFG, SvgIcon, OptionInput, UploadWarp } from "vfg";
 import "vfg/dist/style.css";
 
 const app = createApp(App);
@@ -42,7 +42,6 @@ app.use(ElementPlus, {
 app.use(VFG);
 app.component("svg-icon", SvgIcon);
 app.component("draggable", VueDraggableNext);
-app.component("draggable-warp", DraggableWarp);
 app.component("option-input", OptionInput);
 import "virtual:svg-icons-register";
 Object.keys(ElIcon).forEach((key) => {

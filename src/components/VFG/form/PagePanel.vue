@@ -23,7 +23,6 @@
 import cloneComponent from "./utils/cloneComponent.js";
 import { elements } from "./ui/index.js";
 import { defineComponent, ref } from "vue";
-import { VueDraggable } from 'vue-draggable-plus'
 
 export default defineComponent({
   name: "PagePanel",
