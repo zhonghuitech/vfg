@@ -33,10 +33,10 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install @root dependencies.
-        run: pnpm install && pnpm up vfg
+        run: pnpm install 
 
       - name: Install @playground dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile && pnpm up vfg
         working-directory: ./playground
 
       - name: Generate
