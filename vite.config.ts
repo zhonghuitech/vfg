@@ -10,6 +10,13 @@ export default defineConfig(({ mode, command }) => {
   const { VITE_APP_ENV } = env;
 
   return {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler' // or "modern"
+        }
+      }
+    },
     plugins: createVitePlugins(env, mode, command === "build"),
     build: {
       lib: {
