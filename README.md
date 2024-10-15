@@ -81,10 +81,10 @@ app.mount("#app");
 pnpm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compile and Hot-Reload for playground
 
 ```sh
-pnpm dev
+pnpm pg
 ```
 
 ### Type-Check, Compile and Minify for Production
