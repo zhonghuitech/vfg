@@ -9,7 +9,6 @@ import {
 
 import {
     js_beautify,
-
     html_beautify
 } from 'js-beautify'
 
