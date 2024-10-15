@@ -10,11 +10,12 @@ app.use(ElementPlus, {
     locale: zhCn,
 });
 Object.keys(ElIcon).forEach((key) => {
-    app.component(key, ElIcon[key])
+    app.component(key, ElIcon[key as keyof typeof ElIcon])
 })
 
 // vfg settings.
 // import { setupVFG } from "vfg"
+// @ts-ignore
 import { setupVFG } from '/@/components/main';
 
 import 'vfg/dist/assets/css/style.css';
