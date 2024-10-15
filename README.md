@@ -53,7 +53,7 @@ app.directive("highlight", function (el) {
   let blocks = el.querySelectorAll("pre code");
   setTimeout(() => {
     blocks.forEach((block) => {
-      hljs.highlightBlock(block);
+      hljs.highlightElement(block);
     });
   }, 200);
 });

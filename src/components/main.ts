@@ -4,6 +4,7 @@ import SvgIcon from '@/components/SvgIcon/index.vue'
 import 'virtual:svg-icons-register'
 import { VueDraggable } from 'vue-draggable-plus'
 import hljs from 'highlight.js';
+import 'highlight.js/styles/googlecode.css'
 
 export { VFG, SvgIcon, OptionInput, UploadWrap }
 export function setupVFG(app: App<Element>) {
@@ -14,7 +15,7 @@ export function setupVFG(app: App<Element>) {
         let blocks = el.querySelectorAll('pre code');
         setTimeout(() => {
             blocks.forEach((block: any) => {
-                hljs.highlightBlock(block)
+                hljs.highlightElement(block)
             })
         }, 200)
     })

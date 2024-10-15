@@ -165,7 +165,7 @@ export default defineComponent({
      */
     const hightLight = function (s) {
       if (settings.current == s) {
-        return { border: "1px dashed #f6f7ff", backgroundColor: "#f6f7ff" , "border-radius": "6px", padding:"1px"};
+        return { border: "1px dashed #f6f7ff", backgroundColor: "#f6f7ff", "border-radius": "6px", padding: "1px" };
       }
       return {};
     };
