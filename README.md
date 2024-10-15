@@ -25,7 +25,7 @@ import App from "./App.vue";
 import ElementPlus from "element-plus"; // based on element-plus.
 import "element-plus/theme-chalk/index.css";
 import * as ElIcon from "@element-plus/icons-vue";
-import { VueDraggableNext } from "vue-draggable-next";
+import { VueDraggable } from 'vue-draggable-plus'
 
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 import hljs from "highlight.js";
@@ -41,7 +41,7 @@ app.use(ElementPlus, {
 
 app.use(VFG);
 app.component("svg-icon", SvgIcon);
-app.component("draggable", VueDraggableNext);
+app.component("draggable", VueDraggable);
 app.component("option-input", OptionInput);
 import "virtual:svg-icons-register";
 Object.keys(ElIcon).forEach((key) => {
