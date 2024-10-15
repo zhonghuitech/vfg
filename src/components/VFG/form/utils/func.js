@@ -83,12 +83,14 @@ export function isStr(t) {
 
 export const findEle = function (items, _id) {
     for (let item of items) {
-        if (item.__ID == _id) {
-            return item;
-        } else if (isObjectArray(item.childrens)) {
-            let el = findEle(item.childrens, _id);
-            if (el) {
-                return el;
+        if (item) {
+            if (item.__ID == _id) {
+                return item;
+            } else if (isObjectArray(item.childrens)) {
+                let el = findEle(item.childrens, _id);
+                if (el) {
+                    return el;
+                }
             }
         }
     }

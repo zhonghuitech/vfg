@@ -144,7 +144,11 @@ export default defineComponent({
     };
 
     const addComponentAction = function (el) {
+      console.log('add item action...')
+      console.log(settings.drawingList)
       settings.drawingList.push(el);
+      console.log('after...----')
+      console.log(settings.drawingList)
       settings.current = el.__ID;
     }
 
