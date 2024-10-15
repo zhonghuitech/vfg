@@ -66,8 +66,8 @@
           </div>
         </div>
       </template>
-      <el-scrollbar height="600px" v-highlight>
-        <pre> <code> {{ code }}</code></pre>
+      <el-scrollbar>
+        <CodemirrorComp v-model="code" lang="vue"/>
       </el-scrollbar>
     </el-drawer>
   </div>
@@ -80,6 +80,7 @@ import PageSetting from "./PageSetting.vue";
 import useClipboard from 'vue-clipboard3';
 import { ElMessage } from 'element-plus';
 import { saveAs } from "file-saver";
+import CodemirrorComp from '../../CodemirrorComp/index.vue'
 
 import {
   deepClone,
@@ -112,6 +113,7 @@ export default defineComponent({
     VideoPlay,
     Delete,
     Download,
+    CodemirrorComp
   },
 
   setup(props) {

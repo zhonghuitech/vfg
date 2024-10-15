@@ -436,16 +436,6 @@ export function generate(settings) {
     return ["<template>", html_beautify(html), '</template>', "<script setup>", js_beautify(js.render()), "</script>"].join("\n")
 }
 
-// export function generateAndFormat(settings) {
-//     const codeContent = generate(settings);
-
-//     return synchronizedPrettier.format(codeContent, {
-//         parser: 'babel',
-//         semi: false,
-//         singleQuote: true,
-//     })
-// }
-
 export async function generateAndFormatAsync(settings) {
     const codeContent = generate(settings);
 
