@@ -4,7 +4,7 @@
   <el-form :model="formModel" v-bind="formSetting" :gutter="modelValue.formConf.gutter">
     <draggable class="drawing-board" style="padding: 10px; height: 100%" v-model="modelValue.drawingList" :animation="340"
       group="componentsGroup" @change="onEnd" ghostClass="ghost">
-      <template v-for="(item, index) in conf.drawingList" :key="item.__ID + index">
+      <template v-for="(item, index) in conf.drawingList" :key="item.__ID">
         <!-- {{item}} -->
         <element-render @click.stop="selected(item.__ID)" @update="changeValue" :currentID="modelValue.current"
           style="padding-top: 10px;padding-bottom: 10px;" v-bind="item" class="item-tool-box"></element-render>
