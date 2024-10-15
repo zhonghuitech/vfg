@@ -1,6 +1,6 @@
 import type { App } from 'vue';
 import { VFG, OptionInput, UploadWrap } from "./VFG/index"
-import SvgIcon from '@/components/SvgIcon/index.vue'
+import SvgIcon from '/@/components/SvgIcon/index.vue'
 import 'virtual:svg-icons-register'
 import { VueDraggable } from 'vue-draggable-plus'
 import hljs from 'highlight.js';
