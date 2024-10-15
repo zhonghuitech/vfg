@@ -20,44 +20,29 @@ pnpm install vfg
 2. Config `main.js`
 
 ```js
-import { createApp } from "vue";
-import App from "./App.vue";
-import ElementPlus from "element-plus"; // based on element-plus.
-import "element-plus/theme-chalk/index.css";
-import * as ElIcon from "@element-plus/icons-vue";
-import { VueDraggable } from 'vue-draggable-plus'
-
-import zhCn from "element-plus/es/locale/lang/zh-cn";
-import hljs from "highlight.js";
-import "highlight.js/styles/googlecode.css"; // hl style.
-
-import { VFG, SvgIcon, OptionInput, UploadWrap } from "vfg";
-import "vfg/dist/style.css";
+import { createApp } from 'vue'
+import App from './App.vue'
+import ElementPlus from 'element-plus'; // 三方依赖
+import 'element-plus/theme-chalk/index.css';
+import * as ElIcon from '@element-plus/icons-vue'
+import zhCn from 'element-plus/es/locale/lang/zh-cn';
 
 const app = createApp(App);
 app.use(ElementPlus, {
-  locale: zhCn,
+    locale: zhCn,
 });
-
-app.use(VFG);
-app.component("svg-icon", SvgIcon);
-app.component("draggable", VueDraggable);
-app.component("option-input", OptionInput);
-import "virtual:svg-icons-register";
 Object.keys(ElIcon).forEach((key) => {
-  app.component(key, ElIcon[key]);
-});
-app.component("upload-wrap", UploadWrap);
+    app.component(key, ElIcon[key])
+})
 
-app.directive("highlight", function (el) {
-  let blocks = el.querySelectorAll("pre code");
-  setTimeout(() => {
-    blocks.forEach((block) => {
-      hljs.highlightElement(block);
-    });
-  }, 200);
-});
-app.mount("#app");
+// vfg settings.
+import { setupVFG } from "vfg"
+import 'vfg/dist/assets/css/style.css';
+import 'virtual:svg-icons-register'
+setupVFG(app)
+
+app.mount('#app')
+
 ```
 
 3. Page use vfg
