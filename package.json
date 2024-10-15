@@ -36,6 +36,7 @@
   "homepage": "https://github.com/zhonghuitech/form-generator#readme",
   "scripts": {
     "dev": "vite",
+    "pg": "pnpm -C ./playground/ dev",
     "build": "run-p type-check \"build-only {@}\" --",
     "bd": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
