@@ -9,7 +9,10 @@ export default defineConfig({
   plugins: [
     vue(),
     createSvgIconsPlugin({
-      iconDirs: [path.resolve(process.cwd(), 'src/icons')],
+      iconDirs: [
+        path.resolve(process.cwd(), 'node_modules/vfg/dist/assets/icons'),
+        path.resolve(process.cwd(), 'src/assets/icons')
+      ],
       symbolId: 'icon-[dir]-[name]',
     })]
 })

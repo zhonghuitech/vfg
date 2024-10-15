@@ -30,7 +30,6 @@ app.directive('highlight', function (el) {
 import { setupVFG } from "vfg"
 import 'vfg/dist/assets/css/style.css';
 import 'virtual:svg-icons-register'
-
 setupVFG(app)
 
 app.mount('#app')
