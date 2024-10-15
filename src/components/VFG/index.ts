@@ -7,7 +7,7 @@ import UploadWrap from "./form/elementWarp/UploadWrap.vue";
 // 按需引入
 export { TestButton, FormGenerator, OptionInput, UploadWrap };
 
-const component = [TestButton, FormGenerator];
+const component = [TestButton, FormGenerator, UploadWrap, OptionInput];
 
 const VFG = {
     install(app: App) {
