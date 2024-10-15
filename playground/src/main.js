@@ -10,7 +10,7 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/googlecode.css' //样式文件
 
 import { VFG, SvgIcon, OptionInput, UploadWrap } from "vfg"
-import 'vfg/dist/style.css';
+import 'vfg/dist/assets/css/style.css';
 
 const app = createApp(App);
 app.use(ElementPlus, {
