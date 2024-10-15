@@ -1,3 +1,4 @@
+import exp from "constants";
 import {
     deepClone,
     isObjectObject,
@@ -11,21 +12,22 @@ import {
     js_beautify,
     html_beautify
 } from 'js-beautify'
+import * as prettier from "prettier";
+import parserHtml from "prettier/plugins/html";
+import parserBabel from "prettier/plugins/babel";
+import parserPostcss from "prettier/plugins/postcss";
 
 class Set {
-
     constructor() {
         this.__data = [];
 
     }
-
     add(s) {
         if (this.__data.indexOf(s) > -1) {
             return
         }
         this.__data.push(s);
     }
-
     data() {
 
         return this.__data;
@@ -43,7 +45,6 @@ class Scripts {
         this.ActionData = new Set();
         this.returnData = new Set();
         this.rules = false;
-
     }
 
     definedVar(name, val) {
@@ -61,7 +62,6 @@ class Scripts {
             UIData.${name}=res.data.data;
         });
         `);
-
     }
 
     addPostAction(apiUrl) {
@@ -82,7 +82,6 @@ class Scripts {
         this.returnData.add("postData");
 
     }
-
 
     renderImport(lines) {
         let vueFunc = this.importFuncVue.data().join(",");
@@ -169,8 +168,6 @@ class Scripts {
         lines[0] = this.renderImport([]).join("\n");
         return lines.join("\n")
     }
-
-
 }
 
 const keyName = function (k) {
@@ -193,7 +190,6 @@ const toVal = function (obj) {
     }
 
     return _c;
-
 }
 
 
@@ -363,40 +359,29 @@ const optParseHandles = {
 
             }
             return sons;
-
         }
     },
-
 }
 
 const opt = function (name, opts, js) {
-
-
     let data = opts.type === 'static' ? opts.staticData : opts.dynamicData;
     let parseFunc = opts.tag in optParseHandles[opts.type] ? optParseHandles[opts.type][opts.tag] : optParseHandles[opts.type]['default'];
 
     if (opts.type === "dynamic") {
-
         js.addUiDataFromApi(data.url, data.medth, name);
-
-
     }
 
     return parseFunc(name, opts, data)
-
-
 }
 
 const renderBtns = function (ele, js) {
     if (('__formBtns' in ele.attrs) && ele.attrs.__formBtns) {
-
         js.addPostAction(ele.api);
         return ` 
         <el-form-item>
         <el-button type="primary" @click="postData(${ele.attrs.__formRef})">立即创建</el-button>
         <el-button>取消</el-button>
         </el-form-item>`;
-
     }
 }
 
@@ -404,7 +389,6 @@ const toHtml = function (ele, js) {
     if (ele.attrs.fieldName) {
         js.formData.add([ele.attrs.fieldName, ele.defaultvalue]);
     }
-
 
     if (ele.__rules) {
         js.addRules(deepClone(ele.__rules))
@@ -427,7 +411,6 @@ const toHtml = function (ele, js) {
 
     }
 
-
     let node = ["<", tagName, " ", attrFormat(ele.attrs, ele.props), " ", ">\n", childrenFormat(ele.childrens, js), slotFormat(ele.slots), renderBtns(ele, js), "</", tagName, ">\n"]
     if (ele.formItem) {
         node = ["<", "el-form-item", " ", attrFormat(ele.formItem, {
@@ -439,7 +422,7 @@ const toHtml = function (ele, js) {
     return node.join("");
 
 }
-const generate = function (settings) {
+export function generate(settings) {
     settings = toVal(settings);
     let element = settings.formConf;
     console.log(element);
@@ -451,8 +434,25 @@ const generate = function (settings) {
     js.definedVar(element.attrs.__formRef, 'null');
 
     return ["<template>", html_beautify(html), '</template>', "<script setup>", js_beautify(js.render()), "</script>"].join("\n")
-
 }
-export {
-    generate
+
+// export function generateAndFormat(settings) {
+//     const codeContent = generate(settings);
+
+//     return synchronizedPrettier.format(codeContent, {
+//         parser: 'babel',
+//         semi: false,
+//         singleQuote: true,
+//     })
+// }
+
+export async function generateAndFormatAsync(settings) {
+    const codeContent = generate(settings);
+
+    return prettier.format(codeContent, {
+        parser: 'vue',
+        semi: false,
+        singleQuote: true,
+        plugins: [parserHtml, parserBabel, parserPostcss] 
+    })
 }

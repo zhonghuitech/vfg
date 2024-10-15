@@ -9,7 +9,7 @@
     "src/**/*.ts",
     "vite/**/*.ts",
     "src/**/*.vue"
-  ],
+, "src/components/VFG/form/utils/generate.js"  ],
   "compilerOptions": {
     "composite": true,
     "noEmit": true,

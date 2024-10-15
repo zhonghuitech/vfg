@@ -67,7 +67,7 @@
         </div>
       </template>
       <el-scrollbar height="600px" v-highlight>
-        <pre> <code> {{ generate(settings) }}</code></pre>
+        <pre> <code> {{ code }}</code></pre>
       </el-scrollbar>
     </el-drawer>
   </div>
@@ -78,9 +78,7 @@ import PageDrawer from "./PageDrawer.vue";
 import PagePanel from "./PagePanel.vue";
 import PageSetting from "./PageSetting.vue";
 import useClipboard from 'vue-clipboard3';
-
 import { ElMessage } from 'element-plus';
-
 import { saveAs } from "file-saver";
 
 import {
@@ -90,7 +88,7 @@ import {
   randFieldId,
 } from "./utils/func.js";
 import { formConf } from "./ui/index";
-import { generate } from "./utils/generate.js";
+import { generate, generateAndFormatAsync } from "./utils/generate.js";
 import {
   Iphone,
   Monitor,
@@ -120,6 +118,7 @@ export default defineComponent({
     const device = ref("pc");
     const showCode = ref(false);
     const preview = ref("");
+    const code = ref('')
     const loadSetting = function () {
       let strs = localStorage.getItem("settings");
       if (strs) {
@@ -226,13 +225,15 @@ export default defineComponent({
       saveAs(blob, filename);
     };
 
-    const preViewCode = function () {
+    const preViewCode = async () => {
       showCode.value = true;
+      code.value = await generateAndFormatAsync(settings)
+      console.log(code.value)
     }
 
     const { toClipboard } = useClipboard()
     const ClipboardWrite = async () => {
-      const codeStr = generate(settings);
+      const codeStr = await generateAndFormatAsync(settings);
       try {
         await toClipboard(codeStr);
         ElMessage("复制成功！")
@@ -260,6 +261,7 @@ export default defineComponent({
       preview,
       generate,
       execDownload,
+      code,
       showCode,
       preViewCode,
       ClipboardWrite,
