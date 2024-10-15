@@ -28,6 +28,13 @@ export default defineConfig(({ mode, command }) => {
         // 确保外部化处理那些你不想打包进库的依赖
         external: ["vue"],
         output: {
+          assetFileNames: (assetInfo: any) => {
+            let extType = assetInfo.name.split('.').at(1);
+            if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+              extType = 'img';
+            }
+            return `assets/${extType}/[name][extname]`;
+          },
           // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
           globals: {
             vue: "Vue",

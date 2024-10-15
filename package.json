@@ -1,6 +1,6 @@
 {
   "name": "vfg",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "VFG: Vue3 Form Generator (element-plus).",
   "type": "module",
   "files": [
@@ -40,7 +40,7 @@
     "bd": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "build-only": "vite build",
+    "build-only": "vite build && mkdir dist/assets/icons/ && cp src/assets/icons/* dist/assets/icons/",
     "type-check": "vue-tsc --build --force",
     "pub": "npm publish --access public"
   },
