@@ -425,7 +425,6 @@ const toHtml = function (ele, js) {
 export function generate(settings) {
     settings = toVal(settings);
     let element = settings.formConf;
-    console.log(element);
     element.childrens = settings.drawingList;
 
     const js = new Scripts();

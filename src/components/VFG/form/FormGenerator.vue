@@ -21,7 +21,6 @@
 
       <div class="center-board">
         <div class="action-bar">
-
           <div class="btn" @click="preViewCode">
             <el-icon>
               <video-play />
@@ -230,7 +229,6 @@ export default defineComponent({
     const preViewCode = async () => {
       showCode.value = true;
       code.value = await generateAndFormatAsync(settings)
-      console.log(code.value)
     }
 
     const { toClipboard } = useClipboard()
