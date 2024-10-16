@@ -66,7 +66,7 @@
         </div>
       </template>
       <el-scrollbar>
-        <CodemirrorComp v-model="code" lang="vue"/>
+        <CodemirrorComp v-model="code" lang="vue" />
       </el-scrollbar>
     </el-drawer>
   </div>
@@ -240,7 +240,7 @@ export default defineComponent({
       const codeStr = await generateAndFormatAsync(settings);
       try {
         await toClipboard(codeStr);
-        ElMessage("复制成功！")
+        ElMessage({ message: "复制成功！", type: 'success'})
         console.log('Copied to clipboard')
       } catch (e) {
         console.error(e)
