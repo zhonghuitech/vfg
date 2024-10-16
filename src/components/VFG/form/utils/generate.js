@@ -69,7 +69,7 @@ class Scripts {
                 return false;
             }
             Api.Post("${apiUrl}",formData).then(res=>{
-              Elmessage.sucess("操作成功!");
+              ElMessage.success("操作成功!");
             });
             })
         }
@@ -80,7 +80,7 @@ class Scripts {
 
     renderImport(lines) {
         let vueFunc = this.importFuncVue.data().join(",");
-        lines.push(`import {${vueFunc}} from "vue";`);
+        lines.push(`import {${vueFunc}} from "vue";\nimport { ElMessage } from 'element-plus'`);
         return lines.concat(this.importString.data());
     }
 
