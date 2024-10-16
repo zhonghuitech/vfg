@@ -19,7 +19,9 @@
 
               <el-divider>验证规则</el-divider>
               <rules-input :openRule="currentItem.__openRules" v-if="currentItem.tag !== 'draggable'"
-                :fieldName="currentItem.attrs.fieldName && currentItem.attrs.fieldName.__val__" v-model="modelValue.formConf.__rules"></rules-input>
+                :fieldName="currentItem.attrs.fieldName && currentItem.attrs.fieldName.__val__"
+                v-model="modelValue.formConf.__rules"></rules-input>
+
               <el-button type="primary" @click="deleteItem(currentItem.__ID)">删除
               </el-button>
             </template>
@@ -65,6 +67,7 @@ export default defineComponent({
   setup(props, ctx) {
     const deleteItem = inject("deleteItem");
     const currentTab = ref("form");
+    console.log(props.modelValue)
 
     const currentItem = computed(() => {
       let ele = findEle(props.modelValue.drawingList, props.modelValue.current);
@@ -75,6 +78,8 @@ export default defineComponent({
     });
 
     watch(props.modelValue.drawingList, function () {
+      // console.log("update ....")
+      // console.log(props.modelValue.drawingList)
       ctx.emit("update:modelValue", props.modelValue);
     });
 

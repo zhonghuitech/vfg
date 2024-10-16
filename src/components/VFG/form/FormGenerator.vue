@@ -240,7 +240,7 @@ export default defineComponent({
       const codeStr = await generateAndFormatAsync(settings);
       try {
         await toClipboard(codeStr);
-        ElMessage({ message: "复制成功！", type: 'success'})
+        ElMessage({ message: "复制成功！", type: 'success' })
         console.log('Copied to clipboard')
       } catch (e) {
         console.error(e)

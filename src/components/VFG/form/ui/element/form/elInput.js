@@ -7,7 +7,6 @@ export default {
     tagIcon: 'input',
     __ID: '',
     defaultvalue: '',
-
     formItem: {
         showLabel: helper.input_boolean("显示 label", true),
         labelWidth: helper.input_number("label 宽", 100),
@@ -32,27 +31,18 @@ export default {
             key: "number",
             value: "数字"
         }], "text")
-
-
     },
-
     props: {
-
     },
- 
     childrens: [],
     ctrlBtn: true,
     slots: {
-
         "prefix": helper.input_text("框头部内容", ''),
         "suffix": helper.input_text("框尾部内容", ''),
         "prepend": helper.input_text("框前置内容", ''),
         "append": helper.input_text("框后置内容", ''),
     },
-
     rule: {
         required: helper.input_boolean("必填", false),
-
     }
-
 }

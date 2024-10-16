@@ -53,8 +53,8 @@ export default defineComponent({
   props: ["modelValue", "defaultvalue", "fieldName", "openRule"],
   setup(props, ctx) {
     const btn = ref(null);
-
-    const data = reactive(deepClone(toRaw(props.modelValue)));
+    const mV = toRaw(props.modelValue)
+    const data = reactive(deepClone(mV));
 
     if (!(props.fieldName in data)) {
       data[props.fieldName] = [];
@@ -83,7 +83,7 @@ export default defineComponent({
     };
 
     const save = function () {
-
+      // console.log(data)
       let newData = toRaw(data);
       let index = newData[props.fieldName].findIndex((item) => item.id === "_required");
 
@@ -104,10 +104,23 @@ export default defineComponent({
       ctx.emit("update:modelValue", newData);
     };
 
-
-    watchEffect([data, required], () => {
-      save();
+    watch(() => props.fieldName, (newId, oldId) => {
+      console.log('------>>' + newId)
+      const rawModelValue = toRaw(props.modelValue)
+      console.log(rawModelValue)
+      if (rawModelValue[newId]) {
+        const idx = rawModelValue[newId].findIndex(item => item.id === '_required')
+        required.value = idx > -1
+      } else {
+        required.value = false
+      }
     })
+
+    watch([data, required], () => {
+      console.log('change.ddddd--> ' + required.value)
+      save(required.value);
+    })
+
     const querySearch = function (qs, cb) {
       const results = [
         {
