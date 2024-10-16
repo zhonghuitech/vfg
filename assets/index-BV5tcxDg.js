@@ -269,11 +269,12 @@ ${t}`,n),a=r;if(a||(a=t==="+++"?"toml":"yaml"),i===-1&&t==="---"&&a==="yaml"&&(i
                 return false;
             }
             Api.Post("${t}",formData).then(res=>{
-              Elmessage.sucess("操作成功!");
+              ElMessage.success("操作成功!");
             });
             })
         }
-        `),this.returnData.add("postData")}renderImport(t){let n=this.importFuncVue.data().join(",");return t.push(`import {${n}} from "vue";`),t.concat(this.importString.data())}red(t){this.importFuncVue.add("reactive");let n={};return this.formData.data().forEach(r=>{console.log(r),n[r[0]]=r[1]}),t.push(`const formData=reactive(${JSON.stringify(n)});`),this.returnData.add("formData"),t}renderUIData(t){this.importFuncVue.add("reactive");let n={};return this.UIData.data().forEach(r=>{n[r]=""}),t.push(`const UIData=reactive(${JSON.stringify(n)});`),this.returnData.add("UIData"),t}renderApiScript(t){return t.concat(this.APIData.data().join(`
+        `),this.returnData.add("postData")}renderImport(t){let n=this.importFuncVue.data().join(",");return t.push(`import {${n}} from "vue";
+import { ElMessage } from 'element-plus'`),t.concat(this.importString.data())}red(t){this.importFuncVue.add("reactive");let n={};return this.formData.data().forEach(r=>{console.log(r),n[r[0]]=r[1]}),t.push(`const formData=reactive(${JSON.stringify(n)});`),this.returnData.add("formData"),t}renderUIData(t){this.importFuncVue.add("reactive");let n={};return this.UIData.data().forEach(r=>{n[r]=""}),t.push(`const UIData=reactive(${JSON.stringify(n)});`),this.returnData.add("UIData"),t}renderApiScript(t){return t.concat(this.APIData.data().join(`
 `))}renderVarsData(t){return t.concat(this.vars.data().join(`
 `))}renderActionData(t){return t.concat(this.ActionData.data().join(`
 `))}renderFormRules(t){if(this.rules===!1)return t;for(let r in this.rules)this.rules[r]=Object.values(this.rules[r]);this.returnData.add("rules");let n=JSON.stringify(this.rules,(r,i)=>r==="pattern"?`--${i}--`:i);return n=n.replace(/\-\-"/g,"/").replace(/"\-\-/g,"/"),t.push(`const rules=${n}`),t}renderSetup(t){return t=this.red(t),t=this.renderUIData(t),t=this.renderApiScript(t),t=this.renderFormRules(t),t=this.renderVarsData(t),t=this.renderActionData(t),t}renderEnd(t){return t}render(){this.importFuncVue.add("ref");let t=[""];return t=this.renderSetup(t),t=this.renderEnd(t),t[0]=this.renderImport([]).join(`
