@@ -83,17 +83,22 @@ export default defineComponent({
     };
 
     const save = function () {
-      // console.log(data)
       let newData = toRaw(data);
-      let index = newData[props.fieldName].findIndex((item) => item.id === "_required");
+      // console.log(newData)
+
+      let index = -1
+      if (newData[props.fieldName]) {
+        index = newData[props.fieldName].findIndex((item) => item.id === "_required");
+      }
 
       if (index > -1) {
-        newData[props.fieldName].splice(
-          newData[props.fieldName].findIndex((item) => item.id === "_required"),
-          1
-        );
+        newData[props.fieldName].splice(index, 1);
       }
+
       if (required.value) {
+        if (!newData[props.fieldName]) {
+          newData[props.fieldName] = []
+        }
         newData[props.fieldName].push({
           id: "_required",
           required: true,
@@ -105,9 +110,9 @@ export default defineComponent({
     };
 
     watch(() => props.fieldName, (newId, oldId) => {
-      console.log('------>>' + newId)
+      // console.log('------>>' + newId)
       const rawModelValue = toRaw(props.modelValue)
-      console.log(rawModelValue)
+      // console.log(rawModelValue)
       if (rawModelValue[newId]) {
         const idx = rawModelValue[newId].findIndex(item => item.id === '_required')
         required.value = idx > -1
