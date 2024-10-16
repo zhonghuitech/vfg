@@ -2,7 +2,7 @@ import helper from "../../helper.js";
 
 export default {
         tag: "el-rate",
-        name: "Rate 评分",
+        name: "评分",
         __openRules: true,
         tagIcon: "rate",
         defaultvalue: 0,
@@ -10,7 +10,7 @@ export default {
         formItem: {
                 showLabel: helper.input_boolean("显示 label", true),
                 labelWidth: helper.input_number("label 宽", 100),
-                label: helper.input_text("label", 'Rate 评分', ),
+                label: helper.input_text("label", '评分', ),
         },
         attrs: {
                 fieldName: helper.input_text("字段名", '字段名'),

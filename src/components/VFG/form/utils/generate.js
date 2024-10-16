@@ -7,10 +7,7 @@ import {
     isObjectUnde
 } from "./func.js";
 
-import {
-    js_beautify,
-    html_beautify
-} from 'js-beautify'
+import beautify from 'js-beautify';
 import * as prettier from "prettier";
 import parserHtml from "prettier/plugins/html";
 import parserBabel from "prettier/plugins/babel";
@@ -395,11 +392,11 @@ const toHtml = function (ele, js) {
         ele['childrens'] = ele['childrens'].concat(ops);
     }
 
-    let node = ["<", tagName, " ", attrFormat(ele.attrs, ele.props), " ", ">\n", childrenFormat(ele.childrens, js), slotFormat(ele.slots), renderBtns(ele, js), "</", tagName, ">\n"]
+    let node = ["<", tagName, " ", attrFormat(ele.attrs, ele.props), " ", ">\n", childrenFormat(ele.childrens, js), slotFormat(ele.slots), renderBtns(ele, js), "\n</", tagName, ">\n"]
     if (ele.formItem) {
         node = ["<", "el-form-item", " ", attrFormat(ele.formItem, {
             prop: ele.attrs.fieldName
-        }), " ", ">", node.join(""), "</", "el-form-item", ">"];
+        }), " ", ">\n", node.join(""), "\n</", "el-form-item", ">\n"];
     }
 
     return node.join("");
@@ -421,8 +418,8 @@ export function generate(settings) {
     let html = toHtml(element, js);
 
     js.definedVar(element.attrs.__formRef, 'null');
-
-    return ["<template>", html_beautify(html), '</template>', "<script setup>", js_beautify(js.render()), "</script>"].join("\n")
+    const templateContent = ["<template>\n", html, '</template>'].join('').replace(/(\r\n|\n|\r)/gm, "").replaceAll('><', '>\n<');
+    return [beautify.html(templateContent), "\n<script setup>", beautify.js(js.render()), "</script>"].join("\n")
 }
 
 export async function generateAndFormatAsync(settings) {

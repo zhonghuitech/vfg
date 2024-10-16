@@ -12,25 +12,16 @@
         </div>
         <el-scrollbar class="left-scrollbar">
           <!-- {{generate(settings)}} -->
-
           <page-panel @addComponent="addComponentAction"></page-panel>
-
           <div class="components-list"></div>
         </el-scrollbar>
       </div>
 
       <div class="center-board">
         <div class="action-bar">
-          <div class="btn" @click="preViewCode">
-            <el-icon>
-              <video-play />
-            </el-icon>生成
-          </div>
-          <div class="btn" @click="clearn()">
-            <el-icon>
-              <delete />
-            </el-icon>清空
-          </div>
+          <el-button style="margin-left: 5px;" type="default" link icon="VideoPlay" @click="preViewCode">生成</el-button>
+          <el-button type="danger" link icon="Delete" @click="clearn()">清空</el-button>
+
           <div class="btn">
             <el-switch v-model="device" active-text="电脑模式" inactive-text="手机模式" active-value="pc"
               inactive-value="mobile" />
@@ -52,17 +43,8 @@
     <el-drawer v-model="showCode" direction="rtl" size="50%" style="height:100%">
       <template #header>
         <div class="preview-action-bar">
-          <div class="btn" @click="execDownload('test.vue')">
-            <el-icon>
-              <download />
-            </el-icon>下载代码
-          </div>
-
-          <div class="btn" @click="ClipboardWrite()">
-            <el-icon>
-              <document-copy />
-            </el-icon>复制代码
-          </div>
+          <el-button type="default" link icon="Download" @click="execDownload('test.vue')">下载代码</el-button>
+          <el-button type="default" link icon="DocumentCopy" @click="ClipboardWrite()">复制代码</el-button>
         </div>
       </template>
       <el-scrollbar>
@@ -232,12 +214,14 @@ export default defineComponent({
 
     const preViewCode = async () => {
       showCode.value = true;
-      code.value = await generateAndFormatAsync(settings)
+      code.value = generate(settings)
+      // code.value = await generateAndFormatAsync(settings)
     }
 
     const { toClipboard } = useClipboard()
     const ClipboardWrite = async () => {
-      const codeStr = await generateAndFormatAsync(settings);
+      // const codeStr = await generateAndFormatAsync(settings);
+      const codeStr = generate(settings)
       try {
         await toClipboard(codeStr);
         ElMessage({ message: "复制成功！", type: 'success' })
