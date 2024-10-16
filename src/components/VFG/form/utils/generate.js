@@ -1,4 +1,3 @@
-import exp from "constants";
 import {
     deepClone,
     isObjectObject,
@@ -65,7 +64,6 @@ class Scripts {
     }
 
     addPostAction(apiUrl) {
-
         this.importString.add('import {Api} from "@/api"; ');
         this.ActionData.add(`
         const postData=function(formEl){
@@ -124,7 +122,6 @@ class Scripts {
     }
 
     renderFormRules(lines) {
-
         if (this.rules === false) {
 
             return lines;
@@ -178,7 +175,8 @@ const keyName = function (k) {
 const toVal = function (obj) {
     const _c = {}
     for (let a in obj) {
-        if (typeof obj[a] == 'object') {
+        // 默认值不要处理，否则 Array 类型的 [1, 2] 会变成 obj {0:1,1:2}
+        if (typeof obj[a] == 'object' && a !== 'defaultvalue') {
             if ('__val__' in obj[a]) {
                 _c[a] = obj[a]['__val__'];
             } else {
@@ -199,6 +197,7 @@ const isBoolean = function (s) {
     }
     return ['true', "false"].indexOf(s) > -1;
 }
+
 const attrFuns = {
     FormData: "formData",
     default(k, v) {
@@ -215,7 +214,6 @@ const attrFuns = {
         return "";
     },
     __formRef(v) {
-
         // attrFuns.FormData = v;
         return `ref="${v}"`;
 
@@ -239,48 +237,26 @@ const attrFormat = function (attrs, props) {
     attrs = Object.assign({}, attrs, props);
     let attr = [];
     for (let k in attrs) {
-
         if (k in attrFuns) {
             attr.push(attrFuns[k](attrs[k]));
         } else {
             attr.push(attrFuns.default(k, attrs[k]));
         }
-
     }
-
     return attr.join(" ");
-
 }
 
 const slotFormat = function (slots) {
-
     let eles = [];
     for (let name in slots) {
         if (slots[name]) {
-            eles.push(`<template slot="${name}">${slots[name]}</template>`)
+            eles.push(`<template #${name}>${slots[name]}</template>`)
         }
-
     }
-
     return eles.join("");
 }
 
-const childrenFormat = function (childrens, js) {
-
-    if (!childrens) {
-        return ''
-    }
-    childrens = Object.values(childrens)
-    let sons = childrens.map(function (ele) {
-
-        return toHtml(ele, js);
-    })
-
-    return sons.join(" ");
-}
-
 const optParseHandles = {
-
     dynamic: {
         default: function (name, opts, data) {
             let sons = [];
@@ -317,10 +293,7 @@ const optParseHandles = {
             }
 
             sons.push(son);
-
-
             return sons;
-
         }
     },
 
@@ -379,17 +352,31 @@ const renderBtns = function (ele, js) {
         js.addPostAction(ele.api);
         return ` 
         <el-form-item>
-        <el-button type="primary" @click="postData(${ele.attrs.__formRef})">立即创建</el-button>
+        <el-button type="primary" @click="postData(${ele.attrs.__formRef})">确定</el-button>
         <el-button>取消</el-button>
         </el-form-item>`;
     }
 }
 
+const childrenFormat = function (childrens, js) {
+    if (!childrens) {
+        return ''
+    }
+    childrens = Object.values(childrens)
+    let sons = childrens.map(function (ele) {
+        return toHtml(ele, js);
+    })
+
+    return sons.join(" ");
+}
+
 const toHtml = function (ele, js) {
+    // form表单数据映射
     if (ele.attrs.fieldName) {
         js.formData.add([ele.attrs.fieldName, ele.defaultvalue]);
     }
 
+    // 表单的校验规则
     if (ele.__rules) {
         js.addRules(deepClone(ele.__rules))
         ele.attrs[":rules"] = "rules";
@@ -401,14 +388,11 @@ const toHtml = function (ele, js) {
     }
 
     if ('__opt__' in ele) {
-
         if (isObjectArray(ele['childrens']) === false) {
             ele['childrens'] = [];
         }
         let ops = opt(ele.attrs.fieldName, ele.__opt__, js);
-
         ele['childrens'] = ele['childrens'].concat(ops);
-
     }
 
     let node = ["<", tagName, " ", attrFormat(ele.attrs, ele.props), " ", ">\n", childrenFormat(ele.childrens, js), slotFormat(ele.slots), renderBtns(ele, js), "</", tagName, ">\n"]
@@ -416,16 +400,22 @@ const toHtml = function (ele, js) {
         node = ["<", "el-form-item", " ", attrFormat(ele.formItem, {
             prop: ele.attrs.fieldName
         }), " ", ">", node.join(""), "</", "el-form-item", ">"];
-
     }
 
     return node.join("");
 
 }
 export function generate(settings) {
-    settings = toVal(settings);
-    let element = settings.formConf;
-    element.childrens = settings.drawingList;
+    console.log('generate...')
+    console.log(settings)
+    const settingsV = toVal(settings);
+    console.log('---after')
+    console.log(settingsV)
+    let element = settingsV.formConf;
+    element.childrens = settingsV.drawingList;
+    console.log(element)
+    console.log(typeof element.childrens)
+    console.log(Array.isArray(element.childrens))
 
     const js = new Scripts();
     let html = toHtml(element, js);
@@ -442,6 +432,6 @@ export async function generateAndFormatAsync(settings) {
         parser: 'vue',
         semi: false,
         singleQuote: true,
-        plugins: [parserHtml, parserBabel, parserPostcss] 
+        plugins: [parserHtml, parserBabel, parserPostcss]
     })
 }
