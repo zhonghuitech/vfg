@@ -79,6 +79,10 @@ export function isNumber(t: any) {
     return toStr(t) === '[object Number]'
 }
 
+export function isNumberType(t: any) {
+    return typeof t === 'number'
+}
+
 export function isStr(t: any) {
     return toStr(t) === '[object String]'
 }

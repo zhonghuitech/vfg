@@ -12,6 +12,7 @@ import { Api } from "./api";
 
 const optParseHandles = {
     default: function (_c, data, tag) {
+        if (!data) { return }
         for (let item of data) {
             let son = {};
             son.tag = tag || _c.__opt__.tag;
