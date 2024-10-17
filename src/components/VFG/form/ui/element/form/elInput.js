@@ -18,7 +18,7 @@ export default {
         placeholder: helper.input_text("占位字符", '请输入'),
         "prefix-icon": helper.input_icon("框头部图标", ''),
         "suffix-icon": helper.input_icon("框头部图标", ''),
-        type: helper.input_select("类型", [{
+        type: helper.input_select("文本类型", [{
             key: "text",
             value: "文本"
         }, {

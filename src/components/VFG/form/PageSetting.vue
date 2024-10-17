@@ -8,7 +8,7 @@
             <el-button type="danger" text bg icon="Delete" @click="deleteItem(currentItem.__ID)">删除组件</el-button>
 
             <template v-if="currentItem">
-              <el-form ref="form2" label-position="top" label-width="80px">
+              <el-form ref="form2" label-width="80px" size="small">
                 <el-form-item v-for="(func, title) in currentItem.actions" :key="title">
                   <el-button @click="func(currentItem)">{{ title }}</el-button>
                 </el-form-item>
@@ -31,7 +31,7 @@
       <el-tab-pane label="表单属性" name="form">
         <div class="field-box">
           <el-scrollbar class="right-scrollbar">
-            <el-form ref="form" label-position="top" label-width="80px">
+            <el-form ref="form" label-width="80px" size="small">
               <template v-for="(item, index) in formConf" :key="index">
                 <!-- {{index}} -->
                 <element-render @update="(e) => {

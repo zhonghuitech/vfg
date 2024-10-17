@@ -16,7 +16,7 @@ export default {
         fieldName: helper.input_text("字段名", '字段名'),
         disabled: helper.input_boolean("是否禁用", false),
         border: helper.input_boolean("占位字符", true),
-        size: helper.input_radio("尺寸", [{
+        size: helper.input_radio("选项尺寸", [{
             key: "default",
             value: "默认"
         }, {

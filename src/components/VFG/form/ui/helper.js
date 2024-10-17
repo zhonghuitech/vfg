@@ -73,6 +73,7 @@ export const input_radio = function (value, opts, val) {
         input_type: "input_radio",
         value,
         opts,
+        label: value,
         __child
     }
 }
@@ -91,6 +92,7 @@ const input_select = function (value, opts, val) {
         input_type: "input_select",
         value,
         opts,
+        label: value,
         __child
     }
 

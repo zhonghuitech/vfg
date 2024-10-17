@@ -20,7 +20,6 @@ const slotParser = {
                 tag: conf.__child.tag,
                 attrs: attr,
                 slots: slots
-
             }
             childrens.push(item)
         }
@@ -111,7 +110,7 @@ export const eleRenderFormat = function (conf, eleName) {
         delete ini.slots
     }
 
-    ini['formItem'] = { showLabel: true, label: conf.label, labelWidth: conf.labelWidth ? conf.labelWidth : undefined }
+    ini['formItem'] = { showLabel: true, label: conf.label, labelWidth: conf.labelWidth ? conf.labelWidth : '80px' }
     ini['defaultvalue'] = conf['__val__']
     ini['eleName'] = eleName;
     //console.log(ini)
@@ -121,7 +120,7 @@ export const eleRenderFormat = function (conf, eleName) {
 
 
 export const eleRenderSetFormat = function (conf) {
-    console.log(conf)
+    // console.log(conf)
 
     const eles = [];
     eles.push({ tag: "el-divider", slots: { default: "form item" } });
@@ -139,8 +138,16 @@ export const eleRenderSetFormat = function (conf) {
         let item = conf.attrs[f];
         eles.push(eleRenderFormat(item, f))
     }
-    eles.push(eleRenderFormat(conf.__opt__, '__opt__'))
-    console.log(eles)
+
+    const opt = eleRenderFormat(conf.__opt__, '__opt__')
+    if (opt && opt.formItem) {
+        eles.push({ tag: "el-divider", slots: { default: "选项" } });
+        opt.formItem.label = undefined
+        opt.formItem.labelWidth = '1'
+        eles.push(opt)
+    }
+
+    // console.log(eles)
     return eles;
 
 }
