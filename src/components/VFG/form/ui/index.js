@@ -29,6 +29,16 @@ const formConf = {
             key: "top",
             value: "顶部对齐"
         }], "right"),
+        wrapStyle: helper.input_radio("交互样式", [{
+            key: "drawer",
+            value: "抽屉"
+        }, {
+            key: "dialog",
+            value: "对话框"
+        }, {
+            key: "none",
+            value: "无样式"
+        }], "drawer"),
         labelWidth: helper.input_number("标签宽度", 100),
         disabled: helper.input_boolean("禁用", false),
         inline: helper.input_boolean("行内模式", false),

@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 axios.defaults.timeout = 10000; //响应时间
 import {
     ElMessage
@@ -19,7 +18,6 @@ axios.interceptors.request.use(function (config) {
     ElMessage.error('请求错误，请重试');
     return Promise.reject(error);
 });
-
 
 export class Api {
     static Callback(res, resolve) {
@@ -55,5 +53,4 @@ export class Api {
                 })
         })
     }
-
 }

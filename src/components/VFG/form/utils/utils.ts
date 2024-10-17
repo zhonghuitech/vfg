@@ -3,11 +3,11 @@ import {
 } from "./func";
 
 const slotParser = {
-    default(conf) {
+    default(conf: any) {
         let childrens = []
         for (let db of conf.opts) {
-            let attr = {}
-            let slots = {}
+            let attr = {} as any
+            let slots = {} as any
             for (let k in conf.__child.keyValue) {
                 if ('__default__' == conf.__child.keyValue[k]) {
                     slots['default'] = db[k];
@@ -28,12 +28,12 @@ const slotParser = {
     }
 }
 
-export const eleRenderFormat = function (conf, eleName) {
+export const eleRenderFormat = function (conf: any, eleName: any) {
     if (!isObjectObject(conf)) {
         return null
     }
 
-    const types = {
+    const types: any = {
         input_text: {
             childrens: [],
             tag: "el-input",
@@ -94,7 +94,7 @@ export const eleRenderFormat = function (conf, eleName) {
     if (conf.input_type in types == false) {
         t = 'input_text'
     }
-    let ini = types[t];
+    let ini = types[t] as any;
     for (let k in conf) {
         if (['__val__', 'input_type', 'label', 'opts'].includes(k) == false) {
             ini['attrs'][k] = conf[k];
@@ -114,8 +114,7 @@ export const eleRenderFormat = function (conf, eleName) {
 
 }
 
-
-export const eleRenderSetFormat = function (conf) {
+export const eleRenderSetFormat = function (conf: any) {
     // console.log(conf)
 
     const eles = [];

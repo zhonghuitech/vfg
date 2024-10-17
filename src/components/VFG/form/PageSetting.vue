@@ -38,7 +38,6 @@
                   modelValue.formConf.attrs[index]['__val__'] = e;
                 }
                   " v-bind="eleRenderFormat(item)"></element-render>
-
               </template>
               <el-form-item label="接口地址">
                 <el-input v-model="modelValue.formConf.api"></el-input>
@@ -53,7 +52,7 @@
 <script>
 import { ref, defineComponent, toRaw, computed, inject, watch } from "vue";
 
-import { eleRenderFormat, eleRenderSetFormat } from "./utils/utils.js";
+import { eleRenderFormat, eleRenderSetFormat } from "./utils/utils";
 import { findEle, isObjectArray, deepClone, randFieldId } from "./utils/func";
 import RulesInput from "./RulesInput.vue";
 import ElementRender from "./ElementRender.vue";

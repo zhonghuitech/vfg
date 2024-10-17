@@ -49,10 +49,7 @@ const lines = {
     ]
 }
 
-
 export default {
-
-
     install: (app, options) => {
         const plumbIns = jsPlumb.getInstance();
 
@@ -77,10 +74,7 @@ export default {
 
                     });
                 }
-
             }
-
         })
-
     }
 }
