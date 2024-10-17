@@ -16,8 +16,8 @@ export default {
         fieldName: helper.input_text("字段名", '字段名'),
         'disabled': helper.input_boolean('是否禁用', false),
         'size': helper.input_radio('尺寸', [{ "key": "default", "value": "默认" }, { "key": "large", "value": "较大" }, { "key": "small", "value": "较小" }], 'default'),
-        'show-alpha': helper.input_boolean('是否支持透明度选择', false),
-        'color-format': helper.input_radio('写入 v-model 的颜色的格式', [{ "key": "hsl", "value": "hsl" }, { "key": "hsv", "value": "hsv" }, { "key": "hex", "value": "hex" }, { "key": "rgb", "value": "rgb" }], 'rgb')
+        'show-alpha': helper.input_boolean('透明度选择', false),
+        'color-format': helper.input_radio('颜色格式', [{ "key": "hsl", "value": "hsl" }, { "key": "hsv", "value": "hsv" }, { "key": "hex", "value": "hex" }, { "key": "rgb", "value": "rgb" }], 'rgb')
     },
     slots: {
     },
