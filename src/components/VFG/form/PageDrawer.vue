@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { deepClone, isObjectArray } from "./utils/func.js";
+import { deepClone, isObjectArray } from "./utils/func";
 
 import { defineComponent, reactive, computed, inject, watch } from "vue";
 import { initRender } from "./utils/drawer.js";

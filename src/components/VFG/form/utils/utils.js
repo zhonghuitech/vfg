@@ -1,8 +1,8 @@
 import {
     isObjectObject
-} from "./func.js";
-const slotParser = {
+} from "./func";
 
+const slotParser = {
     default(conf) {
         let childrens = []
         for (let db of conf.opts) {
@@ -27,14 +27,13 @@ const slotParser = {
         return childrens
 
     }
-
 }
+
 export const eleRenderFormat = function (conf, eleName) {
 
     if (!isObjectObject(conf)) {
         return null
     }
-
 
     const types = {
         input_text: {
@@ -109,7 +108,6 @@ export const eleRenderFormat = function (conf, eleName) {
     if ('__child' in conf) {
         ini.childrens = slotParser.default(conf);
     } else if (Object.keys(ini.slots).length === 0) {
-
         delete ini.slots
     }
 
@@ -123,6 +121,8 @@ export const eleRenderFormat = function (conf, eleName) {
 
 
 export const eleRenderSetFormat = function (conf) {
+    console.log(conf)
+
     const eles = [];
     eles.push({ tag: "el-divider", slots: { default: "form item" } });
     for (let f in conf.formItem) {
@@ -132,7 +132,6 @@ export const eleRenderSetFormat = function (conf) {
     eles.push({ tag: "el-divider", slots: { default: "属性" } });
 
     if ('__text' in conf) {
-
         eles.push(eleRenderFormat(conf.__text, '__text'))
     }
 
@@ -141,6 +140,7 @@ export const eleRenderSetFormat = function (conf) {
         eles.push(eleRenderFormat(item, f))
     }
     eles.push(eleRenderFormat(conf.__opt__, '__opt__'))
+    console.log(eles)
     return eles;
 
 }

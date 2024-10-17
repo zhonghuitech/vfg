@@ -6,7 +6,7 @@ import {
     isStr,
     isNumber,
     isObjectUnde,
-} from "./func.js";
+} from "./func";
 
 import { Api } from "./api";
 

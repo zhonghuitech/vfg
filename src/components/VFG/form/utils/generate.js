@@ -5,7 +5,7 @@ import {
     isStr,
     isNumber,
     isObjectUnde
-} from "./func.js";
+} from "./func";
 import { getTag } from "./drawer.js"
 
 import beautify from 'js-beautify';

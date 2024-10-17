@@ -5,8 +5,7 @@
       <el-tab-pane label="组件属性" name="field">
         <div class="field-box">
           <el-scrollbar class="right-scrollbar">
-            <el-button type="danger" text bg icon="Delete" @click="deleteItem(currentItem.__ID)">删除组件
-            </el-button>
+            <el-button type="danger" text bg icon="Delete" @click="deleteItem(currentItem.__ID)">删除组件</el-button>
 
             <template v-if="currentItem">
               <el-form ref="form2" label-position="top" label-width="80px">
@@ -55,7 +54,7 @@
 import { ref, defineComponent, toRaw, computed, inject, watch } from "vue";
 
 import { eleRenderFormat, eleRenderSetFormat } from "./utils/utils.js";
-import { findEle, isObjectArray, deepClone, randFieldId } from "./utils/func.js";
+import { findEle, isObjectArray, deepClone, randFieldId } from "./utils/func";
 import RulesInput from "./RulesInput.vue";
 import ElementRender from "./ElementRender.vue";
 

@@ -1,4 +1,4 @@
-function randomString(length) {
+function randomString(length: number) {
     var str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var result = '';
     for (var i = length; i > 0; --i)
@@ -6,18 +6,18 @@ function randomString(length) {
     return result;
 }
 
-export function toHump(name) {
+export function toHump(name: string) {
     return name.replace(/\_?\-(\w)/g, function (all, letter) {
         return letter.toUpperCase();
     });
 }
-export function randFieldId() {
 
+export function randFieldId() {
     return `field_${randomString(5)}`;
 }
 
 // 深拷贝对象
-export function deepClone(obj) {
+export function deepClone(obj: any) {
     const _toString = Object.prototype.toString
 
     // null, undefined, non-object, function
@@ -61,27 +61,29 @@ export function deepClone(obj) {
 }
 
 const toStr = Function.prototype.call.bind(Object.prototype.toString)
-export function isObjectObject(t) {
+
+export function isObjectObject(t: any) {
     return toStr(t) === '[object Object]'
 }
-export function isObjectArray(t) {
+export function isObjectArray(t: any) {
     return toStr(t) === '[object Array]'
 }
-export function isObjectNull(t) {
+export function isObjectNull(t: any) {
     return toStr(t) === '[object Null]'
 }
-export function isObjectUnde(t) {
+export function isObjectUnde(t: any) {
     return toStr(t) === '[object Undefined]'
 }
 
-export function isNumber(t) {
+export function isNumber(t: any) {
     return toStr(t) === '[object Number]'
 }
-export function isStr(t) {
+
+export function isStr(t: any) {
     return toStr(t) === '[object String]'
 }
 
-export const findEle = function (items, _id) {
+export const findEle: any = function (items: any, _id: string) {
     for (let item of items) {
         if (item) {
             if (item.__ID == _id) {

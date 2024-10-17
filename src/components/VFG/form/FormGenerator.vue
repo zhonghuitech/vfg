@@ -68,7 +68,7 @@ import {
   findEle,
   isObjectArray,
   randFieldId,
-} from "./utils/func.js";
+} from "./utils/func";
 import { formConf } from "./ui/index";
 import { generate, generateAndFormatAsync } from "./utils/generate.js";
 import {

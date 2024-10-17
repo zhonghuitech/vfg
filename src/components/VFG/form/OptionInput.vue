@@ -62,7 +62,7 @@
 
 <script>
 import { ref, defineComponent, watch, reactive } from "vue";
-import { deepClone } from "./utils/func.js";
+import { deepClone } from "./utils/func";
 import { Remove } from "@element-plus/icons-vue";
 
 export default defineComponent({

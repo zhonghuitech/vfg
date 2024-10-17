@@ -1,7 +1,7 @@
 import {
     randFieldId,
     deepClone
-} from "../utils/func.js";
+} from "../utils/func";
 
 const cloneItem = function (item) {
     const newitem = deepClone(item);

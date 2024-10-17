@@ -48,7 +48,7 @@
   </el-form>
 </template>
 <script>
-import { deepClone, randFieldId } from "./utils/func.js";
+import { deepClone, randFieldId } from "./utils/func";
 import { rule_options } from "./utils/rules"
 import { CircleCloseFilled } from "@element-plus/icons-vue";
 import { defineComponent, nextTick, reactive, ref, toRaw, watch, watchEffect, computed } from "vue";
