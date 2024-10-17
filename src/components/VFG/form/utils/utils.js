@@ -29,7 +29,6 @@ const slotParser = {
 }
 
 export const eleRenderFormat = function (conf, eleName) {
-
     if (!isObjectObject(conf)) {
         return null
     }
@@ -42,7 +41,6 @@ export const eleRenderFormat = function (conf, eleName) {
             formItem: {},
             slots: {}
         },
-
         input_icon: {
             childrens: [],
             tag: "input-icon",
@@ -50,7 +48,6 @@ export const eleRenderFormat = function (conf, eleName) {
             formItem: {},
             slots: {}
         },
-
         input_number: {
             childrens: [],
             tag: "el-input-number",
@@ -86,7 +83,6 @@ export const eleRenderFormat = function (conf, eleName) {
             attrs: {},
             slots: {}
         },
-
         input_boolean: {
             childrens: [],
             tag: "el-switch", attrs: { "active-value": true, "inactive-value": false }
