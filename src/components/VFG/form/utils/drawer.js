@@ -8,7 +8,7 @@ import {
     isObjectUnde,
 } from "./func";
 
-import { request } from "/@/components/VFG/core/request";
+import request from "/@/components/VFG/core/request";
 
 const optParseHandles = {
     default: function (_c, data, tag) {
