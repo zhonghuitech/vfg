@@ -1,22 +1,10 @@
-import type { App } from 'vue';
 import { VFG, OptionInput, UploadWrap, request } from "./VFG/index"
 import SvgIcon from '/@/components/SvgIcon/index.vue'
 import 'virtual:svg-icons-register'
-import { VueDraggable } from 'vue-draggable-plus'
-import hljs from 'highlight.js';
 import 'highlight.js/styles/googlecode.css'
+import type { VFGSetupOption } from "./setup"
+import { setupVFG } from "./setup"
 
 export { VFG, SvgIcon, OptionInput, UploadWrap, request }
-export function setupVFG(app: App<Element>) {
-    app.use(VFG)
-    app.component("svg-icon", SvgIcon as any)
-    app.component("draggable", VueDraggable as any);
-    app.directive('highlight', function (el: any) {
-        let blocks = el.querySelectorAll('pre code');
-        setTimeout(() => {
-            blocks.forEach((block: any) => {
-                hljs.highlightElement(block)
-            })
-        }, 200)
-    })
-}
+export { setupVFG }
+export type { VFGSetupOption }
