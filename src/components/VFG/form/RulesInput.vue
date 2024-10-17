@@ -25,7 +25,10 @@
           </el-form-item>
 
           <el-form-item label="触发事件">
-            <el-input v-model="item.trigger"></el-input>
+            <el-radio-group v-model="item.trigger">
+              <el-radio-button label="blur" value="blur" />
+              <el-radio-button label="change" value="change" />
+            </el-radio-group>
           </el-form-item>
 
           <span class="tool">
