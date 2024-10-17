@@ -17,7 +17,6 @@ import parserPostcss from "prettier/plugins/postcss";
 class Set {
     constructor() {
         this.__data = [];
-
     }
     add(s) {
         if (this.__data.indexOf(s) > -1) {
@@ -422,7 +421,6 @@ export function generate(settings) {
     element.childrens = settingsV.drawingList;
     console.log(element)
 
-    console.log(element)
     console.log(typeof element.childrens)
     console.log(Array.isArray(element.childrens))
 
@@ -430,8 +428,27 @@ export function generate(settings) {
     let html = toHtml(element, js);
 
     js.definedVar(element.attrs.__formRef, 'null');
-    const templateContent = ["<template>\n", html, '</template>'].join('').replace(/(\r\n|\n|\r)/gm, "").replaceAll('><', '>\n<');
-    return [beautify.html(templateContent), "\n<script setup>", beautify.js(js.render()), "</script>"].join("\n")
+
+    const wrapStyle = element.attrs.wrapStyle
+    let appendToBody = wrapStyle === 'dialog' ? ' append-to-body' : ''
+    let wrapHtml = wrapStyle === 'none' ? html : `<el-${wrapStyle} title="导入表" v-model="visible" direction="rtl" size="50%"${appendToBody}>${html}</el-${wrapStyle}>`
+    const templateContent = ["<template>\n", wrapHtml, '</template>'].join('').replace(/(\r\n|\n|\r)/gm, "").replaceAll('><', '>\n<');
+
+    const jsConst = wrapStyle === 'none' ? '' : `
+    const visible = ref(false);
+    function show() {
+        visible.value = true;
+    }
+
+    function cancel() {
+        visible.value = false;
+    }
+    
+    defineExpose({
+    show,
+    });
+    `
+    return [beautify.html(templateContent), "\n<script setup>", beautify.js(js.render() + jsConst), "</script>"].join("\n")
 }
 
 export async function generateAndFormatAsync(settings) {
