@@ -1,17 +1,20 @@
 <template>
-  <el-form label-position="left" label-width="100px">
-    <el-form-item label="必填">
-      <el-switch v-model="required" />
-    </el-form-item>
+  <el-form label-position="left" label-width="100px" style="margin-top: 5px; margin-bottom: 25px;">
+    <el-row>
+      <el-col :span="12">
+        <el-switch v-model="required" size="large" active-text="必填" inactive-text="可选" />
+      </el-col>
+      <el-col :span="12" v-if="openRule" style="display: flex; flex-direction:row-reverse">
+        <el-button ref="btn" type="default" link icon="CirclePlusFilled" @click.prevent="addItem">添加规则</el-button>
+      </el-col>
+    </el-row>
+
     <template v-if="openRule">
-      <el-form-item>
-        <el-button @click.prevent="addItem">添加规则</el-button>
-      </el-form-item>
       <template v-for="(item, index) in data[fieldName]" :key="'c' + index">
         <el-card v-if="'pattern' in item" style="margin: 10px 5px" class="_box">
           <el-form-item label="表达式">
             <el-autocomplete v-model="item.pattern" :fetch-suggestions="querySearch" class="inline-input"
-              placeholder="输入验证正则表达式" @select="handleSelect(item)">
+              placeholder="输入验证正则表达式" @select="handleSelect" clearable @focus="fucusAction(item)">
               <template #default="{ item }">
                 {{ item.title }}
               </template>
@@ -43,6 +46,7 @@
 </template>
 <script>
 import { deepClone, randFieldId } from "./utils/func.js";
+import { rule_options } from "./utils/rules"
 import { CircleCloseFilled } from "@element-plus/icons-vue";
 import { defineComponent, nextTick, reactive, ref, toRaw, watch, watchEffect, computed } from "vue";
 
@@ -53,8 +57,10 @@ export default defineComponent({
   props: ["modelValue", "defaultvalue", "fieldName", "openRule"],
   setup(props, ctx) {
     const btn = ref(null);
+    const currentRule = ref(null)
     const mV = toRaw(props.modelValue)
     const data = reactive(deepClone(mV));
+    // console.log(data)
 
     if (!(props.fieldName in data)) {
       data[props.fieldName] = [];
@@ -127,52 +133,26 @@ export default defineComponent({
     })
 
     const querySearch = function (qs, cb) {
-      const results = [
-        {
-          title: "Email",
-          value: "^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+",
-          msg: "请输入正确的 Email",
-        },
-
-        {
-          title: "真实姓名",
-          value: "^[\u4e00-\u9fa5]{2,4}$",
-          msg: "请输入正确的姓名",
-        },
-        {
-          title: "身份证",
-          value:
-            "^[1-9]d{5}(18|19|([23]d))d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)d{3}[0-9Xx]$",
-          msg: "请输入正确的身份证号码",
-        },
-        {
-          title: "URL",
-          value:
-            "^((https?|ftp|file)://)?([da-z.-]+).([a-z.]{2,6})([/w .-]*)*/?$",
-          msg: "请输入正确的URL",
-        },
-        {
-          title: "电话号码",
-          value: "^((d{3,4}-)|d{3.4}-)?d{7,8}$",
-          msg: "请输入正确的电话号码",
-        },
-        {
-          title: "手机号码",
-          value: "^1[0-9]{10}$",
-          msg: "请输入正确的手机号码"
-        },
-        {
-          title: "必须是中文",
-          value: "^[\\u4e00-\\u9fa5]{0,}$",
-          msg: "必须是中文",
-        },
-      ];
+      const results = qs
+        ? rule_options.filter((item) => {
+          const qsLowerCase = qs.toLowerCase()
+          return item.title.toLowerCase().includes(qsLowerCase) || item.msg.toLowerCase().includes(qsLowerCase)
+        })
+        : rule_options
       cb(results);
     };
 
-    const handleSelect = function (opt, item) {
-      // item.message=opt.msg
-      console.log(item, opt);
+    function fucusAction(item) {
+      currentRule.value = item.id
+    }
+
+    function handleSelect(item) {
+      if (currentRule.value) {
+        const finded = data[props.fieldName].find(i => i.id === currentRule.value)
+        if (finded) {
+          finded.message = item.msg
+        }
+      }
     };
 
     const del = function (id) {
@@ -189,6 +169,7 @@ export default defineComponent({
       save,
       querySearch,
       handleSelect,
+      fucusAction,
       del,
       btn, required
     };

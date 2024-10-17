@@ -5,6 +5,9 @@
       <el-tab-pane label="组件属性" name="field">
         <div class="field-box">
           <el-scrollbar class="right-scrollbar">
+            <el-button type="danger" text bg icon="Delete" @click="deleteItem(currentItem.__ID)">删除组件
+            </el-button>
+
             <template v-if="currentItem">
               <el-form ref="form2" label-position="top" label-width="80px">
                 <el-form-item v-for="(func, title) in currentItem.actions" :key="title">
@@ -21,9 +24,6 @@
               <rules-input :openRule="currentItem.__openRules" v-if="currentItem.tag !== 'draggable'"
                 :fieldName="currentItem.attrs.fieldName && currentItem.attrs.fieldName.__val__"
                 v-model="modelValue.formConf.__rules"></rules-input>
-
-              <el-button type="primary" @click="deleteItem(currentItem.__ID)">删除
-              </el-button>
             </template>
           </el-scrollbar>
         </div>
