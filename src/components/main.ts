@@ -1,10 +1,12 @@
-import { VFG, OptionInput, UploadWrap, request } from "./VFG/index"
+import { VFG, OptionInput, UploadWrap } from "./VFG/index"
 import SvgIcon from '/@/components/SvgIcon/index.vue'
 import 'virtual:svg-icons-register'
 import 'highlight.js/styles/googlecode.css'
 import type { VFGSetupOption } from "./setup"
 import { setupVFG } from "./setup"
+import request from "./VFG/core/request";
+import { reqConfig } from "./VFG/core/request";
 
-export { VFG, SvgIcon, OptionInput, UploadWrap, request }
+export { VFG, SvgIcon, OptionInput, UploadWrap, request, reqConfig }
 export { setupVFG }
 export type { VFGSetupOption }

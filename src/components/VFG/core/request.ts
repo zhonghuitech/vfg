@@ -6,9 +6,10 @@ axios.defaults.timeout = 10000; //响应时间
 import { ElMessage, ElNotification, ElMessageBox } from 'element-plus';
 
 export let isRelogin = { show: false };
+export let reqConfig = { token: '' }
 
 // 创建axios实例
-const request = axios.create({
+const service = axios.create({
     // axios中请求配置有baseURL选项，表示请求URL公共部分
     baseURL: '',
     // 超时
@@ -43,14 +44,17 @@ export function tansParams(params: any) {
 
 // 请求拦截器（在发送请求之前做些什么）
 // request拦截器
-request.interceptors.request.use(
+service.interceptors.request.use(
     (config: any) => {
         // console.log("request", config);
         // 是否需要设置 token
         const isToken = (config.headers || {}).isToken === false;
         // 是否需要防止数据重复提交
         const isRepeatSubmit = (config.headers || {}).repeatSubmit === false;
-
+        console.log(reqConfig.token)
+        if (!isToken && !reqConfig.token) {
+            config.headers["Authorization"] = "Bearer " + reqConfig.token; // 让每个请求携带自定义token 请根据实际情况自行修改
+        }
         // get请求映射params参数
         if (config.method === "get" && config.params) {
             let url = config.url + "?" + tansParams(config.params);
@@ -113,7 +117,7 @@ request.interceptors.request.use(
 );
 
 // 响应拦截器
-request.interceptors.response.use(
+service.interceptors.response.use(
     (res: any) => {
         // 未设置状态码则默认成功状态
         const code = res.data.code || 200;
@@ -173,4 +177,4 @@ request.interceptors.response.use(
     }
 );
 
-export { request }
+export default service;

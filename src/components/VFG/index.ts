@@ -3,10 +3,9 @@ import FormGenerator from "./form/FormGenerator.vue"
 import type { App, Plugin } from 'vue';
 import OptionInput from "./form/OptionInput.vue";
 import UploadWrap from "./form/elementWarp/UploadWrap.vue";
-import { request } from "./core/request";
 
 // 按需引入
-export { TestButton, FormGenerator, OptionInput, UploadWrap, request };
+export { TestButton, FormGenerator, OptionInput, UploadWrap };
 
 const component = [TestButton, FormGenerator, UploadWrap, OptionInput];
 
