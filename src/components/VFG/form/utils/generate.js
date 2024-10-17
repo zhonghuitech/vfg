@@ -52,23 +52,30 @@ class Scripts {
 
     addUiDataFromApi(url, medth, name) {
         this.UIData.add(name);
-        this.importString.add('import {Api} from "@/api"; ')
+        this.importString.add('import {request} from "vfg"; ')
         this.APIData.add(`
-        Api.${medth}("${url}").then(res=>{
+        request({
+            url: ${url},
+            method: '${medth}'
+        }).then(res=>{
             UIData.${name}=res.data.data;
         });
         `);
     }
 
     addPostAction(apiUrl) {
-        this.importString.add('import {Api} from "@/api"; ');
+        this.importString.add('import {request} from "vfg"; ');
         this.ActionData.add(`
         const postData=function(formEl){
         formEl.validate((valid) => {
             if(valid===false){
                 return false;
             }
-            Api.Post("${apiUrl}",formData).then(res=>{
+            request({
+                url: ${apiUrl},
+                method: 'post',
+                data: formData
+            }).then(res=>{
               ElMessage.success("操作成功!");
             });
             })

@@ -8,7 +8,7 @@ import {
     isObjectUnde,
 } from "./func";
 
-import { Api } from "./api";
+import { request } from "/@/components/VFG/core/request";
 
 const optParseHandles = {
     default: function (_c, data, tag) {
@@ -134,7 +134,10 @@ const _clone = function (obj) {
         if (_c.__opt__.type == "static") {
             parseFunc(_c, data, optTag);
         } else {
-            Api.Get(data.url).then((res) => {
+            request({
+                url: data.url,
+                method: 'get'
+            }).then((res) => {
                 parseFunc(_c, res.data, optTag);
             });
         }
