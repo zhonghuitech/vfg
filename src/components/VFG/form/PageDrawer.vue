@@ -1,9 +1,9 @@
 <template>
   <!-- {{ modelValue.drawingList }} -->
 
-  <el-form :model="formModel" v-bind="formSetting" :gutter="modelValue.formConf.gutter">
-    <draggable class="drawing-board" style="padding: 10px; height: 100%" v-model="modelValue.drawingList" :animation="340"
-      group="componentsGroup" @change="onEnd" ghostClass="ghost">
+  <el-form :model="formModel" v-bind="formSetting" :gutter="modelValue.formConf.gutter" :rules="rules">
+    <draggable class="drawing-board" style="padding: 10px; height: 100%" v-model="modelValue.drawingList"
+      :animation="340" group="componentsGroup" @change="onEnd" ghostClass="ghost">
       <template v-for="(item, index) in conf.drawingList" :key="item.__ID">
         <!-- {{item}} -->
         <element-render @click.stop="selected(item.__ID)" @update="changeValue" :currentID="modelValue.current"
@@ -44,6 +44,9 @@ export default defineComponent({
     };
     const conf = initRender(props.modelValue);
     const formModel = reactive({});
+
+    const rules = computed(() => props.modelValue.formConf.__rules)
+    console.log(rules.value)
 
     let formEleKeys = [];
     const watchElement = function (eles) {
@@ -94,7 +97,7 @@ export default defineComponent({
       formModel[idname] = val;
     };
 
-    return { onEnd, conf, formSetting, selected, changeValue, formModel };
+    return { onEnd, conf, formSetting, selected, changeValue, formModel, rules };
   },
 });
 </script>

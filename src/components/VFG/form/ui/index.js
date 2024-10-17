@@ -32,7 +32,7 @@ const formConf = {
         labelWidth: helper.input_number("标签宽度", 100),
         disabled: helper.input_boolean("禁用", false),
         inline: helper.input_boolean("行内模式", false),
-        hideRequiredAsterisk: helper.input_boolean("必填标星", false),
+        hideRequiredAsterisk: helper.input_boolean("必填标星隐藏", false),
         __formBtns: helper.input_boolean("是否显示按钮", true),
     },
 }
