@@ -11,10 +11,10 @@ import {
 import { Api } from "./api";
 
 const optParseHandles = {
-    default: function (_c, data) {
+    default: function (_c, data, tag) {
         for (let item of data) {
             let son = {};
-            son.tag = _c.__opt__.tag;
+            son.tag = tag || _c.__opt__.tag;
             son.attrs = {
                 value: item.value,
             };
@@ -24,10 +24,10 @@ const optParseHandles = {
             _c.childrens.value.push(son);
         }
     },
-    "el-option": function (_c, data) {
+    "el-option": function (_c, data, tag) {
         for (let item of data) {
             let son = {};
-            son.tag = _c.__opt__.tag;
+            son.tag = tag || _c.__opt__.tag;
             son.attrs = {
                 value: item.value,
                 label: item.key,
@@ -54,6 +54,17 @@ const toVal = function (obj) {
 
     return _c;
 };
+
+// 对于 el-checkbox-group 样式类型依赖于 type
+export const getTag = (_c) => {
+    if (_c.tag === 'el-checkbox-group') {
+        return 'el-checkbox' + (_c.attrs.type == 'button' ? '-button' : '')
+    } else if (_c.tag === 'el-radio-group') {
+        return 'el-radio' + (_c.attrs.type == 'button' ? '-button' : '')
+    }
+    return _c.__opt__.tag
+}
+
 const _clone = function (obj) {
     if (isNumber(obj) || isStr(obj) || isObjectUnde(obj)) {
         return obj;
@@ -109,20 +120,21 @@ const _clone = function (obj) {
     }
 
     if ("__opt__" in _c) {
+        const optTag = getTag(_c)
         let data =
             _c.__opt__.type == "static"
                 ? _c.__opt__.staticData
                 : _c.__opt__.dynamicData;
         let parseFunc =
             _c.__opt__.tag in optParseHandles
-                ? optParseHandles[_c.__opt__.tag]
+                ? optParseHandles[optTag]
                 : optParseHandles["default"];
 
         if (_c.__opt__.type == "static") {
-            parseFunc(_c, data);
+            parseFunc(_c, data, optTag);
         } else {
             Api.Get(data.url).then((res) => {
-                parseFunc(_c, res.data);
+                parseFunc(_c, res.data, optTag);
             });
         }
     }
@@ -131,6 +143,7 @@ const _clone = function (obj) {
 };
 
 export function initRender(settings) {
+    console.log(settings.drawingList)
     const conf = reactive({
         formConf: settings.formConf,
         current: settings.current,

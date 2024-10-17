@@ -16,7 +16,6 @@ export default {
         fieldName: helper.input_text("字段名", '字段名'),
         disabled: helper.input_boolean("是否禁用", false),
         border: helper.input_boolean("占位字符", true),
-
         size: helper.input_radio("尺寸", [{
             key: "default",
             value: "默认"
@@ -27,12 +26,19 @@ export default {
             key: "small",
             value: "较小"
         }], "default"),
+        type: helper.input_radio("选项样式", [{
+            key: "default",
+            value: "默认"
+        }, {
+            key: "button",
+            value: "按钮"
+        }], "default"),
     },
     __opt__: helper.input_opt("选择项", 'el-radio-button'),
- 
+
     slots: {
     },
-    props:{},
+    props: {},
     childrens: [],
     ctrlBtn: true,
 

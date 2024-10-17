@@ -6,6 +6,7 @@ import {
     isNumber,
     isObjectUnde
 } from "./func.js";
+import { getTag } from "./drawer.js"
 
 import beautify from 'js-beautify';
 import * as prettier from "prettier";
@@ -230,6 +231,7 @@ const attrFuns = {
         return `style="${lines.join(";")}"`
     }
 }
+
 const attrFormat = function (attrs, props) {
     attrs = Object.assign({}, attrs, props);
     let attr = [];
@@ -303,7 +305,7 @@ const optParseHandles = {
                 }
                 son.tag = opts.tag;
                 son.attrs = {
-                    "label": item.value
+                    "value": item.value
                 }
                 son.slots = {
                     default: item.key
@@ -334,6 +336,8 @@ const optParseHandles = {
 }
 
 const opt = function (name, opts, js) {
+    console.log(name)
+    console.log(opts)
     let data = opts.type === 'static' ? opts.staticData : opts.dynamicData;
     let parseFunc = opts.tag in optParseHandles[opts.type] ? optParseHandles[opts.type][opts.tag] : optParseHandles[opts.type]['default'];
 
@@ -388,6 +392,10 @@ const toHtml = function (ele, js) {
         if (isObjectArray(ele['childrens']) === false) {
             ele['childrens'] = [];
         }
+
+        const tag = getTag(ele)
+        ele.__opt__.tag = tag  // 处理el-radio-group这种类型， button 或 default.
+
         let ops = opt(ele.attrs.fieldName, ele.__opt__, js);
         ele['childrens'] = ele['childrens'].concat(ops);
     }
@@ -402,14 +410,18 @@ const toHtml = function (ele, js) {
     return node.join("");
 
 }
+
 export function generate(settings) {
     console.log('generate...')
+
     console.log(settings)
     const settingsV = toVal(settings);
     console.log('---after')
     console.log(settingsV)
     let element = settingsV.formConf;
     element.childrens = settingsV.drawingList;
+    console.log(element)
+
     console.log(element)
     console.log(typeof element.childrens)
     console.log(Array.isArray(element.childrens))

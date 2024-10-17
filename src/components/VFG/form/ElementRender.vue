@@ -81,6 +81,9 @@ export default defineComponent({
     },
   },
   setup(props, context) {
+    // console.log(props.tag)
+    // console.log(props.attrs)
+
     const copyItem = inject("copyItem");
     const deleteItem = inject("deleteItem");
     const hightLight = inject("hightLight");
