@@ -99,7 +99,7 @@ export default defineComponent({
 
     watch(vm, () => {
       if (props.tag == "draggable") {
-        // console.log(vm.value, "====", props.__ID);
+        console.log(vm.value, "====", props.__ID);
         updateChild(vm.value, props.__ID);
         // 拖拽组件 触发更新子组件事件
         return;

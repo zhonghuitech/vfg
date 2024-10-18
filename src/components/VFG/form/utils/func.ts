@@ -17,7 +17,7 @@ export function randFieldId() {
 }
 
 // 深拷贝对象
-export function deepClone(obj: any) {
+export function deepClone(obj: any, needRandFieldId: boolean = false) {
     const _toString = Object.prototype.toString
 
     // null, undefined, non-object, function
@@ -54,7 +54,7 @@ export function deepClone(obj: any) {
     const result = Array.isArray(obj) ? [] : obj.constructor ? new obj.constructor() : {}
 
     for (const key in obj) {
-        result[key] = deepClone(obj[key])
+        result[key] = ("__ID" === key && needRandFieldId) ? randFieldId() : deepClone(obj[key], needRandFieldId)
     }
 
     return result

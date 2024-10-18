@@ -22,7 +22,7 @@ const elDragable = {
             "border-style": "solid",
             "border-color": "yellow"
         },
-        component: "el-col",
+        // component: "el-col",
         group: "componentsGroup",
         // class: "drag-wrapper box",
         animation: 340,
@@ -56,7 +56,6 @@ const elCol = {
             "border-style": "dotted",
             "border-color": "red"
         },
-        component: "el-col",
         group: "componentsGroup",
         animation: 340,
     },

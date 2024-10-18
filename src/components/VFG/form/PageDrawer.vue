@@ -39,6 +39,7 @@ export default defineComponent({
     const updateDefaultValue = inject("updateDefaultValue");
     const onEnd = function (e) {
       console.log('onEnd...')
+      console.log(e)
       console.log(props.modelValue)
       context.emit("update:modelValue", props.modelValue, e.clonedData);
     };

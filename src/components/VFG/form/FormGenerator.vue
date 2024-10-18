@@ -138,12 +138,15 @@ export default defineComponent({
     }
 
     const update = function (e, ele) {
+      console.log('update action @FormGenerator...')
+      console.log(settings.drawingList)
+      console.log(e)
       if (ele) {
         // 选中当前
         settings.current = ele.__ID
       }
-      settings.formConf = e.formConf;
-      settings.drawingList = e.drawingList;
+      //settings.formConf = e.formConf;
+      //settings.drawingList = e.drawingList;
     };
 
     const addComponentAction = function (el) {
@@ -214,9 +217,14 @@ export default defineComponent({
     };
 
     const updateChild = function (eles, ids) {
+      console.log('更新子组件...')
+      console.log(eles)
+      console.log(ids)
+      console.log(settings.drawingList)
       let item = findEle(settings.drawingList, ids);
-
+      console.log(item)
       item.childrens = eles;
+      console.log(settings.drawingList)
     };
 
     const updateDefaultValue = function (val, ids) {

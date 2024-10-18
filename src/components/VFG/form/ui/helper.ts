@@ -4,10 +4,11 @@ import {
 } from "../utils/func";
 
 const cloneItem = function (item: any) {
-    const newitem = deepClone(item);
+    const newitem = deepClone(item, true);
     newitem.__ID = randFieldId()
     return newitem;
 }
+
 const input_text = function (name: string, val: any) {
     return {
         __val__: val,
