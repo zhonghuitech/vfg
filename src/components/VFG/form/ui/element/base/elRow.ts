@@ -1,13 +1,49 @@
 import helper from "../../helper.js";
 
-const elCol = {
+const elDragable = {
     tag: "draggable",
-    name: "栅格",
+    name: "拖拽容器",
     __openRules: false,
     tagIcon: 'row',
     __ID: '',
     defaultvalue: [],
     attrs: {
+        fieldName: helper.input_text("字段名", '字段名'),
+        span: helper.input_range("列数2", 1, 24, 8),
+        offset: helper.input_range("左侧间隔2", 0, 24, 0),
+        push: helper.input_range("右移动2", 0, 24, 0),
+        pull: helper.input_range("左移动2", 0, 24, 0),
+    },
+    props: {
+        style: {
+            "min-height": "80px",
+            "background": "gray",
+            "margin-top": "7.5px",
+            "border-style": "solid",
+            "border-color": "yellow"
+        },
+        component: "el-col",
+        group: "componentsGroup",
+        // class: "drag-wrapper box",
+        animation: 340,
+    },
+    childrens: [
+
+    ],
+    ctrlBtn: true,
+    slots: {
+    }
+}
+
+const elCol = {
+    tag: "el-col",
+    name: "列组件",
+    __openRules: false,
+    tagIcon: 'row',
+    __ID: '',
+    defaultvalue: [],
+    attrs: {
+        fieldName: helper.input_text("字段名", '字段名'),
         span: helper.input_range("列数", 1, 24, 8),
         offset: helper.input_range("左侧间隔", 0, 24, 0),
         push: helper.input_range("右移动", 0, 24, 0),
@@ -15,14 +51,17 @@ const elCol = {
     },
     props: {
         style: {
-            "min-height": "60px"
+            "min-height": "100px",
+            "background": "yellow",
+            "border-style": "dotted",
+            "border-color": "red"
         },
         component: "el-col",
         group: "componentsGroup",
-        class: "drag-wrapper box",
         animation: 340,
     },
     childrens: [
+        helper.cloneItem(elDragable)
     ],
     ctrlBtn: true,
     slots: {
@@ -48,6 +87,7 @@ export default {
     tagIcon: 'input',
     __ID: '',
     attrs: {
+        fieldName: helper.input_text("字段名", '字段名'),
         gutter: helper.input_range("栅格间隔", 1, 24, 24),
         justify: helper.input_radio("justify", [{
             key: 'start',

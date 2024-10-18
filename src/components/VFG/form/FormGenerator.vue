@@ -32,6 +32,21 @@
               inactive-value="preview" />
           </div>
         </div>
+
+        <!-- <el-row>
+          <el-col :span="8" style="background-color: yellow;">
+            <draggable class="drawing-board" style="padding: 10px; height: 100%" v-model="dList" :animation="340"
+              group="componentsGroup" @change="onEnd" ghostClass="ghost">
+              <template v-for="(item, index) in dList" :key="item.id">
+                <element-render 
+                style="padding-top: 10px;padding-bottom: 10px;" v-bind="item" class="item-tool-box">{{ item.name }}</element-render>
+              </template>
+            </draggable>
+          </el-col>
+          <el-col :span="8" style="background-color: gray;">bb</el-col>
+          <el-col :span="8" style="background-color: red;">gg</el-col>
+        </el-row> -->
+
         <el-scrollbar class="center-scrollbar" :class="[device, preview]">
           <page-drawer :model-value="settings" @update:model-value="update"></page-drawer>
         </el-scrollbar>
@@ -102,6 +117,7 @@ export default defineComponent({
     const showCode = ref(false);
     const preview = ref("");
     const code = ref('')
+    const dList = ref([])
     const loadSetting = function () {
       let strs = localStorage.getItem("settings");
       if (strs) {
@@ -115,6 +131,11 @@ export default defineComponent({
       };
     };
     const settings = reactive(loadSetting());
+
+    const onEnd = (e) => {
+      console.log(dList.value)
+      console.log(e)
+    }
 
     const update = function (e, ele) {
       if (ele) {
@@ -253,7 +274,9 @@ export default defineComponent({
       showCode,
       preViewCode,
       ClipboardWrite,
-      addComponentAction
+      addComponentAction,
+      dList,
+      onEnd
     };
   },
 });

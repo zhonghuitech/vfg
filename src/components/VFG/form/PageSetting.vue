@@ -12,7 +12,7 @@
             <template v-if="currentItem">
               <el-form ref="form2" label-width="80px" size="small">
                 <el-form-item v-for="(func, title) in currentItem.actions" :key="title">
-                  <el-button @click="func(currentItem)">{{ title }}</el-button>
+                  <el-button type="primary" icon="Plus" @click="func(currentItem)">{{ title }}</el-button>
                 </el-form-item>
                 <template v-for="(item, index) in eleRenderSetFormat(currentItem)"
                   :key="index + '-' + currentItem.__ID">
@@ -73,6 +73,7 @@ export default defineComponent({
       let ele = findEle(props.modelValue.drawingList, props.modelValue.current);
       if (ele) {
         currentTab.value = "field";
+        console.log(ele)
         return ele;
       }
     });

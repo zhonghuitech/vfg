@@ -114,11 +114,18 @@ export const eleRenderFormat = function (conf: any, eleName: any) {
 
 }
 
+const getComName = function (conf: any) {
+    if (conf.tag == 'el-row' || conf.tag == 'el-col' || conf.tag == 'draggable') {
+        return (conf.name || conf.tag)
+    }
+    return "form item"
+}
+
 export const eleRenderSetFormat = function (conf: any) {
-    // console.log(conf)
+    console.log(conf)
 
     const eles = [];
-    eles.push({ tag: "el-divider", slots: { default: "form item" } });
+    eles.push({ tag: "el-divider", slots: { default: getComName(conf) } });
     for (let f in conf.formItem) {
         let item = conf.formItem[f];
         eles.push(eleRenderFormat(item, f))
