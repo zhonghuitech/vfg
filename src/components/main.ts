@@ -4,9 +4,8 @@ import 'virtual:svg-icons-register'
 import 'highlight.js/styles/googlecode.css'
 import type { VFGSetupOption } from "./setup"
 import { setupVFG } from "./setup"
-import request from "./VFG/core/request";
-import { reqConfig } from "./VFG/core/request";
+import { request } from "./setup";
 
-export { VFG, SvgIcon, OptionInput, UploadWrap, request, reqConfig }
+export { VFG, SvgIcon, OptionInput, UploadWrap, request }
 export { setupVFG }
 export type { VFGSetupOption }

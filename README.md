@@ -7,7 +7,7 @@
      <a href="https://www.npmjs.com/package/vfg"><img src="https://badgen.net/npm/license/vfg" alt="License"></a> 
 </p>
 
-VFG: Vue3 Form Generator (based on Element-Plus).
+VFG: Vue3 Form&Page Generator (based on Element-Plus).
 
 ## Usage
 

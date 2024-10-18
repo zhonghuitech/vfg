@@ -3,18 +3,30 @@ import { VFG } from "./VFG/index"
 import SvgIcon from '/@/components/SvgIcon/index.vue'
 import { VueDraggable } from 'vue-draggable-plus'
 import hljs from 'highlight.js';
+import type { RequestConfig } from './VFG/core/network/request';
+import requestDefault from "./VFG/core/network/request";
+import { createRequest } from "./VFG/core/network/request";
 
 export interface VFGSetupOption {
     initSvgIcon: boolean,
+    reqConfig: RequestConfig
 }
 
 export const DEFAULT_OPTION: VFGSetupOption = {
-    initSvgIcon: true
+    initSvgIcon: true,
+    reqConfig: {
+        baseURL: '',
+        getToken: null
+    }
 }
 
+let request = requestDefault;
 export function setupVFG(app: App<Element>, option?: VFGSetupOption) {
-    const options = option ? { ...DEFAULT_OPTION, ...option } : DEFAULT_OPTION;
+    if (option && option.reqConfig) {
+        request = createRequest(option.reqConfig)
+    }
 
+    const options = option ? { ...DEFAULT_OPTION, ...option } : DEFAULT_OPTION;
     app.use(VFG)
     if (options.initSvgIcon) {
         app.component("svg-icon", SvgIcon as any)
@@ -30,3 +42,5 @@ export function setupVFG(app: App<Element>, option?: VFGSetupOption) {
         }, 200)
     })
 }
+
+export { request }
