@@ -365,12 +365,17 @@ const opt = function (name: any, opts: any, js: any) {
 const renderBtns = function (ele: any, js: any) {
     if (('__formBtns' in ele.attrs) && ele.attrs.__formBtns) {
         js.addPostAction(ele.api);
-        return ` 
-        <el-form-item>
-        <el-button type="primary" @click="postData(${ele.attrs.__formRef})">确定</el-button>
-        <el-button>取消</el-button>
-        </el-form-item>`;
+        return ele.attrs.wrapStyle === 'none' ? `<el-form-item><el-button type="primary" @click="postData(${ele.attrs.__formRef})">确定</el-button><el-button>取消</el-button></el-form-item>` : '';
     }
+}
+
+const renderFooter = function () {
+    return `<template #footer>
+            <div class="dialog-footer">
+                <el-button type="primary" @click="postData(refForm)">确 定</el-button>
+                <el-button @click="cancel">取 消</el-button>
+            </div>
+        </template>`
 }
 
 const childrenFormat = function (childrens: any, js: any) {
@@ -446,7 +451,8 @@ export function generate(settings: any) {
 
     const wrapStyle = element.attrs.wrapStyle
     let appendToBody = wrapStyle === 'dialog' ? ' append-to-body' : ''
-    let wrapHtml = wrapStyle === 'none' ? html : `<el-${wrapStyle} title="导入表" v-model="visible" direction="rtl" size="50%"${appendToBody}>${html}</el-${wrapStyle}>`
+    const footer = renderFooter()
+    let wrapHtml = wrapStyle === 'none' ? html : `<el-${wrapStyle} title="导入表" v-model="visible" direction="rtl" size="50%"${appendToBody}>${html}${footer}</el-${wrapStyle}>`
     const templateContent = ["<template>\n", wrapHtml, '</template>'].join('').replace(/(\r\n|\n|\r)/gm, "").replaceAll('><', '>\n<');
 
     const jsConst = wrapStyle === 'none' ? '' : `
