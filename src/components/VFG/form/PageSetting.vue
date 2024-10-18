@@ -5,7 +5,8 @@
       <el-tab-pane label="组件属性" name="field">
         <div class="field-box">
           <el-scrollbar class="right-scrollbar">
-            <el-button type="danger" text bg icon="Delete" @click="deleteItem(currentItem.__ID)">删除组件</el-button>
+            <el-button v-if="currentItem" type="danger" text bg icon="Delete" @click="deleteItem(currentItem.__ID)">删除组件</el-button>
+            <el-text v-else class="mx-1" type="warning">请选择组件...</el-text>
 
             <template v-if="currentItem">
               <el-form ref="form2" label-width="80px" size="small">
