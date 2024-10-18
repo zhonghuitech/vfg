@@ -1,7 +1,8 @@
 {
   "files": [],
   "compilerOptions": {
-    "allowJs": true
+    "allowJs": true,
+    "types": ["vite/client"]
   },
   "references": [
     {

@@ -17,7 +17,7 @@
     "module": "es2022",
     "moduleResolution": "Bundler",
     "types": [
-      "node"
+      "node", "vite/client"
     ],
     "baseUrl": ".",
     "paths": {

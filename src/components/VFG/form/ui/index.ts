@@ -1,4 +1,4 @@
-import helper from "./helper.js";
+import helper from "./helper";
 
 // 表单属性【右面板】
 const formConf = {
@@ -47,16 +47,16 @@ const formConf = {
     },
 }
 
-const elements = {
+const elements: any = {
     base: { eles: [], title: "基本组件" },
     form: { eles: [], title: "表单组件" },
 };
 
-let files = import.meta.glob('./element/form/*.js', { eager: true });
+let files: any = import.meta.glob('./element/form/*.ts', { eager: true });
 for (const key in files) {
     elements.form.eles.push(files[key].default)
 }
-files = import.meta.glob('./element/base/*.js', { eager: true });
+files = import.meta.glob('./element/base/*.ts', { eager: true });
 for (const key in files) {
     elements.base.eles.push(files[key].default)
 }

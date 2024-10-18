@@ -22,7 +22,7 @@
 
 <script>
 import cloneComponent from "./utils/cloneComponent";
-import { elements } from "./ui/index.js";
+import { elements } from "./ui/index";
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({

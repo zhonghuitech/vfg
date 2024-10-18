@@ -3,12 +3,12 @@ import {
     deepClone
 } from "../utils/func";
 
-const cloneItem = function (item) {
+const cloneItem = function (item: any) {
     const newitem = deepClone(item);
     newitem.__ID = randFieldId()
     return newitem;
 }
-const input_text = function (name, val) {
+const input_text = function (name: string, val: any) {
     return {
         __val__: val,
         input_type: "input_text",
@@ -16,13 +16,13 @@ const input_text = function (name, val) {
     }
 }
 
-const input_slot_text = function (name, val) {
-    let ini = input_text(name, val);
+const input_slot_text = function (name: string, val: any) {
+    let ini: any = input_text(name, val);
     ini.tag = "text";
     return ini;
 }
 
-const input_number = function (name, val) {
+const input_number = function (name: string, val: any) {
     return {
         __val__: val,
         input_type: "input_number",
@@ -30,7 +30,7 @@ const input_number = function (name, val) {
     }
 }
 
-const input_boolean = function (name, val) {
+const input_boolean = function (name: string, val: any) {
     return {
         __val__: val,
         input_type: "input_boolean",
@@ -39,7 +39,7 @@ const input_boolean = function (name, val) {
 }
 
 
-const input_icon = function (name, val) {
+const input_icon = function (name: string, val: any) {
     return {
         __val__: val,
         input_type: "input_icon",
@@ -48,7 +48,7 @@ const input_icon = function (name, val) {
 }
 
 
-const input_range = function (label, min, max, val) {
+const input_range = function (label: string, min: number, max: number, val: any) {
     return {
         __val__: val,
         input_type: "input_range",
@@ -59,7 +59,7 @@ const input_range = function (label, min, max, val) {
 }
 
 
-export const input_radio = function (value, opts, val) {
+export const input_radio = function (value: any, opts: any, val: any) {
     const __child = {
         tag: "el-radio-button",
         keyValue: {
@@ -78,7 +78,7 @@ export const input_radio = function (value, opts, val) {
     }
 }
 
-const input_select = function (value, opts, val) {
+const input_select = function (value: any, opts: any, val: any) {
     const __child = {
         tag: "el-option",
         keyValue: {
@@ -98,7 +98,7 @@ const input_select = function (value, opts, val) {
 
 }
 
-const optValue = function (tag) {
+const optValue = function (tag: string) {
     return {
         type: 'static',
         tag: tag,
@@ -118,7 +118,7 @@ const optValue = function (tag) {
     }
 
 }
-const input_opt = function (value, tag) {
+const input_opt = function (value: string, tag: string) {
     return {
         __val__: optValue(tag),
         input_type: "input_opt",

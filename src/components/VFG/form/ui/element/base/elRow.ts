@@ -83,7 +83,7 @@ export default {
     },
 
     actions: {
-        "增加列": function (current) {
+        "增加列": function (current: any) {
             current.childrens.push(helper.cloneItem(elCol))
         }
     },
