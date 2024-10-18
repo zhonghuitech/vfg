@@ -39,6 +39,7 @@
     "pg": "pnpm -C ./playground/ dev",
     "build": "run-p type-check \"build-only {@}\" --",
     "bd": "vue-tsc --noEmit && vite build",
+    "tsc": "run-p type-check",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build && mkdir dist/assets/icons/ && cp src/assets/icons/* dist/assets/icons/",

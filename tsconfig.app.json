@@ -6,7 +6,8 @@
     "src/**/*.tsx",
     "env.d.ts",
     "src/**/*",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "src"
   ],
   "exclude": [
     "src/**/__tests__/*"
