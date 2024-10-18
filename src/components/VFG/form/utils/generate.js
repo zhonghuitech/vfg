@@ -6,7 +6,7 @@ import {
     isNumber,
     isObjectUnde
 } from "./func";
-import { getTag } from "./drawer.js"
+import { getTag } from "./drawer"
 
 import beautify from 'js-beautify';
 import * as prettier from "prettier";

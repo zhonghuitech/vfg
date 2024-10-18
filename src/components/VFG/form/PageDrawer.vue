@@ -24,7 +24,7 @@
 import { deepClone, isObjectArray } from "./utils/func";
 
 import { defineComponent, reactive, computed, inject, watch } from "vue";
-import { initRender } from "./utils/drawer.js";
+import { initRender } from "./utils/drawer";
 import ElementRender from "./ElementRender.vue";
 
 export default defineComponent({

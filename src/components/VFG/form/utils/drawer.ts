@@ -8,13 +8,14 @@ import {
     isObjectUnde,
 } from "./func";
 
-import request from "/@/components/VFG/core/request";
+import request from "/@/components/VFG/core/network/request";
+//import request from "../../core/network/request";
 
 const optParseHandles = {
-    default: function (_c, data, tag) {
+    default: function (_c: any, data: any, tag: any) {
         if (!data) { return }
         for (let item of data) {
-            let son = {};
+            let son = {} as any;
             son.tag = tag || _c.__opt__.tag;
             son.attrs = {
                 value: item.value,
@@ -25,9 +26,9 @@ const optParseHandles = {
             _c.childrens.value.push(son);
         }
     },
-    "el-option": function (_c, data, tag) {
+    "el-option": function (_c: any, data: any, tag: any) {
         for (let item of data) {
-            let son = {};
+            let son = {} as any;
             son.tag = tag || _c.__opt__.tag;
             son.attrs = {
                 value: item.value,
@@ -37,10 +38,10 @@ const optParseHandles = {
             _c.childrens.value.push(son);
         }
     },
-};
+} as any;
 
-const toVal = function (obj) {
-    const _c = {};
+const toVal = function (obj: any) {
+    const _c = {} as any;
     for (let a in obj) {
         if (typeof obj[a] == "object") {
             if ("__val__" in obj[a]) {
@@ -57,7 +58,7 @@ const toVal = function (obj) {
 };
 
 // 对于 el-checkbox-group 样式类型依赖于 type
-export const getTag = (_c) => {
+export const getTag = (_c: any) => {
     if (_c.tag === 'el-checkbox-group') {
         return 'el-checkbox' + (_c.attrs.type == 'button' ? '-button' : '')
     } else if (_c.tag === 'el-radio-group') {
@@ -66,12 +67,12 @@ export const getTag = (_c) => {
     return _c.__opt__.tag
 }
 
-const _clone = function (obj) {
+const _clone = function (obj: any) {
     if (isNumber(obj) || isStr(obj) || isObjectUnde(obj)) {
         return obj;
     }
 
-    const _c = {};
+    const _c = {} as any;
     for (let a in obj) {
         if (isObjectObject(obj[a])) {
             if ("__val__" in obj[a]) {
@@ -82,7 +83,7 @@ const _clone = function (obj) {
                 }
             }
         } else if (isObjectArray(obj[a])) {
-            _c[a] = obj[a].map((x) => {
+            _c[a] = obj[a].map((x: any) => {
                 return _clone(x);
             });
         } else {
@@ -137,7 +138,7 @@ const _clone = function (obj) {
             request({
                 url: data.url,
                 method: 'get'
-            }).then((res) => {
+            }).then((res: any) => {
                 parseFunc(_c, res.data, optTag);
             });
         }
@@ -146,18 +147,18 @@ const _clone = function (obj) {
     return _c;
 };
 
-export function initRender(settings) {
+export function initRender(settings: any) {
     console.log(settings.drawingList)
     const conf = reactive({
         formConf: settings.formConf,
         current: settings.current,
-        drawingList: settings.drawingList.map((x) => {
+        drawingList: settings.drawingList.map((x: any) => {
             return _clone(x);
         }),
     });
 
     watch(settings, () => {
-        conf.drawingList = settings.drawingList.map((x) => {
+        conf.drawingList = settings.drawingList.map((x: any) => {
             return _clone(x);
         });
     });
