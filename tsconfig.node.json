@@ -9,13 +9,12 @@
     "src/**/*.ts",
     "vite/**/*.ts",
     "src/**/*.vue",
-    "src/components/VFG/form/utils/generate.js"
   ],
   "compilerOptions": {
     "composite": true,
     "noEmit": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-    "module": "ESNext",
+    "module": "es2022",
     "moduleResolution": "Bundler",
     "types": [
       "node"

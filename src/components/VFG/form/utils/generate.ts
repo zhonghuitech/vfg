@@ -15,23 +15,34 @@ import parserBabel from "prettier/plugins/babel";
 import parserPostcss from "prettier/plugins/postcss";
 
 class Set {
+    private __data: any;
+
     constructor() {
         this.__data = [];
     }
-    add(s) {
+    add(s: any) {
         if (this.__data.indexOf(s) > -1) {
             return
         }
         this.__data.push(s);
     }
     data() {
-
         return this.__data;
     }
 }
 
 class Scripts {
-    constructor(rules) {
+    private importFuncVue: Set;
+    private importString: Set;
+    private UIData: Set;
+    private vars: Set;
+    private formData: Set;
+    private APIData: Set;
+    private ActionData: Set;
+    private returnData: Set;
+    private rules: any;
+
+    constructor() {
         this.importFuncVue = new Set();
         this.importString = new Set();
         this.UIData = new Set();
@@ -43,27 +54,28 @@ class Scripts {
         this.rules = false;
     }
 
-    definedVar(name, val) {
+    definedVar(name: string, val: string) {
         this.vars.add(`const ${name}=ref(${val})`)
     }
-    addRules(rules) {
+
+    addRules(rules: any) {
         this.rules = rules;
     }
 
-    addUiDataFromApi(apiUrl, medth, name) {
+    addUiDataFromApi(apiUrl: string, method: string, name: string) {
         this.UIData.add(name);
         this.importString.add('import {request} from "vfg"; ')
         this.APIData.add(`
         request({
             url: '${apiUrl}',
-            method: '${medth}'
+            method: '${method}'
         }).then(res=>{
             UIData.${name}=res.data.data;
         });
         `);
     }
 
-    addPostAction(apiUrl) {
+    addPostAction(apiUrl: string) {
         this.importString.add('import {request} from "vfg"; ');
         this.ActionData.add(`
         const postData=function(formEl){
@@ -86,16 +98,16 @@ class Scripts {
 
     }
 
-    renderImport(lines) {
+    renderImport(lines: any) {
         let vueFunc = this.importFuncVue.data().join(",");
         lines.push(`import {${vueFunc}} from "vue";\nimport { ElMessage } from 'element-plus'`);
         return lines.concat(this.importString.data());
     }
 
-    red(lines) {
+    red(lines: any) {
         this.importFuncVue.add('reactive');
-        let formData = {};
-        this.formData.data().forEach(element => {
+        let formData: any = {};
+        this.formData.data().forEach((element: any) => {
             console.log(element)
             formData[element[0]] = element[1];
         });
@@ -104,10 +116,10 @@ class Scripts {
         return lines;
     }
 
-    renderUIData(lines) {
+    renderUIData(lines: any) {
         this.importFuncVue.add('reactive');
-        let uiData = {};
-        this.UIData.data().forEach(element => {
+        let uiData: any = {};
+        this.UIData.data().forEach((element: any) => {
             uiData[element] = '';
         });
         lines.push(`const UIData=reactive(${JSON.stringify(uiData)});`);
@@ -115,24 +127,21 @@ class Scripts {
         return lines;
     }
 
-    renderApiScript(lines) {
-
+    renderApiScript(lines: any) {
         return lines.concat(this.APIData.data().join("\n"));
     }
-    renderVarsData(lines) {
+    renderVarsData(lines: any) {
         return lines.concat(this.vars.data().join("\n"));
     }
-    renderActionData(lines) {
+    renderActionData(lines: any) {
         return lines.concat(this.ActionData.data().join("\n"));
     }
 
-    renderFormRules(lines) {
+    renderFormRules(lines: any) {
         if (this.rules === false) {
-
             return lines;
         }
         for (let p in this.rules) {
-
             this.rules[p] = Object.values(this.rules[p])
         }
         this.returnData.add("rules");
@@ -148,7 +157,7 @@ class Scripts {
         return lines;
     }
 
-    renderSetup(lines) {
+    renderSetup(lines: any) {
         lines = this.red(lines);
         lines = this.renderUIData(lines);
         lines = this.renderApiScript(lines);
@@ -158,7 +167,7 @@ class Scripts {
         return lines;
     }
 
-    renderEnd(lines) {
+    renderEnd(lines: any) {
         return lines;
     }
 
@@ -172,13 +181,13 @@ class Scripts {
     }
 }
 
-const keyName = function (k) {
+const keyName = function (k: string) {
     let r = new RegExp('([A-Z]{1,1})');
     return k.replace(r, '-$1').toLowerCase();
 }
 
-const toVal = function (obj) {
-    const _c = {}
+const toVal = function (obj: any) {
+    const _c: any = {}
     for (let a in obj) {
         // 默认值不要处理，否则 Array 类型的 [1, 2] 会变成 obj {0:1,1:2}
         if (typeof obj[a] == 'object' && a !== 'defaultvalue') {
@@ -195,17 +204,16 @@ const toVal = function (obj) {
     return _c;
 }
 
-
-const isBoolean = function (s) {
+const isBoolean = function (s: any) {
     if (typeof s == 'boolean') {
         return true;
     }
     return ['true', "false"].indexOf(s) > -1;
 }
 
-const attrFuns = {
+const attrFuns: any = {
     FormData: "formData",
-    default(k, v) {
+    default(k: any, v: any) {
         if (k.substring(0, 2) === '__') {
             return "";
         }
@@ -218,18 +226,18 @@ const attrFuns = {
         }
         return "";
     },
-    __formRef(v) {
+    __formRef(v: any) {
         // attrFuns.FormData = v;
         return `ref="${v}"`;
     },
-    __formModel(v) {
+    __formModel(v: any) {
         attrFuns.FormData = v;
         return `:model="${v}"`;
     },
-    fieldName(v) {
+    fieldName(v: any) {
         return `v-model="${attrFuns.FormData}.${v}"`;
     },
-    style(css) {
+    style(css: any) {
         let lines = [];
         for (let name in css) {
             lines.push(`${keyName(name)}:${css[name]}`);
@@ -238,9 +246,9 @@ const attrFuns = {
     }
 }
 
-const attrFormat = function (attrs, props) {
+const attrFormat = function (attrs: any, props: any) {
     attrs = Object.assign({}, attrs, props);
-    let attr = [];
+    let attr: any = [];
     for (let k in attrs) {
         if (k in attrFuns) {
             attr.push(attrFuns[k](attrs[k]));
@@ -251,7 +259,7 @@ const attrFormat = function (attrs, props) {
     return attr.join(" ");
 }
 
-const slotFormat = function (slots) {
+const slotFormat = function (slots: any) {
     let eles = [];
     for (let name in slots) {
         if (slots[name]) {
@@ -261,12 +269,12 @@ const slotFormat = function (slots) {
     return eles.join("");
 }
 
-const optParseHandles = {
+const optParseHandles: any = {
     dynamic: {
-        default: function (name, opts, data) {
+        default: function (name: any, opts: any, data: any) {
             let sons = [];
 
-            let son = {
+            let son: any = {
                 props: {}
             }
             son.tag = opts.tag
@@ -283,10 +291,10 @@ const optParseHandles = {
             return sons;
 
         },
-        "el-option": function (name, opts, data) {
+        "el-option": function (name: any, opts: any, data: any) {
             let sons = [];
 
-            let son = {
+            let son: any = {
                 props: {}
             }
             son.tag = opts.tag
@@ -303,10 +311,10 @@ const optParseHandles = {
     },
 
     static: {
-        default: function (name, opts, data) {
+        default: function (name: any, opts: any, data: any) {
             let sons = [];
             for (let item of data) {
-                let son = {
+                let son: any = {
                     props: {}
                 }
                 son.tag = opts.tag;
@@ -321,10 +329,10 @@ const optParseHandles = {
             return sons;
 
         },
-        "el-option": function (name, opts, data) {
+        "el-option": function (name: any, opts: any, data: any) {
             let sons = [];
             for (let item of data) {
-                let son = {
+                let son: any = {
                     props: {}
                 }
                 son.tag = opts.tag
@@ -341,7 +349,7 @@ const optParseHandles = {
     },
 }
 
-const opt = function (name, opts, js) {
+const opt = function (name: any, opts: any, js: any) {
     console.log(name)
     console.log(opts)
     let data = opts.type === 'static' ? opts.staticData : opts.dynamicData;
@@ -354,7 +362,7 @@ const opt = function (name, opts, js) {
     return parseFunc(name, opts, data)
 }
 
-const renderBtns = function (ele, js) {
+const renderBtns = function (ele: any, js: any) {
     if (('__formBtns' in ele.attrs) && ele.attrs.__formBtns) {
         js.addPostAction(ele.api);
         return ` 
@@ -365,19 +373,19 @@ const renderBtns = function (ele, js) {
     }
 }
 
-const childrenFormat = function (childrens, js) {
+const childrenFormat = function (childrens: any, js: any) {
     if (!childrens) {
         return ''
     }
     childrens = Object.values(childrens)
-    let sons = childrens.map(function (ele) {
+    let sons = childrens.map((ele: any) => {
         return toHtml(ele, js);
     })
 
     return sons.join(" ");
 }
 
-const toHtml = function (ele, js) {
+const toHtml = function (ele: any, js: any) {
     // form表单数据映射
     if (ele.attrs.fieldName) {
         js.formData.add([ele.attrs.fieldName, ele.defaultvalue]);
@@ -417,7 +425,7 @@ const toHtml = function (ele, js) {
 
 }
 
-export function generate(settings) {
+export function generate(settings: any) {
     console.log('generate...')
 
     console.log(settings)
@@ -458,7 +466,7 @@ export function generate(settings) {
     return [beautify.html(templateContent), "\n<script setup>", beautify.js(js.render() + jsConst), "</script>"].join("\n")
 }
 
-export async function generateAndFormatAsync(settings) {
+export async function generateAndFormatAsync(settings: any) {
     const codeContent = generate(settings);
 
     return prettier.format(codeContent, {

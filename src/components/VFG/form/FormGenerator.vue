@@ -70,7 +70,7 @@ import {
   randFieldId,
 } from "./utils/func";
 import { formConf } from "./ui/index";
-import { generate, generateAndFormatAsync } from "./utils/generate.js";
+import { generate, generateAndFormatAsync } from "./utils/generate";
 import {
   Iphone,
   Monitor,
