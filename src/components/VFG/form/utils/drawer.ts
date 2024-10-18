@@ -9,7 +9,6 @@ import {
 } from "./func";
 
 import request from "/@/components/VFG/core/network/request";
-//import request from "../../core/network/request";
 
 const optParseHandles = {
     default: function (_c: any, data: any, tag: any) {

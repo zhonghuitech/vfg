@@ -50,12 +50,12 @@ class Scripts {
         this.rules = rules;
     }
 
-    addUiDataFromApi(url, medth, name) {
+    addUiDataFromApi(apiUrl, medth, name) {
         this.UIData.add(name);
         this.importString.add('import {request} from "vfg"; ')
         this.APIData.add(`
         request({
-            url: ${url},
+            url: '${apiUrl}',
             method: '${medth}'
         }).then(res=>{
             UIData.${name}=res.data.data;
@@ -72,11 +72,12 @@ class Scripts {
                 return false;
             }
             request({
-                url: ${apiUrl},
+                url: '${apiUrl}',
                 method: 'post',
                 data: formData
-            }).then(res=>{
-              ElMessage.success("操作成功!");
+            }).then(res => {
+                console.log(res);
+                ElMessage.success("操作成功!");
             });
             })
         }
@@ -220,7 +221,6 @@ const attrFuns = {
     __formRef(v) {
         // attrFuns.FormData = v;
         return `ref="${v}"`;
-
     },
     __formModel(v) {
         attrFuns.FormData = v;
