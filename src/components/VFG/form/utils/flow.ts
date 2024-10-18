@@ -2,7 +2,7 @@ import {
     jsPlumb
 } from "jsplumb";
 
-const connectorStyle = {
+const connectorStyle: any = {
     ConnectionsDetachable: false,
     MaxConnections: 100,
     //连线类型
@@ -22,25 +22,21 @@ const connectorStyle = {
     }, {
         fill: "#3296fa"
     }]
-
-
 };
 
-const lines = {
+const lines: any = {
     condition: [
 
     ],
     default: [
-
         ['Label', {
             label: '<button class="add-node-btn">+</button>',
             cssClass: '',
             labelStyle: {
                 color: 'red'
             },
-
             events: {
-                click: function (diamondOverlay, originalEvent) {
+                click: function (diamondOverlay: any, originalEvent: any) {
                     console.log("double click on diamond overlay for : ", diamondOverlay.component);
                 }
             }
@@ -50,7 +46,7 @@ const lines = {
 }
 
 export default {
-    install: (app, options) => {
+    install: (app: any, options: any) => {
         const plumbIns = jsPlumb.getInstance();
 
         plumbIns.importDefaults(connectorStyle);
@@ -59,7 +55,7 @@ export default {
         app.config.globalProperties.$plumbIns = () => {
             console.log(1)
         };
-        app.directive('flow', function (el, binding) {
+        app.directive('flow', function (el: any, binding: any) {
 
             let lineType = binding.arg;
 
@@ -71,7 +67,6 @@ export default {
                         target: el,
                         source: f,
                         overlays: lines[lineType],
-
                     });
                 }
             }

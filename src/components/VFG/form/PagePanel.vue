@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import cloneComponent from "./utils/cloneComponent.js";
+import cloneComponent from "./utils/cloneComponent";
 import { elements } from "./ui/index.js";
 import { defineComponent, ref } from "vue";
 

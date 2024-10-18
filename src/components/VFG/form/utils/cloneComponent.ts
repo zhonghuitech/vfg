@@ -1,7 +1,7 @@
 import { deepClone, randFieldId } from "./func";
 
-export default function (props) {
-    function copy(origin) {
+export default function (props: any) {
+    function copy(origin: any) {
         let new_element = deepClone(origin);
         console.log("fieldName", new_element);
         new_element.__ID = randFieldId();
@@ -15,7 +15,7 @@ export default function (props) {
         return new_element;
     }
 
-    const onEnd = function (obj) {
+    const onEnd = function (obj: any) {
         // console.log(obj);
     };
 
