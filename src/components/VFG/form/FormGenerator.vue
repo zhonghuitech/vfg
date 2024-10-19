@@ -203,7 +203,7 @@ export default defineComponent({
     const _copy = function (items, _id) {
       for (let item of items) {
         if (item.__ID == _id) {
-          const newItem = deepClone(item);
+          const newItem = deepClone(item, true);
           newItem.__ID = randFieldId();
           items.push(reactive(newItem));
           return true;
