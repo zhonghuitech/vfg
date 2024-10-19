@@ -401,7 +401,8 @@ const toHtml = function (ele: any, js: any) {
         js.addRules(deepClone(ele.__rules))
         ele.attrs[":rules"] = "rules";
     }
-    let tagName = 'component' in ele.props ? ele.props.component : ele.tag;
+    
+    let tagName = (ele.props && 'component' in ele.props) ? ele.props.component : ele.tag;
 
     if ('__text' in ele) {
         ele['slots']['default'] = ele.__text;
