@@ -11,7 +11,7 @@
 
             <template v-if="currentItem">
               <el-form ref="form2" label-width="80px" size="small">
-                <el-form-item v-for="(func, title) in currentItem.actions" :key="title">
+                <el-form-item v-for="(func, title) in getActions(currentItem)" :key="title">
                   <el-button type="primary" icon="Plus" @click="func(currentItem)">{{ title }}</el-button>
                 </el-form-item>
                 <template v-for="(item, index) in eleRenderSetFormat(currentItem)"
@@ -58,6 +58,7 @@ import { eleRenderFormat, eleRenderSetFormat } from "./utils/utils";
 import { findEle, isObjectArray, deepClone, randFieldId } from "./utils/func";
 import RulesInput from "./RulesInput.vue";
 import ElementRender from "./ElementRender.vue";
+import elRow from "/@/components/VFG/form/ui/element/base/elRow"
 
 export default defineComponent({
   components: { ElementRender, RulesInput },
@@ -100,6 +101,17 @@ export default defineComponent({
       }
     };
 
+    const getActions = function (currentItem) {
+      console.log(currentItem)
+      if (currentItem.actions && Object.keys(currentItem.actions).length != 0) {
+        return currentItem.actions
+      } else if (currentItem.tag === 'el-row') {
+        return elRow.actions
+      } else {
+        return []
+      }
+    }
+
     const formConf = toRaw(props.modelValue.formConf.attrs);
 
     return {
@@ -110,6 +122,7 @@ export default defineComponent({
       formConf,
       updateEleSet,
       deleteItem,
+      getActions
     };
   },
 });

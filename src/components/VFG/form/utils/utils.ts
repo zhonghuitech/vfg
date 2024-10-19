@@ -130,6 +130,7 @@ export const eleRenderSetFormat = function (conf: any) {
         let item = conf.formItem[f];
         eles.push(eleRenderFormat(item, f))
     }
+    
     eles.push({ tag: "el-divider", slots: { default: "属性" } });
 
     if ('__text' in conf) {
