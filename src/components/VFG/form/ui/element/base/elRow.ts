@@ -17,17 +17,11 @@ const elDragable = {
     props: {
         style: {
             "min-height": "80px",
-            "background": "gray",
-            "margin-top": "7.5px",
-            "border-style": "solid",
-            "border-color": "yellow",
             "padding": "10px",
             "height": "100%"
         },
-        // component: "el-col",
         group: "componentsGroup",
         ghostClass: "ghost",
-        // class: "drag-wrapper box",
         animation: 340,
     },
     childrens: [
@@ -54,7 +48,6 @@ const elCol = {
     props: {
         style: {
             "min-height": "100px",
-            "background": "yellow",
             "border-style": "dotted",
             "border-color": "red"
         },
@@ -73,7 +66,6 @@ export default {
     tag: "el-row",
     defaultvalue: [],
     props: {
-        // component: "el-row",
         group: "componentsGroup",
         class: "drag-wrapper box",
         style: {
