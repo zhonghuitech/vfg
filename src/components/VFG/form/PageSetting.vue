@@ -78,7 +78,6 @@ export default defineComponent({
       let ele = findEle(props.modelValue.drawingList, props.modelValue.current);
       if (ele) {
         currentTab.value = "field";
-        console.log(ele)
         return ele;
       }
     });
@@ -106,7 +105,6 @@ export default defineComponent({
     };
 
     const getActions = function (currentItem) {
-      console.log(currentItem)
       if (currentItem.actions && Object.keys(currentItem.actions).length != 0) {
         return currentItem.actions
       } else if (currentItem.tag === 'el-row') {
