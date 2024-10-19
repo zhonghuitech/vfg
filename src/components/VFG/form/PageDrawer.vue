@@ -3,20 +3,21 @@
 
   <el-form :model="formModel" v-bind="formSetting" :gutter="modelValue.formConf.gutter" :rules="rules">
     <draggable class="drawing-board" style="padding: 10px; height: 100%" v-model="modelValue.drawingList"
-      :animation="340" group="componentsGroup" @change="onEnd" ghostClass="ghost">
+      :animation="340" group="componentsGroup" ghostClass="ghost">
       <template v-for="(item, index) in conf.drawingList" :key="item.__ID">
         <!-- {{item}} -->
         <element-render @click.stop="selected(item.__ID)" @update="changeValue" :currentID="modelValue.current"
           style="padding-top: 10px;padding-bottom: 10px;" v-bind="item" class="item-tool-box"></element-render>
       </template>
-      <el-empty v-if="conf.drawingList.length < 1" description="从左侧拖入或点选组件进行表单设计"></el-empty>
-      <template v-else>
-        <el-form-item v-if="conf.formConf.attrs.__formBtns.__val__">
-          <el-button type="primary">确认</el-button>
-          <el-button>取消</el-button>
-        </el-form-item>
-      </template>
     </draggable>
+    
+    <el-empty v-if="conf.drawingList.length < 1" description="从左侧拖入或点选组件进行表单设计"></el-empty>
+    <template v-else>
+      <el-form-item v-if="conf.formConf.attrs.__formBtns.__val__">
+        <el-button type="primary">确认</el-button>
+        <el-button>取消</el-button>
+      </el-form-item>
+    </template>
   </el-form>
 </template>
 

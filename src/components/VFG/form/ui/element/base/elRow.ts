@@ -20,15 +20,17 @@ const elDragable = {
             "background": "gray",
             "margin-top": "7.5px",
             "border-style": "solid",
-            "border-color": "yellow"
+            "border-color": "yellow",
+            "padding": "10px",
+            "height": "100%"
         },
         // component: "el-col",
         group: "componentsGroup",
+        ghostClass: "ghost",
         // class: "drag-wrapper box",
         animation: 340,
     },
     childrens: [
-
     ],
     ctrlBtn: true,
     slots: {

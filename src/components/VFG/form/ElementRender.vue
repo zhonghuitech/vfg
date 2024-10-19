@@ -93,7 +93,10 @@ export default defineComponent({
     const events = props.events;
     // const attrs =reactive( Object.assign({}, props.attrs));
 
-    const vm = ref(props.defaultvalue);
+    const vm = ref(props.tag == "draggable" ? props.childrens : props.defaultvalue);
+    if (props.tag == "draggable") {
+      console.log("vm_value=", vm.value)
+    }
 
     // console.log(props.defaultvalue, "props.defaultvalue");
 
@@ -106,6 +109,7 @@ export default defineComponent({
       }
       context.emit("update", vm.value, props.eleName, props.__ID);
     });
+
     const formItemSet = computed(() => {
       if ([false, undefined].includes(props.formItem)) {
         return false;
@@ -120,7 +124,7 @@ export default defineComponent({
         return {};
       }
     });
-    
+
     const editModelValue = function (e) {
       // console.log(e);
       vm.value = e;

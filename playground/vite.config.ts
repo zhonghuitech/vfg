@@ -7,6 +7,9 @@ import path from "path";
 export default defineConfig(({ command, mode }) => {
   return {
     base: command === 'build' ? '/vfg/' : '',
+    define: {
+      __ISPROD__ : command === 'build'
+    },
     css: {
       preprocessorOptions: {
         scss: {

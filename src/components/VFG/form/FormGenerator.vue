@@ -19,6 +19,7 @@
 
       <div class="center-board">
         <div class="action-bar">
+          <el-button v-if="!isProd" style="margin-left: 5px;" type="default" link icon="MapLocation" @click="preViewCodeDebug">调试</el-button>
           <el-button style="margin-left: 5px;" type="default" link icon="VideoPlay" @click="preViewCode">生成</el-button>
           <el-button type="danger" link icon="Delete" @click="clearn()">清空</el-button>
 
@@ -113,6 +114,8 @@ export default defineComponent({
   },
 
   setup(props) {
+    const isProd = __ISPROD__
+
     const device = ref("pc");
     const showCode = ref(false);
     const preview = ref("");
@@ -247,6 +250,10 @@ export default defineComponent({
       // code.value = await generateAndFormatAsync(settings)
     }
 
+    const preViewCodeDebug = () => {
+      console.log(settings.drawingList)
+    }
+
     const { toClipboard } = useClipboard()
     const ClipboardWrite = async () => {
       // const codeStr = await generateAndFormatAsync(settings);
@@ -281,9 +288,11 @@ export default defineComponent({
       code,
       showCode,
       preViewCode,
+      preViewCodeDebug,
       ClipboardWrite,
       addComponentAction,
       dList,
+      isProd,
       onEnd
     };
   },
