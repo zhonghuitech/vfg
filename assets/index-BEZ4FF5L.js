@@ -300,7 +300,7 @@ import { ElMessage } from 'element-plus'`),t.concat(this.importString.data())}re
                 <el-button type="primary" @click="postData(refForm)">确 定</el-button>
                 <el-button @click="cancel">取 消</el-button>
             </div>
-        </template>`},hF=function(e,t){return e?(e=Object.values(e),e.map(r=>bne(r,t)).join(" ")):""},bne=function(e,t){e.attrs.fieldName&&t.formData.add([e.attrs.fieldName,e.defaultvalue]),e.__rules&&(t.addRules(pl(e.__rules)),e.attrs[":rules"]="rules");let n="component"in e.props?e.props.component:e.tag;if("__text"in e&&(e.slots.default=e.__text),"__opt__"in e){ad(e.childrens)===!1&&(e.childrens=[]);const i=vK(e);e.__opt__.tag=i;let a=Ddt(e.attrs.fieldName,e.__opt__,t);e.childrens=e.childrens.concat(a)}let r=n=="draggable"?[hF(e.childrens,t)]:["<",n," ",fF(e.attrs,e.props)," ",`>
+        </template>`},hF=function(e,t){return e?(e=Object.values(e),e.map(r=>bne(r,t)).join(" ")):""},bne=function(e,t){e.attrs.fieldName&&t.formData.add([e.attrs.fieldName,e.defaultvalue]),e.__rules&&(t.addRules(pl(e.__rules)),e.attrs[":rules"]="rules");let n=e.props&&"component"in e.props?e.props.component:e.tag;if("__text"in e&&(e.slots.default=e.__text),"__opt__"in e){ad(e.childrens)===!1&&(e.childrens=[]);const i=vK(e);e.__opt__.tag=i;let a=Ddt(e.attrs.fieldName,e.__opt__,t);e.childrens=e.childrens.concat(a)}let r=n=="draggable"?[hF(e.childrens,t)]:["<",n," ",fF(e.attrs,e.props)," ",`>
 `,hF(e.childrens,t),Ndt(e.slots),Idt(e,t),`
 </`,n,`>
 `];return e.formItem&&(r=["<","el-form-item"," ",fF(e.formItem,{prop:e.attrs.fieldName})," ",`>
