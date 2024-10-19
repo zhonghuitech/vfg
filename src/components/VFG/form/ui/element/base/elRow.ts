@@ -73,7 +73,7 @@ export default {
     tag: "el-row",
     defaultvalue: [],
     props: {
-        component: "el-row",
+        // component: "el-row",
         group: "componentsGroup",
         class: "drag-wrapper box",
         style: {
