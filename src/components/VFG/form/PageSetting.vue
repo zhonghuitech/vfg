@@ -5,15 +5,19 @@
       <el-tab-pane label="组件属性" name="field">
         <div class="field-box">
           <el-scrollbar class="right-scrollbar">
-            <el-button v-if="currentItem" type="danger" text bg icon="Delete"
-              @click="deleteItem(currentItem.__ID)">删除组件</el-button>
-            <el-text v-else class="mx-1" type="warning">请选择组件...</el-text>
+
+            <el-empty v-if="!currentItem" description="请选择组件..." />
 
             <template v-if="currentItem">
               <el-form ref="form2" label-width="80px" size="small">
-                <el-form-item v-for="(func, title) in getActions(currentItem)" :key="title">
-                  <el-button type="primary" icon="Plus" @click="func(currentItem)">{{ title }}</el-button>
+                <el-form-item style="display: flex;">
+                  <el-button v-if="currentItem" type="danger" text bg icon="Delete"
+                    @click="deleteItem(currentItem.__ID)">删除组件</el-button>
+                  <el-form-item v-for="(func, title) in getActions(currentItem)" :key="title">
+                    <el-button type="primary" text bg icon="Plus" @click="func(currentItem)" style="margin-left: 5px;">{{ title }}</el-button>
+                  </el-form-item>
                 </el-form-item>
+
                 <template v-for="(item, index) in eleRenderSetFormat(currentItem)"
                   :key="index + '-' + currentItem.__ID">
                   <!-- {{item}} -->

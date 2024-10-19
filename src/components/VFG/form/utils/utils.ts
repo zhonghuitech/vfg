@@ -122,7 +122,7 @@ const getComName = function (conf: any) {
 }
 
 export const eleRenderSetFormat = function (conf: any) {
-    // console.log(conf)
+    console.log(conf)
 
     const eles = [];
     eles.push({ tag: "el-divider", slots: { default: getComName(conf) } });
@@ -130,7 +130,7 @@ export const eleRenderSetFormat = function (conf: any) {
         let item = conf.formItem[f];
         eles.push(eleRenderFormat(item, f))
     }
-    
+
     eles.push({ tag: "el-divider", slots: { default: "属性" } });
 
     if ('__text' in conf) {
