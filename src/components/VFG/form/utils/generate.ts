@@ -419,7 +419,10 @@ const toHtml = function (ele: any, js: any) {
         ele['childrens'] = ele['childrens'].concat(ops);
     }
 
-    let node = ["<", tagName, " ", attrFormat(ele.attrs, ele.props), " ", ">\n", childrenFormat(ele.childrens, js), slotFormat(ele.slots), renderBtns(ele, js), "\n</", tagName, ">\n"]
+    let node = "draggable" == tagName ?
+        [childrenFormat(ele.childrens, js)]
+        :
+        ["<", tagName, " ", attrFormat(ele.attrs, ele.props), " ", ">\n", childrenFormat(ele.childrens, js), slotFormat(ele.slots), renderBtns(ele, js), "\n</", tagName, ">\n"]
     if (ele.formItem) {
         node = ["<", "el-form-item", " ", attrFormat(ele.formItem, {
             prop: ele.attrs.fieldName
