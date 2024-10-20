@@ -1,4 +1,4 @@
-import helper from "../../helper.js";
+import helper from "../../helper";
 
 
 const elOption = {

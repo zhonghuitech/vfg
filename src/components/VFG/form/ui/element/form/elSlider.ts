@@ -1,4 +1,4 @@
-import helper from "../../helper.js";
+import helper from "../../helper";
 
 export default {
         tag: "el-slider",
