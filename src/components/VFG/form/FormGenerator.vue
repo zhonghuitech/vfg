@@ -19,7 +19,8 @@
 
       <div class="center-board">
         <div class="action-bar">
-          <el-button v-if="!isProd" style="margin-left: 5px;" type="default" link icon="MapLocation" @click="preViewCodeDebug">调试</el-button>
+          <el-button v-if="!isProd" style="margin-left: 5px;" type="default" link icon="MapLocation"
+            @click="preViewCodeDebug">调试</el-button>
           <el-button style="margin-left: 5px;" type="default" link icon="VideoPlay" @click="preViewCode">生成</el-button>
           <el-button type="danger" link icon="Delete" @click="clearn()">清空</el-button>
 
@@ -42,11 +43,11 @@
                 <element-render 
                 style="padding-top: 10px;padding-bottom: 10px;" v-bind="item" class="item-tool-box">{{ item.name }}</element-render>
               </template>
-            </draggable>
-          </el-col>
-          <el-col :span="8" style="background-color: gray;">bb</el-col>
-          <el-col :span="8" style="background-color: red;">gg</el-col>
-        </el-row> -->
+</draggable>
+</el-col>
+<el-col :span="8" style="background-color: gray;">bb</el-col>
+<el-col :span="8" style="background-color: red;">gg</el-col>
+</el-row> -->
 
         <el-scrollbar class="center-scrollbar" :class="[device, preview]">
           <page-drawer :model-value="settings" @update:model-value="update"></page-drawer>
@@ -85,6 +86,7 @@ import {
   isObjectArray,
   randFieldId,
 } from "./utils/func";
+import { initConf } from "./utils/drawer"
 import { formConf } from "./ui/index";
 import { generate, generateAndFormatAsync } from "./utils/generate";
 import {
@@ -226,6 +228,15 @@ export default defineComponent({
       console.log(settings.drawingList)
       let item = findEle(settings.drawingList, ids);
       console.log(item)
+
+      // TODO 这里涉及一个数据转换，将 conf 数据转成 settings 的数据，
+      // 对于 el-checkbox-group ，需要将 children 转成 [], 因为在 conf 中这个组件的 children 是通过 __opt__ 联动的
+      // eles.forEach(i => {
+      //   if ('el-checkbox-group' == i.tag) {
+      //     i.childrens = []
+      //   }
+      // })
+
       item.childrens = eles;
       console.log(settings.drawingList)
     };
@@ -252,6 +263,7 @@ export default defineComponent({
 
     const preViewCodeDebug = () => {
       console.log(settings.drawingList)
+      console.log(initConf(settings))
     }
 
     const { toClipboard } = useClipboard()
@@ -271,12 +283,18 @@ export default defineComponent({
       localStorage.setItem("settings", JSON.stringify(settings));
     });
 
+    const getOrigin = function (id) {
+      return settings;
+    }
+
     provide("copyItem", copyItem);
     provide("deleteItem", deleteItem);
     provide("selected", selected);
     provide("updateChild", updateChild);
     provide("hightLight", hightLight);
     provide("updateDefaultValue", updateDefaultValue);
+    provide("getOrigin", getOrigin)
+
     return {
       settings,
       update,

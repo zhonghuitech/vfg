@@ -90,13 +90,48 @@ export default defineComponent({
     const copyItem = inject("copyItem");
     const deleteItem = inject("deleteItem");
     const hightLight = inject("hightLight");
-
+    const getOrigin = inject("getOrigin")
     const updateChild = inject("updateChild");
     const selected = inject("selected");
     const events = props.events;
     // const attrs =reactive( Object.assign({}, props.attrs));
 
-    const vm = ref(props.tag == "draggable" ? props.childrens : props.defaultvalue);
+
+    const findFun = (i) => {
+      if (i.__ID == props.__ID) {
+        return i
+      } else if (i.childrens && i.childrens.length > 0) {
+        let finded = null;
+        i.childrens.forEach(ci => {
+          finded = findFun(ci)
+        })
+        return finded
+      } else {
+        return null;
+      }
+    }
+
+    let finded = null
+    if (props.tag == "draggable") {
+      const settingsOrigin = getOrigin()
+      console.log(settingsOrigin.drawingList)
+
+      settingsOrigin.drawingList.forEach(i => {
+        let findNow = findFun(i)
+        if (findNow) {
+          finded = findNow
+        }
+      })
+
+      if (!finded) {
+        console.error('unknown error')
+      } else {
+        console.log('finded111', props.__ID)
+        console.log(finded)
+      }
+    }
+
+    const vm = ref(props.tag == "draggable" ? (finded ? finded.childrens : props.childrens) : props.defaultvalue);
     if (props.tag == "draggable") {
       console.log("vm_value=", vm.value)
     }

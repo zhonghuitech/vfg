@@ -146,6 +146,16 @@ const _clone = function (obj: any) {
     return _c;
 };
 
+export function initConf(settings: any) {
+    return {
+        formConf: settings.formConf,
+        current: settings.current,
+        drawingList: settings.drawingList.map((x: any) => {
+            return _clone(x);
+        }),
+    }
+}
+
 export function initRender(settings: any) {
     const conf = reactive({
         formConf: settings.formConf,
@@ -156,6 +166,7 @@ export function initRender(settings: any) {
     });
 
     watch(settings, () => {
+        console.log('settings changed....')
         conf.drawingList = settings.drawingList.map((x: any) => {
             return _clone(x);
         });

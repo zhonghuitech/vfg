@@ -5,7 +5,7 @@
       <template v-for="(item, index) in conf.drawingList" :key="item.__ID">
         <!-- {{item}} -->
         <element-render @click.stop="selected(item.__ID)" @update="changeValue" :currentID="modelValue.current"
-          style="padding-top: 10px;padding-bottom: 10px;" v-bind="item" class="item-tool-box"></element-render>
+          style="padding-top: 10px;padding-bottom: 10px;" v-bind="item"  class="item-tool-box"></element-render>
       </template>
     </draggable>
 
@@ -45,6 +45,7 @@ export default defineComponent({
 
     // 将外层传到的参数 modelValue，转化为可渲染的结构，这里会将 __opt__ 这种转成 children
     const conf = initRender(props.modelValue);
+    console.log(conf)
     const formModel = reactive({});
 
     const rules = computed(() => props.modelValue.formConf.__rules)
