@@ -39,7 +39,6 @@ const input_boolean = function (name: string, val: any) {
     }
 }
 
-
 const input_icon = function (name: string, val: any) {
     return {
         __val__: val,
@@ -47,7 +46,6 @@ const input_icon = function (name: string, val: any) {
         label: name
     }
 }
-
 
 const input_range = function (label: string, min: number, max: number, val: any) {
     return {
@@ -58,7 +56,6 @@ const input_range = function (label: string, min: number, max: number, val: any)
         max
     }
 }
-
 
 export const input_radio = function (value: any, opts: any, val: any) {
     const __child = {
@@ -117,8 +114,8 @@ const optValue = function (tag: string) {
             valueName: "valueName",
         }
     }
-
 }
+
 const input_opt = function (value: string, tag: string) {
     return {
         __val__: optValue(tag),

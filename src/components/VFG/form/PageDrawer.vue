@@ -1,6 +1,4 @@
 <template>
-  <!-- {{ modelValue.drawingList }} -->
-
   <el-form :model="formModel" v-bind="formSetting" :gutter="modelValue.formConf.gutter" :rules="rules">
     <draggable class="drawing-board" style="padding: 10px; height: 100%" v-model="modelValue.drawingList"
       :animation="340" group="componentsGroup" ghostClass="ghost">
@@ -10,7 +8,7 @@
           style="padding-top: 10px;padding-bottom: 10px;" v-bind="item" class="item-tool-box"></element-render>
       </template>
     </draggable>
-    
+
     <el-empty v-if="conf.drawingList.length < 1" description="从左侧拖入或点选组件进行表单设计"></el-empty>
     <template v-else>
       <el-form-item v-if="conf.formConf.attrs.__formBtns.__val__">
@@ -44,6 +42,8 @@ export default defineComponent({
       console.log(props.modelValue)
       context.emit("update:modelValue", props.modelValue, e.clonedData);
     };
+
+    // 将外层传到的参数 modelValue，转化为可渲染的结构，这里会将 __opt__ 这种转成 children
     const conf = initRender(props.modelValue);
     const formModel = reactive({});
 
@@ -85,7 +85,6 @@ export default defineComponent({
       for (let p in ini["rules"]) {
         ini["rules"][p] = ini["rules"][p].map((a) => {
           a.pattern = new RegExp(a.pattern);
-
           return a;
         });
       }
@@ -94,7 +93,6 @@ export default defineComponent({
 
     const changeValue = function (val, elename, idname) {
       console.log(val, elename, idname);
-
       updateDefaultValue(val, idname);
       formModel[idname] = val;
     };

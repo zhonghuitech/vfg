@@ -147,7 +147,6 @@ const _clone = function (obj: any) {
 };
 
 export function initRender(settings: any) {
-    console.log(settings.drawingList)
     const conf = reactive({
         formConf: settings.formConf,
         current: settings.current,

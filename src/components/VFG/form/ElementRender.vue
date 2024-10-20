@@ -82,7 +82,10 @@ export default defineComponent({
   },
   setup(props, context) {
     // console.log(props.tag)
-    // console.log(props.attrs)
+    // if (props.tag == 'el-checkbox-group') {
+    //   console.log(props.attrs)
+    //   console.log(props.childrens)
+    // }
 
     const copyItem = inject("copyItem");
     const deleteItem = inject("deleteItem");
