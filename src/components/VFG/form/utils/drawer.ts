@@ -170,6 +170,7 @@ export function initRender(settings: any) {
         conf.drawingList = settings.drawingList.map((x: any) => {
             return _clone(x);
         });
+        console.log(conf)
     });
 
     return conf;

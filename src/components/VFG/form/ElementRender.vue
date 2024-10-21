@@ -53,7 +53,9 @@
 <script>
 import { defineComponent, computed, ref, watch, inject, reactive } from "vue";
 import InputIcon from "./InputIcon.vue";
-import { CopyDocument, Delete } from "@element-plus/icons-vue";;
+import { CopyDocument, Delete } from "@element-plus/icons-vue";
+import { findEle } from "./utils/func";
+
 export default defineComponent({
   name: "element-render",
   components: { InputIcon, CopyDocument, Delete },
@@ -96,38 +98,15 @@ export default defineComponent({
     const events = props.events;
     // const attrs =reactive( Object.assign({}, props.attrs));
 
-
-    const findFun = (i) => {
-      if (i.__ID == props.__ID) {
-        return i
-      } else if (i.childrens && i.childrens.length > 0) {
-        let finded = null;
-        i.childrens.forEach(ci => {
-          finded = findFun(ci)
-        })
-        return finded
-      } else {
-        return null;
-      }
-    }
-
     let finded = null
     if (props.tag == "draggable") {
+
       const settingsOrigin = getOrigin()
       console.log(settingsOrigin.drawingList)
-
-      settingsOrigin.drawingList.forEach(i => {
-        let findNow = findFun(i)
-        if (findNow) {
-          finded = findNow
-        }
-      })
+      finded = findEle(settingsOrigin.drawingList, props.__ID)
 
       if (!finded) {
-        console.error('unknown error')
-      } else {
-        console.log('finded111', props.__ID)
-        console.log(finded)
+        console.error('unknown error, __ID=' + props.__ID)
       }
     }
 
