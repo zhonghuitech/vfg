@@ -164,6 +164,7 @@ export function initRender(settings: any) {
             return _clone(x);
         }),
     });
+    console.log(conf)
 
     watch(settings, () => {
         conf.drawingList = settings.drawingList.map((x: any) => {

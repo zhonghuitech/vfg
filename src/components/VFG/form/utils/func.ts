@@ -57,6 +57,10 @@ export function deepClone(obj: any, needRandFieldId: boolean = false) {
         result[key] = ("__ID" === key && needRandFieldId) ? randFieldId() : deepClone(obj[key], needRandFieldId)
     }
 
+    if (result.attrs && ("fieldName" in result.attrs)) {
+        result.attrs.fieldName.__val__ = result.__ID;
+    }
+
     return result
 }
 

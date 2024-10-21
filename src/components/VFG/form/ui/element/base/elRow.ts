@@ -9,10 +9,6 @@ const elDragable = {
     defaultvalue: [],
     attrs: {
         fieldName: helper.input_text("字段名", '字段名'),
-        span: helper.input_range("列数2", 1, 24, 8),
-        offset: helper.input_range("左侧间隔2", 0, 24, 0),
-        push: helper.input_range("右移动2", 0, 24, 0),
-        pull: helper.input_range("左移动2", 0, 24, 0),
     },
     props: {
         style: {
