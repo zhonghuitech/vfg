@@ -13,7 +13,7 @@
       </template>
 
       <component :is="tag" v-bind="attrs" v-on="events" :modelValue="vm" @update:modelValue="editModelValue">
-        <template v-for="(son, index) in childrens" :key="'son' + index">
+        <template v-for="(son, index) in childrens" :key="son.__ID || index">
           <element-render :currentID="currentID" v-bind="son"> </element-render>
         </template>
         <template v-for="(val, name) in slots" v-slot:[name]>
@@ -26,7 +26,7 @@
   <template v-else-if="tag == 'el-button'">
     <div :style="hightLight(__ID)">
       <component :is="tag" v-bind="attrs" v-model="vm" v-on="events">
-        <template v-for="(son, index) in childrens" :key="'son' + index">
+        <template v-for="(son, index) in childrens" :key="son.__ID || index">
           <element-render :currentID="currentID" v-bind="son" @update="changeValue" @click.stop="selected(son.__ID)">
           </element-render>
         </template>
@@ -39,7 +39,7 @@
 
   <template v-else>
     <component :is="tag" v-bind="attrs" v-model="vm" v-on="events" :style="hightLight(__ID)">
-      <template v-for="(son, index) in childrens" :key="'son' + index">
+      <template v-for="(son, index) in childrens" :key="son.__ID || index">
         <element-render :currentID="currentID" v-bind="son" @update="changeValue" @click.stop="selected(son.__ID)">
         </element-render>
       </template>
