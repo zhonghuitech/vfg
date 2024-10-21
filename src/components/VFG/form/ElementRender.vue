@@ -1,7 +1,7 @@
 <template>
   <template v-if="formItemSet">
     <el-form-item v-bind="formItemSet" :style="hightLight(__ID)">
-      <template v-if="ctrlBtn">
+      <template v-if="ctrlBtn && preview !== 'preview'">
         <span class="tool-btn tool-btn-del _btn" @click="deleteItem(__ID)" title="删除">
           <el-icon>
             <delete />
@@ -91,11 +91,11 @@ export default defineComponent({
     const selected = inject("selected");
     const events = props.events;
     // const attrs =reactive( Object.assign({}, props.attrs));
+    const settingsOrigin = getOrigin()
 
     let finded = null
     if (props.tag == "draggable") {
       // 因为 settings 和 conf 的数据结构不一样，对于 draggable 类型，需要采用原始的 settings 结构，否则对于 el-checkbox-group 这种类型从里拖拽到外会有问题。
-      const settingsOrigin = getOrigin()
       finded = findEle(settingsOrigin.drawingList, props.__ID)
       if (!finded) {
         console.error('draggable unknown error, __ID=' + props.__ID)
@@ -103,6 +103,7 @@ export default defineComponent({
     }
 
     const vm = ref(props.tag == "draggable" ? (finded ? finded.childrens : props.childrens) : props.defaultvalue);
+    const preview = computed(() => settingsOrigin.preview)
 
     watch(vm, () => {
       if (props.tag == "draggable") {
@@ -154,6 +155,7 @@ export default defineComponent({
       events,
       changeValue,
       hightLight,
+      preview,
       onEnd
     };
   },

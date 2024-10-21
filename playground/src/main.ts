@@ -18,7 +18,7 @@ Object.keys(ElIcon).forEach((key) => {
 // @ts-ignore
 import { setupVFG } from '/@/components/main';
 
-import 'vfg/dist/assets/css/style.css';
+// import 'vfg/dist/assets/css/style.css';
 import 'virtual:svg-icons-register'
 setupVFG(app)
 

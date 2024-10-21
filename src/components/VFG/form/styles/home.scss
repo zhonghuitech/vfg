@@ -2,8 +2,8 @@ $selectedColor: #f6f7ff;
 $lighterBlue: #409eff;
 
 .preview .box{
-      border: none !important;
-    margin-top: 0px   !important;
+    border: none !important;
+    margin-top: 0px !important;
     padding: 0px !important;
 }
 .container {
@@ -221,7 +221,8 @@ height: calc(100vh - 42px) !important;
     }
   }
   .el-form-item {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    margin-top: 5px;
   }
 }
 .drawing-item {
@@ -400,8 +401,8 @@ height: calc(100vh - 42px) !important;
 .el-row.box {
   border: 1px dashed #409eff;
   // margin-bottom: 15px;
-  margin-top: 22px;
-  padding: 25px;
+  // margin-top: 22px;
+  // padding: 25px;
 
   // position:relative;
 }
@@ -409,8 +410,8 @@ height: calc(100vh - 42px) !important;
 .box {
   border: 1px dashed #ffbc40;
   // margin-bottom: 15px;
-  margin-top: 22px;
-  padding: 25px;
+  // margin-top: 22px;
+  // padding: 25px;
   // position:relative;
   // top: 25px;
 }

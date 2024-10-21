@@ -13,12 +13,13 @@ const elDragable = {
     props: {
         style: {
             "min-height": "80px",
-            "padding": "10px",
+           // "padding": "10px",
             "height": "100%"
         },
         group: "componentsGroup",
         ghostClass: "ghost",
         animation: 340,
+        // class: "box",
     },
     childrens: [
     ],
@@ -47,8 +48,7 @@ const elCol = {
             "border-style": "dotted",
             "border-color": "red"
         },
-        group: "componentsGroup",
-        animation: 340,
+        class: "box",
     },
     childrens: [
         helper.cloneItem(elDragable)

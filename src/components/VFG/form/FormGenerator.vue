@@ -30,7 +30,7 @@
           </div>
 
           <div class="btn">
-            <el-switch v-model="preview" active-text="开发模式" inactive-text="预览模式" active-value=""
+            <el-switch v-model="settings.preview" active-text="开发模式" inactive-text="预览模式" active-value=""
               inactive-value="preview" />
           </div>
         </div>
@@ -49,7 +49,7 @@
 <el-col :span="8" style="background-color: red;">gg</el-col>
 </el-row> -->
 
-        <el-scrollbar class="center-scrollbar" :class="[device, preview]">
+        <el-scrollbar class="center-scrollbar" :class="[device, settings.preview]">
           <page-drawer :model-value="settings" @update:model-value="update"></page-drawer>
         </el-scrollbar>
       </div>
@@ -120,7 +120,6 @@ export default defineComponent({
 
     const device = ref("pc");
     const showCode = ref(false);
-    const preview = ref("");
     const code = ref('')
     const dList = ref([])
     const loadSetting = function () {
@@ -131,6 +130,7 @@ export default defineComponent({
 
       return {
         current: "",
+        preview: "",
         formConf: formConf,
         drawingList: [],
       };
@@ -181,7 +181,7 @@ export default defineComponent({
      * 选中高亮
      */
     const hightLight = function (s) {
-      if (settings.current == s) {
+      if (settings.current == s /*&& preview.value != 'preview'*/) {
         return { border: "1px dashed #409eff", backgroundColor: "#f6f7ff", "border-radius": "4px", padding: "1px" };
       }
       return {};
@@ -251,7 +251,7 @@ export default defineComponent({
     }
 
     const preViewCodeDebug = () => {
-      console.log(settings.drawingList)
+      console.log(settings)
       console.log(initConf(settings))
     }
 
@@ -289,7 +289,6 @@ export default defineComponent({
       update,
       device,
       clearn,
-      preview,
       generate,
       execDownload,
       code,
