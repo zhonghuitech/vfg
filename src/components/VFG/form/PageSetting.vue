@@ -72,7 +72,7 @@ export default defineComponent({
   setup(props, ctx) {
     const deleteItem = inject("deleteItem");
     const currentTab = ref("form");
-    console.log(props.modelValue)
+    // console.log(props.modelValue)
 
     const currentItem = computed(() => {
       let ele = findEle(props.modelValue.drawingList, props.modelValue.current);

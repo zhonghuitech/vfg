@@ -38,7 +38,7 @@
   </template>
 
   <template v-else>
-    <component :is="tag" v-bind="attrs" v-model="vm" v-on="events" :style="hightLight(__ID)">
+    <component :is="tag" v-bind="attrs" v-model="vm" v-on="events" :style="hightLight(__ID)" @change="onEnd">
       <template v-for="(son, index) in childrens" :key="son.__ID || index">
         <element-render :currentID="currentID" v-bind="son" @update="changeValue" @click.stop="selected(son.__ID)">
         </element-render>
@@ -83,12 +83,6 @@ export default defineComponent({
     },
   },
   setup(props, context) {
-    // console.log(props.tag)
-    // if (props.tag == 'el-checkbox-group') {
-    //   console.log(props.attrs)
-    //   console.log(props.childrens)
-    // }
-
     const copyItem = inject("copyItem");
     const deleteItem = inject("deleteItem");
     const hightLight = inject("hightLight");
@@ -100,22 +94,15 @@ export default defineComponent({
 
     let finded = null
     if (props.tag == "draggable") {
-
+      // 因为 settings 和 conf 的数据结构不一样，对于 draggable 类型，需要采用原始的 settings 结构，否则对于 el-checkbox-group 这种类型从里拖拽到外会有问题。
       const settingsOrigin = getOrigin()
-      console.log(settingsOrigin.drawingList)
       finded = findEle(settingsOrigin.drawingList, props.__ID)
-
       if (!finded) {
-        console.error('unknown error, __ID=' + props.__ID)
+        console.error('draggable unknown error, __ID=' + props.__ID)
       }
     }
 
     const vm = ref(props.tag == "draggable" ? (finded ? finded.childrens : props.childrens) : props.defaultvalue);
-    if (props.tag == "draggable") {
-      console.log("vm_value=", vm.value)
-    }
-
-    // console.log(props.defaultvalue, "props.defaultvalue");
 
     watch(vm, () => {
       if (props.tag == "draggable") {
@@ -143,8 +130,13 @@ export default defineComponent({
     });
 
     const editModelValue = function (e) {
-      // console.log(e);
       vm.value = e;
+    };
+
+    const onEnd = function (e) {
+      if (e.clonedData) {
+        selected(e.clonedData.__ID)
+      }
     };
 
     const changeValue = function (val, elename, idname) {
@@ -161,7 +153,8 @@ export default defineComponent({
       editModelValue,
       events,
       changeValue,
-      hightLight
+      hightLight,
+      onEnd
     };
   },
 });

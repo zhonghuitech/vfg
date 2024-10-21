@@ -166,11 +166,9 @@ export function initRender(settings: any) {
     });
 
     watch(settings, () => {
-        console.log('settings changed....')
         conf.drawingList = settings.drawingList.map((x: any) => {
             return _clone(x);
         });
-        console.log(conf)
     });
 
     return conf;

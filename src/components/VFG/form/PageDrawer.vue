@@ -1,7 +1,7 @@
 <template>
   <el-form :model="formModel" v-bind="formSetting" :gutter="modelValue.formConf.gutter" :rules="rules">
     <draggable class="drawing-board" style="padding: 10px; height: 100%" v-model="modelValue.drawingList"
-      :animation="340" group="componentsGroup" ghostClass="ghost">
+      :animation="340" group="componentsGroup" ghostClass="ghost" @change="onEnd">
       <template v-for="(item, index) in conf.drawingList" :key="item.__ID">
         <!-- {{item}} -->
         <element-render @click.stop="selected(item.__ID)" @update="changeValue" :currentID="modelValue.current"
@@ -36,20 +36,19 @@ export default defineComponent({
   setup(props, context) {
     const selected = inject("selected");
     const updateDefaultValue = inject("updateDefaultValue");
+    
     const onEnd = function (e) {
-      console.log('onEnd...')
-      console.log(e)
-      console.log(props.modelValue)
-      context.emit("update:modelValue", props.modelValue, e.clonedData);
+      console.log('draggle onEnd... selected current!')
+      if (e.clonedData) {
+        selected(e.clonedData.__ID)
+      }
+      // context.emit("update:modelValue", props.modelValue, e.clonedData);
     };
 
     // 将外层传到的参数 modelValue，转化为可渲染的结构，这里会将 __opt__ 这种转成 children
     const conf = initRender(props.modelValue);
-    console.log(conf)
     const formModel = reactive({});
-
     const rules = computed(() => props.modelValue.formConf.__rules)
-    console.log(rules.value)
 
     let formEleKeys = [];
     const watchElement = function (eles) {

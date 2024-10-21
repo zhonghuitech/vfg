@@ -164,7 +164,9 @@ export default defineComponent({
     }
 
     const selected = function (s) {
-      settings.current = s;
+      if (s) {
+        settings.current = s;
+      }
     };
 
     const clearn = function () {
@@ -223,22 +225,9 @@ export default defineComponent({
 
     const updateChild = function (eles, ids) {
       console.log('更新子组件...')
-      console.log(eles)
-      console.log(ids)
-      console.log(settings.drawingList)
       let item = findEle(settings.drawingList, ids);
-      console.log(item)
-
-      // TODO 这里涉及一个数据转换，将 conf 数据转成 settings 的数据，
-      // 对于 el-checkbox-group ，需要将 children 转成 [], 因为在 conf 中这个组件的 children 是通过 __opt__ 联动的
-      // eles.forEach(i => {
-      //   if ('el-checkbox-group' == i.tag) {
-      //     i.childrens = []
-      //   }
-      // })
-
+      // TODO 这里涉及一个数据转换，将 conf 数据转成 settings 的数据 ?
       item.childrens = eles;
-      console.log(settings.drawingList)
     };
 
     const updateDefaultValue = function (val, ids) {
