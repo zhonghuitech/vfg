@@ -42,10 +42,10 @@ import {
 } from "vue";
 import {
     ElMessage
-} from 'https://unpkg.com/element-plus@2.8.6/dist/index.full.min.js'
+} from 'https://unpkg.com/element-plus@2.8.6/dist/index.full.min.js';
 // import {
 //     request
-// } from "https://unpkg.com/vfg@0.0.12/dist/lib.umd.js";
+// } from "http://localhost:5173/vfg/lib/lib.umd.js";
 
 const formData = reactive({
     "field_J7PXe": [],
