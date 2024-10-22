@@ -40,12 +40,13 @@ import {
     ref,
     reactive
 } from "vue";
-// import {
-//     ElMessage
-// } from 'element-plus'
+import {
+    ElMessage
+} from 'https://unpkg.com/element-plus@2.8.6/dist/index.full.js'
 // import {
 //     request
-// } from "vfg";
+// } from "https://unpkg.com/vfg@0.0.12/dist/lib.umd.js";
+
 const formData = reactive({
     "field_J7PXe": [],
     "field_RVHil": [],
@@ -65,13 +66,13 @@ const rules = {}
 const refForm = ref(null)
 
 const postData = function(formEl) {
-    ElementPlus.ElMessage.success("操作成功!");
+    ElMessage.success("操作成功!");
     formEl.validate((valid) => {
         if (valid === false) {
             return false;
         }
         request({
-            url: 'undefined',
+            url: 'http://localhost:8090/generator/demo',
             method: 'post',
             data: formData
         }).then(res => {
