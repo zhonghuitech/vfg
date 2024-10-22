@@ -37,7 +37,7 @@ const elCol = {
     defaultvalue: [],
     attrs: {
         fieldName: helper.input_text("字段名", '字段名'),
-        span: helper.input_range("列数", 1, 24, 8),
+        span: helper.input_range("列数", 1, 24, 12),
         offset: helper.input_range("左侧间隔", 0, 24, 0),
         push: helper.input_range("右移动", 0, 24, 0),
         pull: helper.input_range("左移动", 0, 24, 0),

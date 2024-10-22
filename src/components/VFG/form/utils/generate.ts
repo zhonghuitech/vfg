@@ -259,9 +259,17 @@ const attrFuns: any = {
     }
 }
 
-const attrFormat = function (attrs: any, props: any) {
+const attrFormat = function (attrs: any, props: any, tagName: string = '') {
     attrs = Object.assign({}, attrs, props);
     let attr: any = [];
+    if ('el-col' === tagName) {
+        attrs[':span'] = attrs['span']
+        delete attrs['span']
+    } else if ('el-row' === tagName) {
+        attrs[':gutter'] = attrs['gutter']
+        delete attrs['gutter']
+    }
+
     for (let k in attrs) {
         if (k in attrFuns) {
             attr.push(attrFuns[k](attrs[k]));
@@ -436,7 +444,7 @@ const toHtml = function (ele: any, js: any) {
     let node = "draggable" == tagName ?
         [childrenFormat(ele.childrens, js)]
         :
-        ["<", tagName, " ", attrFormat(ele.attrs, ele.props), " ", ">\n", childrenFormat(ele.childrens, js), slotFormat(ele.slots), renderBtns(ele, js), "\n</", tagName, ">\n"]
+        ["<", tagName, " ", attrFormat(ele.attrs, ele.props, tagName), " ", ">\n", childrenFormat(ele.childrens, js), slotFormat(ele.slots), renderBtns(ele, js), "\n</", tagName, ">\n"]
     if (ele.formItem) {
         node = ["<", "el-form-item", " ", attrFormat(ele.formItem, {
             prop: ele.attrs.fieldName
