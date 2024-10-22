@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp } from 'vue/dist/vue.esm-bundler';
 import App from './App.vue'
 import ElementPlus from 'element-plus'; // 三方依赖
 import 'element-plus/theme-chalk/index.css';

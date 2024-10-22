@@ -65,7 +65,8 @@
     "vue-clipboard3": "^2.0.0",
     "vue-codemirror": "^6.1.1",
     "vue-draggable-plus": "^0.5.3",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "vue3-sfc-loader": "^0.9.5"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
@@ -74,6 +75,7 @@
     "@types/node": "^20.14.5",
     "@vitejs/plugin-vue": "^5.1.4",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "@vue/compiler-sfc": "^3.5.12",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.5.1",
     "fast-glob": "^3.3.2",

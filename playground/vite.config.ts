@@ -27,6 +27,14 @@ export default defineConfig(({ command, mode }) => {
         symbolId: 'icon-[dir]-[name]',
       })
     ],
+    modules: {
+      rules: [
+        {
+          test: /\.vue$/,
+          use: ['vue-loader', 'vue3-sfc-loader']
+        }
+      ]
+    },
     resolve: {
       alias: {
         "/~": path.resolve(__dirname, "./src"),

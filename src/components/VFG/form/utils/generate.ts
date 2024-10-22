@@ -401,7 +401,7 @@ const toHtml = function (ele: any, js: any) {
         js.addRules(deepClone(ele.__rules))
         ele.attrs[":rules"] = "rules";
     }
-    
+
     let tagName = (ele.props && 'component' in ele.props) ? ele.props.component : ele.tag;
 
     if ('__text' in ele) {
@@ -434,7 +434,7 @@ const toHtml = function (ele: any, js: any) {
 
 }
 
-export function generate(settings: any) {
+export function generate(settings: any, asyncComp: boolean = false) {
     console.log('generate...')
 
     console.log(settings)
@@ -473,13 +473,28 @@ export function generate(settings: any) {
     show,
     });
     `
+
+    if (asyncComp) {
+        return {
+            "template": ["", wrapHtml, ''].join('').replace(/(\r\n|\n|\r)/gm, "").replaceAll('><', '>\n<'),
+            "script": {
+            },
+            'catch': ()=>{
+                console.log('eee')
+            }
+        }
+    }
     return [beautify.html(templateContent), "\n<script setup>", beautify.js(js.render() + jsConst), "</script>"].join("\n")
+}
+
+export async function generateAsyncComponent(settings: any) {
+    return generate(settings, true)
 }
 
 export async function generateAndFormatAsync(settings: any) {
     const codeContent = generate(settings);
 
-    return prettier.format(codeContent, {
+    return prettier.format(codeContent as string, {
         parser: 'vue',
         semi: false,
         singleQuote: true,

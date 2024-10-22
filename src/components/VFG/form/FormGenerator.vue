@@ -21,6 +21,7 @@
         <div class="action-bar">
           <el-button v-if="!isProd" style="margin-left: 5px;" type="default" link icon="MapLocation"
             @click="preViewCodeDebug">调试</el-button>
+          <el-button style="margin-left: 5px;" type="default" link icon="View" @click="preViewShow">预览</el-button>
           <el-button style="margin-left: 5px;" type="default" link icon="VideoPlay" @click="preViewCode">生成</el-button>
           <el-button type="danger" link icon="Delete" @click="clearn()">清空</el-button>
 
@@ -68,6 +69,12 @@
         <CodemirrorComp v-model="code" lang="vue" />
       </el-scrollbar>
     </el-drawer>
+
+    <el-drawer v-model="showPreview" direction="rtl" size="50%" style="height:100%">
+      <!-- <AsyncComp :settings="settings"></AsyncComp> -->
+
+      <DynaComp :settings="settings"></DynaComp>
+    </el-drawer>
   </div>
 </template>
 
@@ -79,6 +86,8 @@ import useClipboard from 'vue-clipboard3';
 import { ElMessage } from 'element-plus';
 import { saveAs } from "file-saver";
 import CodemirrorComp from '../../CodemirrorComp/index.vue'
+import AsyncComp from './AsyncComp.vue'
+import DynaComp from "./DynaComp.vue";
 
 import {
   deepClone,
@@ -112,7 +121,9 @@ export default defineComponent({
     VideoPlay,
     Delete,
     Download,
-    CodemirrorComp
+    CodemirrorComp,
+    AsyncComp,
+    DynaComp
   },
 
   setup(props) {
@@ -120,6 +131,7 @@ export default defineComponent({
 
     const device = ref("pc");
     const showCode = ref(false);
+    const showPreview = ref(false)
     const code = ref('')
     const dList = ref([])
     const loadSetting = function () {
@@ -255,6 +267,10 @@ export default defineComponent({
       console.log(initConf(settings))
     }
 
+    const preViewShow = () => {
+      showPreview.value = true
+    }
+
     const { toClipboard } = useClipboard()
     const ClipboardWrite = async () => {
       // const codeStr = await generateAndFormatAsync(settings);
@@ -299,7 +315,9 @@ export default defineComponent({
       addComponentAction,
       dList,
       isProd,
-      onEnd
+      onEnd,
+      preViewShow,
+      showPreview
     };
   },
 });

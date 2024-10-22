@@ -17,6 +17,9 @@ export default defineConfig(({ mode, command }) => {
         }
       }
     },
+    define: {
+      __ISPROD__ : command === 'build'
+    },
     plugins: createVitePlugins(env, mode, command === "build"),
     build: {
       lib: {
