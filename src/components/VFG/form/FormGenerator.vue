@@ -19,9 +19,10 @@
 
       <div class="center-board">
         <div class="action-bar">
-          <el-button v-if="!isProd" style="margin-left: 5px;" type="default" link icon="MapLocation"
+          <el-button v-if="!isProd" style="margin-left: 5px;" type="warning" link icon="MapLocation"
             @click="preViewCodeDebug">调试</el-button>
           <el-button style="margin-left: 5px;" type="default" link icon="VideoPlay" @click="preViewCode">生成</el-button>
+          <el-button style="margin-left: 5px;" type="primary" link icon="View" @click="preViewShow">预览</el-button>
           <el-button type="danger" link icon="Delete" @click="clearn()">清空</el-button>
 
           <div class="btn">
@@ -101,6 +102,7 @@ import { defineComponent, provide, reactive, ref, watch } from "vue";
 
 export default defineComponent({
   name: "FormGenerator",
+  emits: ["preview"],
   props: {},
   components: {
     PagePanel,
@@ -115,7 +117,7 @@ export default defineComponent({
     CodemirrorComp
   },
 
-  setup(props) {
+  setup(props, context) {
     const isProd = __ISPROD__
 
     const device = ref("pc");
@@ -255,6 +257,10 @@ export default defineComponent({
       console.log(initConf(settings))
     }
 
+    const preViewShow = () => {
+      context.emit("preview", generate(settings, true))
+    }
+
     const { toClipboard } = useClipboard()
     const ClipboardWrite = async () => {
       // const codeStr = await generateAndFormatAsync(settings);
@@ -299,7 +305,8 @@ export default defineComponent({
       addComponentAction,
       dList,
       isProd,
-      onEnd
+      onEnd,
+      preViewShow
     };
   },
 });

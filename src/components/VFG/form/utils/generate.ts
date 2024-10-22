@@ -41,8 +41,9 @@ class Scripts {
     private ActionData: Set;
     private returnData: Set;
     private rules: any;
+    private preview: boolean;
 
-    constructor() {
+    constructor(preview: boolean = false) {
         this.importFuncVue = new Set();
         this.importString = new Set();
         this.UIData = new Set();
@@ -52,6 +53,7 @@ class Scripts {
         this.ActionData = new Set();
         this.returnData = new Set();
         this.rules = false;
+        this.preview = preview;
     }
 
     definedVar(name: string, val: string) {
@@ -64,7 +66,9 @@ class Scripts {
 
     addUiDataFromApi(apiUrl: string, method: string, name: string) {
         this.UIData.add(name);
-        this.importString.add('import {request} from "vfg"; ')
+        this.preview ?
+            this.importString.add('// import {request} from "vfg"; ')
+            : this.importString.add('import {request} from "vfg"; ');
         this.APIData.add(`
         request({
             url: '${apiUrl}',
@@ -76,14 +80,13 @@ class Scripts {
     }
 
     addPostAction(apiUrl: string) {
-        this.importString.add('import {request} from "vfg"; ');
-        this.ActionData.add(`
-        const postData=function(formEl){
-        formEl.validate((valid) => {
-            if(valid===false){
-                return false;
-            }
-            request({
+        this.preview ?
+            this.importString.add('// import {request} from "vfg"; ')
+            : this.importString.add('import {request} from "vfg"; ');
+        const reqContent = this.preview ?
+            `// ElementPlus.ElMessage.success("操作成功!");` :
+            `
+        request({
                 url: '${apiUrl}',
                 method: 'post',
                 data: formData
@@ -91,6 +94,14 @@ class Scripts {
                 console.log(res);
                 ElMessage.success("操作成功!");
             });
+        `
+        this.ActionData.add(`
+        const postData=function(formEl){
+        formEl.validate((valid) => {
+            if(valid===false){
+                return false;
+            }
+            ${reqContent}
             })
         }
         `);
@@ -100,7 +111,9 @@ class Scripts {
 
     renderImport(lines: any) {
         let vueFunc = this.importFuncVue.data().join(",");
-        lines.push(`import {${vueFunc}} from "vue";\nimport { ElMessage } from 'element-plus'`);
+        this.preview ?
+            lines.push(`import {${vueFunc}} from "vue";\n`)
+            : lines.push(`import {${vueFunc}} from "vue";\nimport { ElMessage } from 'element-plus'`);
         return lines.concat(this.importString.data());
     }
 
@@ -401,7 +414,7 @@ const toHtml = function (ele: any, js: any) {
         js.addRules(deepClone(ele.__rules))
         ele.attrs[":rules"] = "rules";
     }
-    
+
     let tagName = (ele.props && 'component' in ele.props) ? ele.props.component : ele.tag;
 
     if ('__text' in ele) {
@@ -434,7 +447,7 @@ const toHtml = function (ele: any, js: any) {
 
 }
 
-export function generate(settings: any) {
+export function generate(settings: any, preview: boolean = false) {
     console.log('generate...')
 
     console.log(settings)
@@ -448,12 +461,12 @@ export function generate(settings: any) {
     console.log(typeof element.childrens)
     console.log(Array.isArray(element.childrens))
 
-    const js = new Scripts();
+    const js = new Scripts(preview);
     let html = toHtml(element, js);
 
     js.definedVar(element.attrs.__formRef, 'null');
 
-    const wrapStyle = element.attrs.wrapStyle
+    const wrapStyle = preview ? 'none' : element.attrs.wrapStyle
     let appendToBody = wrapStyle === 'dialog' ? ' append-to-body' : ''
     const footer = renderFooter()
     let wrapHtml = wrapStyle === 'none' ? html : `<el-${wrapStyle} title="导入表" v-model="visible" direction="rtl" size="50%"${appendToBody}>${html}${footer}</el-${wrapStyle}>`
