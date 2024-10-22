@@ -7,13 +7,14 @@
     "dist"
   ],
   "private": false,
-  "main": "dist/lib.umd.js",
-  "module": "dist/lib.es.js",
-  "style": "dist/style.css",
+  "main": "dist/lib/lib.umd.js",
+  "module": "dist/lib/lib.es.js",
+  "style": "dist/assets/css/style.css",
   "exports": {
     ".": {
-      "import": "dist/lib.es.js",
-      "require": "dist/lib.umd.js"
+      "import": "./dist/lib/lib.es.js", 
+      "require": "./dist/lib/lib.umd.js",
+      "types": "./dist/lib/lib.d.ts" 
     },
     "./*": "./*"
   },

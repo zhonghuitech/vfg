@@ -22,11 +22,12 @@ export default defineConfig(({ mode, command }) => {
       lib: {
         entry: path.resolve(__dirname, "./src/components/main.ts"), //指定组件编译入口文件
         name: "vfg",
-        fileName: (format) => `lib.${format}.js`
+        formats: ["es", "umd", "cjs"],
+        fileName: (format) => `lib/lib.${format}.js`
       },
       rollupOptions: {
         // 确保外部化处理那些你不想打包进库的依赖
-        external: ["vue"],
+        external: ["vue", "element-plus"],
         output: {
           assetFileNames: (assetInfo: any) => {
             let extType = assetInfo.name.split('.').at(1);
@@ -35,6 +36,7 @@ export default defineConfig(({ mode, command }) => {
             }
             return `assets/${extType}/[name][extname]`;
           },
+          dir: "dist",
           // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
           globals: {
             vue: "Vue",
