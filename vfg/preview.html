@@ -1,0 +1,43 @@
+<html>
+
+<body>
+    <div id="app"></div>
+    <!-- Import style -->
+    <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+    <!-- Import Vue 3 -->
+    <script src="//unpkg.com/vue@3"></script>
+    <!-- Import component library -->
+    <script src="//unpkg.com/element-plus"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
+
+    <script type="module">
+        import { sfcContent } from './js/demo.js';
+        const options = {
+            moduleCache: {
+                vue: Vue
+            },
+            async getFile(url) {
+                if (url === '/myComponent.vue')
+                    return Promise.resolve(sfcContent);
+                const res = await fetch(url);
+                if (!res.ok)
+                    throw Object.assign(new Error(res.statusText + ' ' + url), { res });
+                return {
+                    getContentData: asBinary => asBinary ? res.arrayBuffer() : res.text(),
+                }
+            },
+            addStyle(textContent) {
+                const style = Object.assign(document.createElement('style'), { textContent });
+                const ref = document.head.getElementsByTagName('style')[0] || null;
+                document.head.insertBefore(style, ref);
+            },
+        }
+
+        const { loadModule } = window['vue3-sfc-loader'];
+        const app = Vue.createApp(Vue.defineAsyncComponent(() => loadModule('/myComponent.vue', options)));
+        app.use(ElementPlus)
+        app.mount("#app");
+    </script>
+</body>
+
+</html>
