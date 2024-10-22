@@ -79,7 +79,7 @@ import PageSetting from "./PageSetting.vue";
 import useClipboard from 'vue-clipboard3';
 import { ElMessage } from 'element-plus';
 import { saveAs } from "file-saver";
-import CodemirrorComp from '../../CodemirrorComp/index.vue'
+import CodemirrorComp from '/@/components/CodemirrorComp/index.vue'
 
 import {
   deepClone,
