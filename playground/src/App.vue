@@ -2,14 +2,20 @@
   <div>
     <FormGenerator device="pc" @preview="previewAction" />
     <el-drawer title="预览" v-model="visible" direction="rtl" size="100%">
-      <template #header>
-        <div class="dialog-footer"> <el-button @click="cancel">取 消</el-button> </div>
+      <template #header style="margin-top: 100px;">
+        <div style="display:flex;justify-content:center">
+          <el-radio-group v-model="showType">
+            <el-radio-button label="全显示" value="both" />
+            <el-radio-button label="仅源码" value="source" />
+            <el-radio-button label="仅UI" value="ui" />
+          </el-radio-group>
+        </div>
       </template>
       <el-row :gutter="24">
-        <el-col :span="12" style="border: 1px solid #409eff;max-height: calc(100vh - 200px);">
+        <el-col v-if="visiableSource" :span="spanColVal" style="border: 1px solid #409eff;max-height: calc(100vh - 160px);">
           <CodemirrorComp v-model="sfc" lang="vue" />
         </el-col>
-        <el-col :span="12" style="border: 1px solid #409eff;max-height: calc(100vh - 200px);">
+        <el-col v-if="visiableUI" :span="spanColVal" style="border: 1px solid #409eff;max-height: calc(100vh - 160px);">
           <el-scrollbar>
             <DynaComp :sfc="sfc"></DynaComp>
           </el-scrollbar>
@@ -23,11 +29,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import DynaComp from "/~/components/DynaComp.vue";
 import CodemirrorComp from '/@/components/CodemirrorComp/index.vue'
 
 const visible = ref(false);
+const showType = ref('both')
+const spanColVal = computed(() => 'both' == showType.value ? 12 : 24)
+const visiableSource = computed(() => 'ui' == showType.value ? false : true)
+const visiableUI = computed(() => 'source' == showType.value ? false : true)
 
 const sfc = ref('')
 
@@ -41,5 +51,4 @@ const previewAction = function (sfcInput: string) {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

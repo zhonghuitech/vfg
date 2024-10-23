@@ -1,0 +1,8 @@
+.el-drawer__header {
+    align-items: center;
+    color: rgb(114, 118, 123);
+    display: flex;
+    margin-bottom: 2px;
+    padding: var(--el-drawer-padding-primary);
+    padding-bottom: 0;
+}
