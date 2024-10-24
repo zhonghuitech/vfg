@@ -121,7 +121,7 @@ class Scripts {
         this.importFuncVue.add('reactive');
         let formData: any = {};
         this.formData.data().forEach((element: any) => {
-            console.log(element)
+            // console.log(element)
             formData[element[0]] = element[1];
         });
         lines.push(`const formData=reactive(${JSON.stringify(formData)});`);
@@ -232,7 +232,7 @@ const attrFuns: any = {
         }
         if (v) {
             if (isBoolean(v)) {
-                console.log(k, '=----')
+                // console.log(k, '=----')
                 return `:${keyName(k)}="${v}"`
             }
             return `${keyName(k)}="${v}"`
@@ -265,9 +265,13 @@ const attrFormat = function (attrs: any, props: any, tagName: string = '') {
     if ('el-col' === tagName) {
         attrs[':span'] = attrs['span']
         delete attrs['span']
+        delete attrs['style']  // delete border style when generate.
+        delete attrs['class']
     } else if ('el-row' === tagName) {
         attrs[':gutter'] = attrs['gutter']
         delete attrs['gutter']
+        delete attrs['style']
+        delete attrs['class']
     }
 
     for (let k in attrs) {
@@ -452,22 +456,17 @@ const toHtml = function (ele: any, js: any) {
     }
 
     return node.join("");
-
 }
 
 export function generate(settings: any, preview: boolean = false) {
     console.log('generate...')
-
-    console.log(settings)
     const settingsV = toVal(settings);
-    console.log('---after')
-    console.log(settingsV)
     let element = settingsV.formConf;
     element.childrens = settingsV.drawingList;
     console.log(element)
 
-    console.log(typeof element.childrens)
-    console.log(Array.isArray(element.childrens))
+    // console.log(typeof element.childrens)
+    // console.log(Array.isArray(element.childrens))
 
     const js = new Scripts(preview);
     let html = toHtml(element, js);

@@ -1,6 +1,6 @@
 <template>
   <template v-if="formItemSet">
-    <el-form-item v-bind="formItemSet" :style="hightLight(__ID)">
+    <el-form-item v-bind="formItemSet" :style="hightLight(__ID)" class="drag-wrapper">
       <template v-if="ctrlBtn && preview !== 'preview'">
         <span class="tool-btn tool-btn-del _btn" @click="deleteItem(__ID)" title="删除">
           <el-icon>
