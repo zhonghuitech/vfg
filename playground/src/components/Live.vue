@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue"
+import { computed, ref, watch } from "vue"
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from "element-plus"
 import DynaComp from "/~/components/DynaComp.vue";
@@ -67,6 +67,10 @@ const sfc = ref(props.sfc)
 if (!sfc.value || sfc.value.trim() === 0) {
     sfc.value = mockData
 }
+
+watch(() => props.sfc, () => {
+    sfc.value = props.sfc
+})
 
 function goHome() {
     router.push('/')
