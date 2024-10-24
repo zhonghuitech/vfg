@@ -8,7 +8,10 @@
             <a class="github" href="https://github.com/zhonghuitech/vfg" target="_blank">
               <img src="https://github.githubassets.com/pinned-octocat.svg" alt />
             </a>
+            <el-button v-if="showLive" type="default" link icon="Aim"
+              style="font-size: 21px;margin-bottom: 5px;margin-left: 10px;" @click="liveAction"></el-button>
           </div>
+
         </div>
         <el-scrollbar class="left-scrollbar">
           <!-- {{generate(settings)}} -->
@@ -103,7 +106,12 @@ import { defineComponent, provide, reactive, ref, watch } from "vue";
 export default defineComponent({
   name: "FormGenerator",
   emits: ["preview"],
-  props: {},
+  props: {
+    showLive: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {
     PagePanel,
     PageDrawer,
@@ -119,7 +127,7 @@ export default defineComponent({
 
   setup(props, context) {
     const isProd = __ISPROD__
-
+    const showLive = props.showLive
     const device = ref("pc");
     const showCode = ref(false);
     const code = ref('')
@@ -261,6 +269,10 @@ export default defineComponent({
       context.emit("preview", generate(settings, true))
     }
 
+    const liveAction = () => {
+      context.emit("live", generate(settings, true))
+    }
+
     const { toClipboard } = useClipboard()
     const ClipboardWrite = async () => {
       // const codeStr = await generateAndFormatAsync(settings);
@@ -306,7 +318,9 @@ export default defineComponent({
       dList,
       isProd,
       onEnd,
-      preViewShow
+      preViewShow,
+      liveAction,
+      showLive
     };
   },
 });
