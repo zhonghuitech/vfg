@@ -2,7 +2,7 @@
     <div>
         <div class="header_line">
             <el-radio-group>
-                <el-button type="default" link icon="Download" @click="execDownload('test.vue')">下载代码</el-button>
+                <el-button type="default" link icon="Download" @click="execDownload('vfg.vue')">下载代码</el-button>
                 <el-button type="default" link icon="DocumentCopy" @click="ClipboardWrite()">复制代码</el-button>
             </el-radio-group>
 
@@ -42,11 +42,14 @@
 <script lang="ts" setup>
 import { computed, ref } from "vue"
 import { useRoute, useRouter } from 'vue-router'
+import { ElMessage } from "element-plus"
 import DynaComp from "/~/components/DynaComp.vue";
 import CodemirrorComp from '/@/components/CodemirrorComp/index.vue'
 import { mockData } from "/~/js/mock"
-const emit = defineEmits(['close'])
+import useClipboard from 'vue-clipboard3';
+import { saveAs } from "file-saver";
 
+const emit = defineEmits(['close'])
 const router = useRouter()
 const route = useRoute()
 
@@ -71,6 +74,26 @@ function goHome() {
 
 function closeAction() {
     emit('close')
+}
+
+const execDownload = function (filename) {
+    const codeStr = sfc.value
+    const blob = new Blob([codeStr], {
+        type: "text/plain;charset=utf-8",
+    });
+    saveAs(blob, filename);
+};
+
+const { toClipboard } = useClipboard()
+const ClipboardWrite = async () => {
+    const codeStr = sfc.value
+    try {
+        await toClipboard(codeStr);
+        ElMessage({ message: "复制成功！", type: 'success' })
+        console.log('Copied to clipboard')
+    } catch (e) {
+        console.error(e)
+    }
 }
 </script>
 
