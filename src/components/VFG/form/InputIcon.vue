@@ -8,7 +8,9 @@
 
     <ul ref="iconWrap" class="icon-ul">
       <li v-for="icon in iconList" :key="icon" :class="setIcon === icon ? 'active-item' : ''" @click="onSelect(icon)">
-        <i :class="icon" />
+        <el-icon>
+          <component :is="icon" />
+        </el-icon>
         <div>{{ icon }}</div>
       </li>
     </ul>
