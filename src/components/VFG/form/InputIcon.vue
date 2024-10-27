@@ -23,13 +23,12 @@
 <script>
 import iconList from "./icon.json";
 
-const originList = iconList.map((name) => `el-icon-${name}`);
+const originList = iconList.map((name) => `${name}`);
 
 import { defineComponent, nextTick, ref, watch } from "vue";
 
 export default defineComponent({
   name: "input-icon",
-
   props: ["modelValue"],
   emits: ["update:modelValue"],
   setup(props, ctx) {
@@ -64,10 +63,8 @@ export default defineComponent({
 
     return {
       iconList: originList,
-
       key,
       onOpen,
-
       scrollToActive,
       onSelect,
       setIcon,

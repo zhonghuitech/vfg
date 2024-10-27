@@ -38,15 +38,15 @@ export default {
                 }, {
                         "key": "info",
                         "value": "info"
-                }, {
-                        "key": "text",
-                        "value": "text"
                 }], 'primary'),
-                'plain': helper.input_boolean('是否朴素按钮', false),
-                'round': helper.input_boolean('是否圆角按钮', false),
-                'circle': helper.input_boolean('是否圆形按钮', false),
-                'loading': helper.input_boolean('是否加载中状态', false),
-                'disabled': helper.input_boolean('是否禁用状态', false),
-                'autofocus': helper.input_boolean('是否默认聚焦', false)
+                'icon': helper.input_icon('icon', ''),
+                'link': helper.input_boolean('Link', false),
+                'plain': helper.input_boolean('Plain', false),
+                'text': helper.input_boolean('Text', false),
+                'round': helper.input_boolean('Round', false),
+                'circle': helper.input_boolean('Circle', false),
+                'loading': helper.input_boolean('Loading', false),
+                'disabled': helper.input_boolean('Disabled', false),
+                'autofocus': helper.input_boolean('Autofocus', false)
         }
 }

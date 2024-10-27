@@ -7,7 +7,7 @@
      <a href="https://www.npmjs.com/package/vfg"><img src="https://badgen.net/npm/license/vfg" alt="License"></a> 
 </p>
 
-VFG: Vue3 Form&Page Generator (based on Element-Plus).
+[VFG](https://zhonghuitech.github.io/vfg/#/): Vue3 Form&Page Generator (based on Element-Plus).
 
 ## Usage
 
@@ -59,6 +59,9 @@ app.mount('#app')
 
 4. Full example
 [vfg-usage-demo](https://github.com/zhonghuitech/vfg-usage-demo)
+
+## Coding Live
+[https://zhonghuitech.github.io/vfg/#/live](https://zhonghuitech.github.io/vfg/#/live)
 
 ## Project Setup
 
