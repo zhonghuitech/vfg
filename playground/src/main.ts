@@ -5,7 +5,7 @@ import 'element-plus/theme-chalk/index.css'
 import './assets/main.css'
 import * as ElIcon from '@element-plus/icons-vue'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
-import { createMemoryHistory, createWebHistory, createRouter } from 'vue-router'
+import { createMemoryHistory, createWebHistory, createWebHashHistory, createRouter } from 'vue-router'
 
 import Live from "/~/components/Live.vue"
 import Index from "/~/pages/Index.vue"
@@ -15,7 +15,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
+    history: createWebHashHistory(import.meta.env.BASE_URL),
     routes,
 })
 
