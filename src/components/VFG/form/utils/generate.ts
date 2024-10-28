@@ -272,6 +272,9 @@ const attrFormat = function (attrs: any, props: any, tagName: string = '') {
         delete attrs['gutter']
         delete attrs['style']
         delete attrs['class']
+    } else if ('upload-wrap' === tagName) {
+        attrs[':limit'] = attrs['limit']
+        delete attrs['limit']
     }
 
     for (let k in attrs) {
