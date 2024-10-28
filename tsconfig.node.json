@@ -7,7 +7,7 @@
     "nightwatch.conf.*",
     "playwright.config.*",
     "src/**/*.ts",
-    "vite/**/*.ts",
+    "build/**/*.ts",
     "src/**/*.vue",
   ],
   "compilerOptions": {
