@@ -3,7 +3,8 @@
     <template #header>
       <el-form ref="refForm" size="large" label-position="right" label-width="100">
         <el-form-item :show-label="true" label-width="100" label="选择图标" prop="key">
-          <el-input v-model="key" placeholder="请输入图标名称" prefix-icon="search" type="text" clearable :autofocus="true" />
+          <el-input ref="keyInput" v-model="key" placeholder="请输入图标名称" prefix-icon="search" type="text" clearable
+            :autofocus="true" />
         </el-form-item>
       </el-form>
     </template>
@@ -38,6 +39,7 @@ export default defineComponent({
     const key = ref("");
     const dialogTableVisible = ref(false);
     const setIcon = ref(props.modelValue);
+    const keyInput = ref(null);
     const iconList = ref(iconListOrigin.map((name) => `${name}`))
 
     watch(key, () => {
@@ -45,17 +47,20 @@ export default defineComponent({
         : iconListOrigin.map((name) => `${name}`)
     });
 
-    const onOpen = function () {
-      this.key = "";
-      this.scrollToActive();
+    const focusKeyInput = () => {
+      if (keyInput.value) {
+        keyInput.value.focus();
+      }
     };
 
     const onSelect = function (icon) {
       setIcon.value = icon;
       ctx.emit("update:modelValue", icon);
     };
+
     const scrollToActive = async function () {
       await nextTick();
+      focusKeyInput()
       const $activeItem = document.getElementsByClassName("active-item")[0];
       $activeItem && $activeItem.scrollIntoView && $activeItem.scrollIntoView();
     };
@@ -63,11 +68,11 @@ export default defineComponent({
     return {
       iconList,
       key,
-      onOpen,
       scrollToActive,
       onSelect,
       setIcon,
       dialogTableVisible,
+      keyInput
     };
   },
 });
