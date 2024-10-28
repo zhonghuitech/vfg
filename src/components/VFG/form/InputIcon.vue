@@ -1,19 +1,23 @@
 <template>
   <el-dialog v-model="dialogTableVisible" width="980px" @open="scrollToActive">
-    <div slot="title">
-      选择图标
-      <el-input v-model="key" :style="{ width: '260px' }" placeholder="请输入图标名称" prefix-icon="el-icon-search"
-        clearable />
-    </div>
+    <template #header>
+      <el-form ref="refForm" size="large" label-position="right" label-width="100">
+        <el-form-item :show-label="true" label-width="100" label="选择图标" prop="key">
+          <el-input v-model="key" placeholder="请输入图标名称" prefix-icon="search" type="text" clearable :autofocus="true" />
+        </el-form-item>
+      </el-form>
+    </template>
 
-    <ul ref="iconWrap" class="icon-ul">
-      <li v-for="icon in iconList" :key="icon" :class="setIcon === icon ? 'active-item' : ''" @click="onSelect(icon)">
-        <el-icon>
-          <component :is="icon" />
-        </el-icon>
-        <div>{{ icon }}</div>
-      </li>
-    </ul>
+    <el-scrollbar height="400px">
+      <ul ref="iconWrap" class="icon-ul">
+        <li v-for="icon in iconList" :key="icon" :class="setIcon === icon ? 'active-item' : ''" @click="onSelect(icon)">
+          <el-icon>
+            <component :is="icon" />
+          </el-icon>
+          <div>{{ icon }}</div>
+        </li>
+      </ul>
+    </el-scrollbar>
   </el-dialog>
 
   <el-input v-model="setIcon" placeholder="请输入内容">{{ dialogTableVisible }}
@@ -23,10 +27,7 @@
   </el-input>
 </template>
 <script>
-import iconList from "./icon.json";
-
-const originList = iconList.map((name) => `${name}`);
-
+import iconListOrigin from "./icon.json";
 import { defineComponent, nextTick, ref, watch } from "vue";
 
 export default defineComponent({
@@ -36,15 +37,12 @@ export default defineComponent({
   setup(props, ctx) {
     const key = ref("");
     const dialogTableVisible = ref(false);
-
     const setIcon = ref(props.modelValue);
+    const iconList = ref(iconListOrigin.map((name) => `${name}`))
 
     watch(key, () => {
-      if (key) {
-        this.iconList = originList.filter((name) => name.indexOf(key) > -1);
-      } else {
-        this.iconList = originList;
-      }
+      iconList.value = key.value ? iconListOrigin.filter((name) => name.indexOf(key.value) > -1)
+        : iconListOrigin.map((name) => `${name}`)
     });
 
     const onOpen = function () {
@@ -58,13 +56,12 @@ export default defineComponent({
     };
     const scrollToActive = async function () {
       await nextTick();
-
       const $activeItem = document.getElementsByClassName("active-item")[0];
       $activeItem && $activeItem.scrollIntoView && $activeItem.scrollIntoView();
     };
 
     return {
-      iconList: originList,
+      iconList,
       key,
       onOpen,
       scrollToActive,
