@@ -8,17 +8,21 @@ import glob from 'fast-glob'
 import { type BuiltInParserName, format } from 'prettier'
 import chalk from 'chalk'
 
-consola.info(chalk.blue('generating icon lists'))
-
 const currentDir = process.cwd();
-const iconPath = path.join(currentDir, "..", "..", "opensource/element-plus-icons/packages/svg")
 const jsonPath = path.join(currentDir, "src/components/VFG/form/icon.json")
+consola.info(chalk.blue(`delete file: ${jsonPath}`))
+await remove(jsonPath, err => {
+    if (err) return consola.error(err)
+    consola.log('success!')
+})
 
-consola.log(jsonPath)
+consola.info(chalk.blue('generating icon lists'))
+const iconPath = path.join(currentDir, "..", "..", "opensource/element-plus-icons/packages/svg")
 await ensureDir(iconPath)
+
 const files = await getSvgFiles(iconPath)
 const fileNames = files.map((file) => transformToFileName(file))
-consola.log(fileNames)
+await generateEntry(fileNames)
 
 async function getSvgFiles(iconPath: string) {
     const pkg = { dir: iconPath }
@@ -35,9 +39,10 @@ function getName(file: string) {
 }
 
 async function generateEntry(fileNames: string[]) {
-    const code = await formatCode(
-        fileNames.toString(),
-    )
+    const fNameR = fileNames.map(i=>`\"${i}\"`)
+    const content = ["[", fNameR.join(","), "]"].join("");
+    consola.log(content)
+    const code = await formatCode(content, 'json')
     await writeFile(path.resolve(jsonPath), code, 'utf-8')
 }
 
