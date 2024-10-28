@@ -10,6 +10,9 @@ export default defineConfig(({ mode, command }) => {
   const { VITE_APP_ENV } = env;
 
   return {
+    define: {
+      __ISPROD__ : command === 'build'
+    },
     css: {
       preprocessorOptions: {
         scss: {

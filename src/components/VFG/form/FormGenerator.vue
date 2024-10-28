@@ -124,7 +124,6 @@ export default defineComponent({
     Download,
     CodemirrorComp
   },
-
   setup(props, context) {
     const isProd = __ISPROD__
     const showLive = props.showLive
