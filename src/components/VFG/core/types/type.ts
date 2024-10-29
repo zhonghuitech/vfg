@@ -8,5 +8,6 @@ export interface CompItemType {
     slots: object,
     props: object,              // 参数属性，不可编辑
     attrs: object,              // 属性，可编辑
-    childrens: CompItemType[]   // 子组件
+    childrens: CompItemType[],   // 子组件
+    actions: object              // 操作行为
 }

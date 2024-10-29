@@ -62,7 +62,7 @@ import { eleRenderFormat, eleRenderSetFormat } from "./utils/utils";
 import { findEle, isObjectArray, deepClone, randFieldId } from "./utils/func";
 import RulesInput from "./RulesInput.vue";
 import ElementRender from "./ElementRender.vue";
-import elRow from "/@/components/VFG/form/ui/element/base/elRow"
+import elRow from "./ui/element/basic/elRow"
 
 export default defineComponent({
   components: { ElementRender, RulesInput },

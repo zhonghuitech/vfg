@@ -48,17 +48,18 @@ const formConf = {
 }
 
 const elements: any = {
-    base: { eles: [], title: "基本组件" },
+    basic: { eles: [], title: "基本组件" },
     form: { eles: [], title: "表单组件" },
 };
 
-let files: any = import.meta.glob('./element/form/*.ts', { eager: true });
-for (const key in files) {
-    elements.form.eles.push(files[key].default)
-}
-files = import.meta.glob('./element/base/*.ts', { eager: true });
-for (const key in files) {
-    elements.base.eles.push(files[key].default)
+for (const [key, value] of Object.entries(elements)) {
+    const pathKey = `./element/${key}`
+    const files: any = import.meta.glob('./element/*/*.ts', { eager: true });
+    for (const fileKey in files) {
+        if (fileKey.startsWith(pathKey)) {
+            elements[key].eles.push(files[fileKey].default)
+        }
+    }
 }
 
 export {
