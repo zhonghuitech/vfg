@@ -28,12 +28,8 @@ const slotParser = {
     }
 }
 
-export const eleRenderFormat = function (conf: any, eleName: any) {
-    if (!isObjectObject(conf)) {
-        return null
-    }
-
-    const types: any = {
+function initTypes() {
+    return {
         input_text: {
             childrens: [],
             tag: "el-input",
@@ -83,26 +79,42 @@ export const eleRenderFormat = function (conf: any, eleName: any) {
             attrs: {},
             slots: {}
         },
+        input_table: {
+            childrens: [],
+            tag: "tabcol-input",
+            attrs: {},
+            slots: {}
+        },
         input_boolean: {
             childrens: [],
-            tag: "el-switch", attrs: { "active-value": true, "inactive-value": false }
-            , formItem: {}, slots: {}
+            tag: "el-switch",
+            attrs: { "active-value": true, "inactive-value": false },
+            formItem: {},
+            slots: {}
         },
     }
+}
 
-    let t = conf.input_type
+export const eleRenderFormat = function (conf: any, eleName: any) {
+    if (!isObjectObject(conf)) {
+        return null
+    }
+    const types: any = initTypes()
+
+        let t = conf.input_type
     if (conf.input_type in types == false) {
         t = 'input_text'
     }
-    let ini = types[t] as any;
+    let ini = types[t] as any; // 初始设置
     for (let k in conf) {
         if (['__val__', 'input_type', 'label', 'opts'].includes(k) == false) {
             ini['attrs'][k] = conf[k];
         }
     }
+
     if ('__child' in conf) {
         ini.childrens = slotParser.default(conf);
-    } else if (Object.keys(ini.slots).length === 0) {
+    } else if (ini.slots && Object.keys(ini.slots).length === 0) {
         delete ini.slots
     }
 
@@ -150,7 +162,14 @@ export const eleRenderSetFormat = function (conf: any) {
         eles.push(opt)
     }
 
-    // console.log(eles)
+    const tabCol = eleRenderFormat(conf.__table__, '__table__')
+    if (tabCol && tabCol.formItem) {
+        eles.push({ tag: "el-divider", slots: { default: "表格列配置" } });
+        tabCol.formItem.label = undefined
+        tabCol.formItem.labelWidth = '1'
+        eles.push(tabCol)
+    }
+    console.log(eles)
     return eles;
 
 }

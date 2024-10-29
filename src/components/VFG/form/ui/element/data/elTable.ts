@@ -35,6 +35,7 @@ export default {
     ctrlBtn: true,
     // __text: helper.input_text("表格文本", "表格"),
     attrs: {
+        fieldName: helper.input_text("字段名", '字段名'),
         border: helper.input_boolean("带边框", true),
         stripe: helper.input_boolean("带条纹", false),
     },
@@ -48,6 +49,7 @@ export default {
             }
         ]
     },
+    __table__: helper.input_table("列配置", 'el-checkbox-button'),
     childrens: [
         selection,
         helper.cloneItem(createTabCol("id", "编号")),

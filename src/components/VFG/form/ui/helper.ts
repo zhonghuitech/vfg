@@ -124,7 +124,15 @@ const input_opt = function (value: string, tag: string) {
     }
 }
 
+const input_table = function (value: string, tag: string) {
+    return {
+        __val__: optValue(tag),
+        input_type: "input_table",
+        label: value
+    }
+}
+
 export default {
     input_text, input_icon, input_boolean, input_number, input_opt, input_radio, input_range,
-    input_select, input_slot_text, cloneItem, optValue
+    input_select, input_slot_text, cloneItem, optValue, input_table
 }
