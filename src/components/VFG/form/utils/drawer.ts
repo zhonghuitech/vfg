@@ -105,7 +105,7 @@ const _clone = function (obj: any) {
     }
 
     if ("props" in _c) {
-        _c.attrs = Object.assign(_c.attrs, _c.props);
+        _c.attrs = _c.attrs ? Object.assign(_c.attrs, _c.props) : {};
         delete _c.props;
     }
 
