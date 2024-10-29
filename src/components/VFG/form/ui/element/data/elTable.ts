@@ -26,6 +26,12 @@ function createTabCol(prop: string, label: string) {
     }
 }
 
+const optList = [
+    selection,
+    helper.cloneItem(createTabCol("id", "编号")),
+    helper.cloneItem(createTabCol("name", "姓名"))
+]
+
 export default {
     __ID: '',            // 这个 ID 应用到页面上会被替换为随机生成的
     tag: "el-table",     // 组件名，全局唯一
@@ -42,17 +48,15 @@ export default {
     slots: {
     },
     props: {
-        ":data" : [
+        ":data": [
             {
                 "id": 1,
                 "name": "张三"
             }
         ]
     },
-    __table__: helper.input_table("列配置", 'el-checkbox-button'),
+    __table__: helper.input_table("列配置", optList),
     childrens: [
-        selection,
-        helper.cloneItem(createTabCol("id", "编号")),
-        helper.cloneItem(createTabCol("name", "姓名"))
+        ...optList
     ],
 }

@@ -10,10 +10,10 @@
                                     <Operation />
                                 </el-icon>
                             </div>
-                            <el-input v-model="item.key"
+                            <el-input v-model="item.label"
                                 style="margin-left: 5px;margin-right: 5px;max-width:120px;"></el-input>
-                            <el-input v-model="item.value" style="margin-left: 5px;margin-right: 5px;" />
-                            
+                            <el-input v-model="item.prop" style="margin-left: 5px;margin-right: 5px;" />
+
                             <div style="display:flex;align-items: center;cursor: pointer;">
                                 <el-icon>
                                     <Edit />
@@ -49,15 +49,9 @@ export default defineComponent({
     components: { Remove },
     setup(props, ctx) {
         let modelValue = props.modelValue || {};
-        const isNumberValueType = ref(false)
-        const current = ref(props.modelValue.type);
-        const staticData = reactive(deepClone(props.modelValue.staticData));
-        const dynamicData = reactive(deepClone(props.modelValue.dynamicData));
+        const current = ref(modelValue.type || '');
+        const staticData = reactive(deepClone(modelValue.staticData));
         const dragList = ref(staticData)
-
-        if (staticData.length > 0) {
-            isNumberValueType.value = isNumberType(staticData[0].value)
-        }
 
         // console.log(staticData)
         // console.log(dragList.value)
@@ -65,18 +59,8 @@ export default defineComponent({
         const addItem = function () {
             let cont = staticData.length + 1
             console.log(staticData)
-
-            if (isNumberValueType.value) {
-                staticData.forEach(item => {
-                    if (isNumberType(item.value) && item.value >= cont) {
-                        cont = item.value + 1;
-                    }
-                })
-            }
-            const addItem = { key: "选项" + cont, value: isNumberValueType.value ? cont : "" + cont };
+            const addItem = { label: "选项" + cont, prop: "" + cont };
             staticData.push(addItem);
-            //dragList.value.push(addItem)
-            console.log(staticData)
         };
 
         const delItem = function (index) {
@@ -85,7 +69,7 @@ export default defineComponent({
             // dragList.value.splice(index, 1)
         };
 
-        watch([dynamicData, staticData, current], () => {
+        watch([staticData, current], () => {
             console.log('变动事件...')
             dragList.value = []
             staticData.forEach((item, index) => {
@@ -95,7 +79,6 @@ export default defineComponent({
                 type: current.value,
                 tag: props.modelValue.tag,
                 staticData,
-                dynamicData,
             });
         });
 
@@ -105,7 +88,7 @@ export default defineComponent({
             })
         };
 
-        return { staticData, addItem, delItem, dynamicData, current, onEnd, dragList, isNumberValueType };
+        return { staticData, addItem, delItem, current, onEnd, dragList };
     },
 });
 </script>
