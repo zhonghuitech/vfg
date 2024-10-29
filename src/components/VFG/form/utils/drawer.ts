@@ -153,7 +153,7 @@ const _clone = function (obj: any) {
 const _pre = function (_c: any) {
     if ("__table__" in _c) {
         console.log(_c)
-        let data = _c.__table__.staticData
+        let data = _c.__table__.__val__.staticData
         if (!data) {
             return _c;
         }
