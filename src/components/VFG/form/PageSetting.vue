@@ -25,7 +25,7 @@
                 </template>
               </el-form>
 
-              <el-divider>验证规则</el-divider>
+              <el-divider v-if="currentItem.__openRules">验证规则</el-divider>
               <rules-input :openRule="currentItem.__openRules" v-if="currentItem.tag !== 'draggable'"
                 :fieldName="currentItem.attrs.fieldName && currentItem.attrs.fieldName.__val__"
                 v-model="modelValue.formConf.__rules"></rules-input>
@@ -78,6 +78,7 @@ export default defineComponent({
       let ele = findEle(props.modelValue.drawingList, props.modelValue.current);
       if (ele) {
         currentTab.value = "field";
+        console.log(ele)
         return ele;
       }
     });

@@ -3,14 +3,14 @@ import helper from "../../helper";
 export default {
     tag: "el-input-number",
     name: "数字输入框",
-    __openRules: false,
+    __openRules: true,
     tagIcon: 'number',
     __ID: '',
     defaultvalue: 0,
     formItem: {
         showLabel: helper.input_boolean("显示 label", true),
         labelWidth: helper.input_number("label 宽", 100),
-        label: helper.input_text("label", '单行文本',),
+        label: helper.input_text("label", '数字输入框',),
     },
     attrs: {
         fieldName: helper.input_text("字段名", '字段名'),

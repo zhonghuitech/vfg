@@ -3,7 +3,7 @@ import helper from "../../helper";
 export default {
     tag: "el-color-picker",
     name: "取色器",
-    __openRules: false,
+    __openRules: true,
     tagIcon: "color",
     ctrlBtn: true,
     defaultvalue:"#000000",

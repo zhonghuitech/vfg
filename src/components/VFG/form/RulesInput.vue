@@ -1,15 +1,15 @@
 <template>
-  <el-form label-position="left" label-width="100px" style="margin-top: 5px; margin-bottom: 25px;">
+  <el-form v-if="openRule" label-position="left" label-width="100px" style="margin-top: 5px; margin-bottom: 25px;">
     <el-row>
       <el-col :span="12">
         <el-switch v-model="required" size="large" active-text="必填" inactive-text="可选" />
       </el-col>
-      <el-col :span="12" v-if="openRule" style="display: flex; flex-direction:row-reverse">
+      <el-col :span="12"  style="display: flex; flex-direction:row-reverse">
         <el-button ref="btn" type="default" link icon="CirclePlusFilled" @click.prevent="addItem">添加规则</el-button>
       </el-col>
     </el-row>
 
-    <template v-if="openRule">
+    <template>
       <template v-for="(item, index) in data[fieldName]" :key="'c' + index">
         <el-card v-if="'pattern' in item" style="margin: 10px 5px" class="_box">
           <el-form-item label="表达式">

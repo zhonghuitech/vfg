@@ -50,6 +50,7 @@ const formConf = {
 const elements: any = {
     basic: { eles: [], title: "基本组件" },
     form: { eles: [], title: "表单组件" },
+    data: { eles: [], title: "数据展示" }
 };
 
 for (const [key, value] of Object.entries(elements)) {

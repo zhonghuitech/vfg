@@ -1,9 +1,9 @@
 import helper from "../../helper";
 
 export default {
-        '__ID': '',
         tag: "upload-wrap",
         name: "上传文件",
+        __ID: '',
         __openRules: false,
         tagIcon: "input",
         ctrlBtn: true,

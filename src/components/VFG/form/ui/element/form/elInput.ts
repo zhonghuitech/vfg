@@ -10,7 +10,7 @@ export default {
     formItem: {
         showLabel: helper.input_boolean("显示 label", true),
         labelWidth: helper.input_number("label 宽", 100),
-        label: helper.input_text("label", '单行文本',),
+        label: helper.input_text("label", '输入框',),
     },
     attrs: {
         fieldName: helper.input_text("字段名", '字段名'),

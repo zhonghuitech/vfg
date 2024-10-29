@@ -2,14 +2,14 @@ import helper from "../../helper";
 
 export default {
         tag: "el-switch",
-        name: "Switch 开关",
+        name: "开关 Switch",
         __openRules: false,
         tagIcon: "switch",
         ctrlBtn: true,
         formItem: {
                 showLabel: helper.input_boolean("显示 label", true),
                 labelWidth: helper.input_number("label 宽", 100),
-                label: helper.input_text("label", 'Switch 开关', ),
+                label: helper.input_text("label", '开关', ),
         },
         attrs: {
                 fieldName: helper.input_text("字段名", '字段名'),
