@@ -1,4 +1,6 @@
 import { reactive, ref, watch } from "vue";
+import helper from "/@/components/VFG/form/ui/helper";
+import { createTabCol } from "/@/components/VFG/form/ui/helper";
 
 import {
     isObjectObject,
@@ -143,8 +145,24 @@ const _clone = function (obj: any) {
         }
     }
 
+
+
     return _c;
 };
+
+const _pre = function (_c: any) {
+    if ("__table__" in _c) {
+        console.log(_c)
+        let data = _c.__table__.staticData
+        if (!data) {
+            return _c;
+        }
+        _c.childrens = data.map(item => {
+            return helper.cloneItem(createTabCol(item.prop, item.label))
+        })
+    }
+    return _c;
+}
 
 export function initConf(settings: any) {
     return {
@@ -160,7 +178,7 @@ export function initRender(settings: any) {
     const conf = reactive({
         formConf: settings.formConf,
         current: settings.current,
-        drawingList: settings.drawingList.map((x: any) => {
+        drawingList: settings.drawingList.map(_pre).map((x: any) => {
             return _clone(x);
         }),
     });

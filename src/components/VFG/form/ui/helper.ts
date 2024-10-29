@@ -146,7 +146,18 @@ const input_table = function (value: string, optList: any) {
     }
 }
 
-
+export function createTabCol(prop: string, label: string) {
+    return {
+        tag: "el-table-column",
+        tagIcon: "table",
+        __ID: '',
+        name: "表格列描述",
+        attrs: {
+            prop: input_text("prop", prop),
+            label: input_text("label", label),
+        }
+    }
+}
 
 export default {
     input_text, input_icon, input_boolean, input_number, input_opt, input_radio, input_range,

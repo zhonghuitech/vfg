@@ -1,4 +1,5 @@
 import helper from "../../helper";
+import { createTabCol } from "/@/components/VFG/form/ui/helper";
 
 const selection = {
     tag: "el-table-column",
@@ -10,19 +11,6 @@ const selection = {
     props: {
         type: 'selection',
         ':selectable': 'selectable'
-    }
-}
-
-function createTabCol(prop: string, label: string) {
-    return {
-        tag: "el-table-column",
-        tagIcon: "table",
-        __ID: '',
-        name: "表格列描述",
-        attrs: {
-            prop: helper.input_text("prop", prop),
-            label: helper.input_text("label", label),
-        }
     }
 }
 
