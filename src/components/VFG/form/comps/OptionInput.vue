@@ -59,7 +59,7 @@
 
 <script>
 import { ref, defineComponent, watch, reactive } from "vue";
-import { deepClone, isNumberType } from "./utils/func";
+import { deepClone, isNumberType } from "../utils/func";
 import { Remove } from "@element-plus/icons-vue";
 
 export default defineComponent({

@@ -1,8 +1,8 @@
 import TestButton from "./button/index.vue";
 import FormGenerator from "./form/FormGenerator.vue"
 import type { App, Plugin } from 'vue';
-import OptionInput from "./form/OptionInput.vue";
-import UploadWrap from "./form/elementWarp/UploadWrap.vue";
+import OptionInput from "./form/comps/OptionInput.vue";
+import UploadWrap from "./form/comps/UploadWrap.vue";
 
 // 按需引入
 export { TestButton, FormGenerator, OptionInput, UploadWrap };

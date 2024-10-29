@@ -60,7 +60,7 @@ import { ref, defineComponent, toRaw, computed, inject, watch } from "vue";
 
 import { eleRenderFormat, eleRenderSetFormat } from "./utils/utils";
 import { findEle, isObjectArray, deepClone, randFieldId } from "./utils/func";
-import RulesInput from "./RulesInput.vue";
+import RulesInput from "/@/components/VFG/form/comps/RulesInput.vue";
 import ElementRender from "./ElementRender.vue";
 import elRow from "./ui/element/basic/elRow"
 

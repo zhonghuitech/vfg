@@ -52,7 +52,7 @@
 
 <script>
 import { defineComponent, computed, ref, watch, inject, reactive } from "vue";
-import InputIcon from "./InputIcon.vue";
+import InputIcon from "/@/components/VFG/form/comps/InputIcon.vue";
 import { CopyDocument, Delete } from "@element-plus/icons-vue";
 import { findEle } from "./utils/func";
 
