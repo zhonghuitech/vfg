@@ -7,5 +7,6 @@ import { setupVFG } from "./setup"
 import { request } from "./setup";
 
 export { VFG, SvgIcon, OptionInput, UploadWrap, request }
+export type * from "/@/components/VFG/core/types/type"
 export { setupVFG }
 export type { VFGSetupOption }

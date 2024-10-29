@@ -19,7 +19,7 @@ const elOption = {
 
 export default {
         tag: "el-select",
-        name: "下拉选择",
+        name: "选择器",
         __openRules: false,
         tagIcon: "select",
         ctrlBtn: true,

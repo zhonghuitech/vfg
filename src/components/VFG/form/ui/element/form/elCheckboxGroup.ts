@@ -2,7 +2,7 @@ import helper from "../../helper";
 
 export default {
     tag: "el-checkbox-group",
-    name: "复选框",
+    name: "多选框",
     __openRules: false,
     tagIcon: 'checkbox',
     __ID: '',

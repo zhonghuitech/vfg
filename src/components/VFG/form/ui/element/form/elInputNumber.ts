@@ -2,13 +2,11 @@ import helper from "../../helper";
 
 export default {
     tag: "el-input-number",
-    name: "单行文本",
+    name: "数字输入框",
     __openRules: false,
     tagIcon: 'number',
     __ID: '',
     defaultvalue: 0,
-
-
     formItem: {
         showLabel: helper.input_boolean("显示 label", true),
         labelWidth: helper.input_number("label 宽", 100),

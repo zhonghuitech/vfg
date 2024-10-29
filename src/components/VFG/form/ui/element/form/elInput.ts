@@ -2,7 +2,7 @@ import helper from "../../helper";
 
 export default {
     tag: "el-input",
-    name: "单行文本",
+    name: "输入框",
     __openRules: true,
     tagIcon: 'input',
     __ID: '',
