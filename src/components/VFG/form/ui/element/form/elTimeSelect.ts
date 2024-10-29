@@ -28,7 +28,8 @@ export default {
                         "key": "mini",
                         "value": "mini"
                 }], '')
-        }, slots: {
+        },
+        slots: {
         },
         props: {},
         childrens: []
