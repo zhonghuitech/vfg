@@ -32,6 +32,18 @@ export default {
         fieldName: helper.input_text("字段名", '字段名'),
         border: helper.input_boolean("带边框", true),
         stripe: helper.input_boolean("带条纹", false),
+        size: helper.input_radio("表的尺寸",
+            [{
+                key: "large",
+                value: "较大"
+            }, {
+                key: "default",
+                value: "默认"
+            }, {
+                key: "small",
+                value: "较小"
+            }], "default"),
+        'show-header': helper.input_boolean("显示表头", true),
     },
     slots: {
     },
