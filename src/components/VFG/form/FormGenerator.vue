@@ -89,6 +89,9 @@ import {
   findEle,
   isObjectArray,
   randFieldId,
+  buildEleTree,
+  reBuildEleTree,
+  buildIdArray
 } from "./utils/func";
 import { initConf } from "./utils/drawer"
 import { formConf } from "./ui/index";
@@ -123,6 +126,12 @@ export default defineComponent({
     Delete,
     Download,
     CodemirrorComp
+  },
+  mounted() {
+    document.addEventListener("keydown", this.keyClickHandler)
+  },
+  unmounted() {
+    window.removeEventListener('keydown', this.keyClickHandler);
   },
   setup(props, context) {
     const isProd = __ISPROD__
@@ -293,6 +302,25 @@ export default defineComponent({
       return settings;
     }
 
+    const keyClickHandler = (e) => {
+      console.log("您按下的按钮的keyCode为：" + e.keyCode + ', current:' + settings.current)
+      if (e.keyCode == 46 && settings.current) {
+        deleteItem(settings.current)
+      } else if (e.keyCode == 38 || e.keyCode == 40) {
+        // 方向键 up = 38
+        const isUp = e.keyCode == 38
+        const treeList = buildEleTree(settings.drawingList)
+        const idarr = buildIdArray(treeList)
+        reBuildEleTree(treeList, undefined, idarr)
+        console.log(treeList)
+        const ele = idarr[settings.current]
+        const finded = isUp ? ele.pre : ele.next
+        if (finded) {
+          settings.current = finded
+        }
+      }
+    }
+
     provide("copyItem", copyItem);
     provide("deleteItem", deleteItem);
     provide("selected", selected);
@@ -319,7 +347,8 @@ export default defineComponent({
       onEnd,
       preViewShow,
       liveAction,
-      showLive
+      showLive,
+      keyClickHandler
     };
   },
 });
