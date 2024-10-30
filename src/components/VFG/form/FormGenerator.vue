@@ -219,6 +219,7 @@ export default defineComponent({
     };
 
     const deleteItem = function (_id) {
+      selectNext()
       _del(settings.drawingList, _id);
     };
 
@@ -309,15 +310,19 @@ export default defineComponent({
       } else if (e.keyCode == 38 || e.keyCode == 40) {
         // 方向键 up = 38
         const isUp = e.keyCode == 38
-        const treeList = buildEleTree(settings.drawingList)
-        const idarr = buildIdArray(treeList)
-        reBuildEleTree(treeList, undefined, idarr)
-        console.log(treeList)
-        const ele = idarr[settings.current]
-        const finded = isUp ? ele.pre : ele.next
-        if (finded) {
-          settings.current = finded
-        }
+        selectNext(isUp)
+      }
+    }
+
+    const selectNext = (isPre = false) => {
+      const treeList = buildEleTree(settings.drawingList)
+      const idarr = buildIdArray(treeList)
+      reBuildEleTree(treeList, undefined, idarr)
+      console.log(treeList)
+      const ele = idarr[settings.current]
+      const finded = isPre ? ele.pre : ele.next
+      if (finded) {
+        settings.current = finded
       }
     }
 
