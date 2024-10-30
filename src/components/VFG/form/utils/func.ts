@@ -138,15 +138,23 @@ export function buildIdArray(items: any[]): any {
     return idarr;
 }
 
-function findParentSibling(idarr: any[], parentEle: any, isNext: boolean = true): any {
+function findParentNextSibling(idarr: any[], parentEle: any): any {
     if (!parentEle) {
         return undefined
-    } else if (isNext && parentEle.nextSibling) {
+    } else if (parentEle.nextSibling) {
         return parentEle.nextSibling
-    } else if (!isNext && parentEle.preSibling) {
-        return parentEle.preSibling
     } else {
-        return parentEle.parent ? findParentSibling(idarr, idarr[parentEle.parent], isNext) : undefined
+        return parentEle.parent ? findParentNextSibling(idarr, idarr[parentEle.parent]) : undefined
+    }
+}
+
+function findPreSibling(sibling: any): any {
+    if (!sibling) {
+        return undefined
+    } else if (sibling.childrens && sibling.childrens.length > 0) {
+        return findPreSibling(sibling.childrens[sibling.childrens.length - 1])
+    } else {
+        return sibling.id
     }
 }
 
@@ -157,13 +165,21 @@ export const reBuildEleTree: any = function (items: any[], parentEle: any, idarr
             item.childrens[0].id :  // 先找 child 中第一个
             (item.nextSibling ?
                 item.nextSibling : // 再找下一个 兄弟节点
-                findParentSibling(idarr, parentEle)  // 最后找 parent 的下一个 兄弟
+                findParentNextSibling(idarr, parentEle)  // 最后找 parent 的下一个 兄弟
             )
-        item.pre = item.preSibling ?
-            item.preSibling :      // 先找上一个 兄弟节点
-            findParentSibling(idarr, parentEle, false)   // 再找 parent 节点的 上一个兄弟结点
+        if (!item.next && !parentEle && index == len - 1) {
+            item.next = items[0].id  // 循环到第 1 个
+        }
+
+        item.pre = !item.preSibling ?
+            (parentEle ? parentEle.id : undefined) :     // 无上一个兄弟节点时，直接找 parent 节点
+            findPreSibling(idarr[item.preSibling])       // 再找 上一个兄弟节点的 最底层的 最右侧节点
         if (item.childrens && item.childrens.length > 0) {
             reBuildEleTree(item.childrens, item, idarr)
+        }
+
+        if (!item.pre && !parentEle && index == 0) {
+            item.pre = items[len - 1].id
         }
     });
 }
