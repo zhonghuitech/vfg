@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import CompItem from '/@/components/VFG/form/comps/CompItem.vue'
+import CompItem from './CompItem.vue'
 // import JsonViewer from 'vue-json-viewer'
 
 export default defineComponent({

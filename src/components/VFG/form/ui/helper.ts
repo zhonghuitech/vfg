@@ -128,7 +128,7 @@ const colOptValue = function () {
     return {
         type: 'static',
         tag: 'el-checkbox-button',
-        staticData: [{
+        header: [{
             prop: "id",
             label: "编号"
         }, {

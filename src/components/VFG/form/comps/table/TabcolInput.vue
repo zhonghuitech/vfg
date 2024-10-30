@@ -50,45 +50,45 @@ export default defineComponent({
     setup(props, ctx) {
         let modelValue = props.modelValue || {};
         const current = ref(modelValue.type || '');
-        const staticData = reactive(deepClone(modelValue.staticData));
-        const dragList = ref(staticData)
+        const header = reactive(deepClone(modelValue.header));
+        const dragList = ref(header)
 
-        // console.log(staticData)
+        // console.log(header)
         // console.log(dragList.value)
 
         const addItem = function () {
-            let cont = staticData.length + 1
-            console.log(staticData)
+            let cont = header.length + 1
+            console.log(header)
             const addItem = { label: "选项" + cont, prop: "" + cont };
-            staticData.push(addItem);
+            header.push(addItem);
         };
 
         const delItem = function (index) {
             console.log(index)
-            staticData.splice(index, 1);
+            header.splice(index, 1);
             // dragList.value.splice(index, 1)
         };
 
-        watch([staticData, current], () => {
+        watch([header, current], () => {
             console.log('变动事件...')
             dragList.value = []
-            staticData.forEach((item, index) => {
+            header.forEach((item, index) => {
                 dragList.value[index] = item
             })
             ctx.emit("update:modelValue", {
                 type: current.value,
                 tag: props.modelValue.tag,
-                staticData,
+                header,
             });
         });
 
         const onEnd = function (obj) {
             dragList.value.forEach((item, index) => {
-                staticData[index] = item
+                header[index] = item
             })
         };
 
-        return { staticData, addItem, delItem, current, onEnd, dragList };
+        return { header, addItem, delItem, current, onEnd, dragList };
     },
 });
 </script>

@@ -1,6 +1,7 @@
 import { reactive, ref, watch } from "vue";
 import helper from "/@/components/VFG/form/ui/helper";
 import { createTabCol } from "/@/components/VFG/form/ui/helper";
+import { deepClone } from "/@/components/VFG/form/utils/func"
 
 import {
     isObjectObject,
@@ -145,15 +146,13 @@ const _clone = function (obj: any) {
         }
     }
 
-
-
     return _c;
 };
 
-const _pre = function (_c: any) {
+const _pre = function (obj: any) {
+    const _c = deepClone(obj) as any;
     if ("__table__" in _c) {
-        console.log(_c)
-        let data = _c.__table__.__val__.staticData
+        let data = _c.__table__.__val__.header
         if (!data) {
             return _c;
         }
@@ -185,7 +184,7 @@ export function initRender(settings: any) {
     console.log(conf)
 
     watch(settings, () => {
-        conf.drawingList = settings.drawingList.map((x: any) => {
+        conf.drawingList = settings.drawingList.map(_pre).map((x: any) => {
             return _clone(x);
         });
     });
