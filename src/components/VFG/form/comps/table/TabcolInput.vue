@@ -19,7 +19,7 @@
                                     <Edit />
                                 </el-icon>
                                 <el-icon style="margin-right: 5px; margin-left: 5px;">
-                                    <Plus />
+                                    <Plus @click="addItem(index)"/>
                                 </el-icon>
                                 <el-icon>
                                     <Minus @click="delItem(index)" />
@@ -34,7 +34,6 @@
             <el-button @click.prevent="addItem" type="primary" link>添加选项</el-button>
         </el-form-item>
     </el-form>
-
 </template>
 
 <script>
@@ -56,11 +55,12 @@ export default defineComponent({
         // console.log(header)
         // console.log(dragList.value)
 
-        const addItem = function () {
+        const addItem = function (index) {
             let cont = header.length + 1
             console.log(header)
+            console.log(index)
             const addItem = { label: "选项" + cont, prop: "" + cont };
-            header.push(addItem);
+            header.splice(index + 1, 0, addItem);
         };
 
         const delItem = function (index) {
