@@ -7,7 +7,13 @@
                 </div>
 
                 <el-table ref="tabA" class="elTable" :data="dList">
-                    <el-table-column label="排序号" width="150px" align="center" fixed prop="num" />
+                    <el-table-column label="排序号" width="150px" align="center" fixed prop="num">
+                        <template #default="scope">
+                            <div style="display: flex; align-items: center" :attrabc="scope.row.num" class="attrabcccc">
+                                <span style="margin-left: 10px">{{ scope.row.num }}</span>
+                            </div>
+                        </template>
+                    </el-table-column>
                     <el-table-column label="姓名" fixed align="center" prop="name" />
                     <el-table-column label="操作" align="center" fixed="right" width="150px"
                         class-name="small-padding fixed-width">
@@ -72,6 +78,7 @@ const initSort = () => {
         ghostClass: 'sortable-ghost', //拖拽样式
         easing: 'cubic-bezier(1, 0, 0, 1)',
         store: null,
+        draggable: '.el-table__row',
         onStart: (item) => {
             console.log('onstart...');
             console.log(sortInstance.value.toArray())
@@ -103,8 +110,47 @@ onMounted(() => {
     initSort()
 })
 
+// 强制原生排序
+const forceRecoderChild = () => {
+    // 找到所有 children
+    const childCols = document.querySelectorAll('.attrabcccc')
+    let sortArr = []
+    // 找到 list 的排序值，按这个值重新排序下这个 children
+    // 举例： 2 3 1 4 7
+    for (let i = 0; i < childCols.length; i++) {
+        sortArr[i] = parseInt(childCols[i].attributes['attrabc'].value)
+    }
+    const sortedArr = sortArr.map(i => i).sort((a, b) => {
+        return a < b ? -1 : (a > b ? 1 : 0)
+    })
+    // 重新排序后找到真正的下标
+    let sortedArrMap = {}
+    sortedArr.forEach((item, idx) => {
+        sortedArrMap[item] = idx
+    })
+
+    // sortedArray 为最后排序好的数组
+    let sortedArray = []
+    const rootEl = sortInstance.value.el;
+    sortArr.forEach((item, idx) => {
+        const idxOri = sortedArrMap[item]
+        sortedArray[idxOri] = rootEl.children[idx]
+    })
+
+    // 删除原数组数据
+    for (let i=0;i<rootEl.children.length;i++) {
+        rootEl.removeChild(rootEl.children[i])
+    }
+
+    // 将排序好的数组 append 到 rootEl
+    sortedArray.forEach((item, idx) => {
+        rootEl.appendChild(item)
+    })
+}
+
 const savAction = () => {
     console.log('save action')
+
     const reOrList = toRaw(newList.value).map((item, idx) => {
         return {
             num: idx + 1,
@@ -116,10 +162,11 @@ const savAction = () => {
     console.log('sortable 对象。。。（原生）')
     console.log(sortInstance.value)
 
-    console.log('最新值')
+    console.log('期望值')
     console.log(reOrList)
     dList.value = reOrList
 
+    forceRecoderChild()
     console.log('table 对象...(vue)')
     console.log(tabA.value)
 }
