@@ -44,7 +44,11 @@
         </el-row>
 
         <div style="display: flex;align-items: center;justify-content: center;margin-top: 10px;">
-            <el-button style="margin-left: 50px;margin-top: 20px;" type="primary" @click="savAction">应用排序</el-button>
+            <el-button style="margin-left: 50px;margin-top: 20px;" type="warning" icon="WarningFilled"
+                @click="savAction(false)">提交排序</el-button>
+            <el-button style="margin-left: 20px;margin-top: 20px;" type="success" icon="SuccessFilled"
+                @click="savAction(true)">提交排序（修复后）</el-button>
+            <el-button style="margin-left: 20px;margin-top: 20px;" icon="RefreshLeft" @click="iniData" circle />
         </div>
     </div>
 
@@ -61,12 +65,18 @@ const initArr = [
     { num: 4, name: "N4" },
     { num: 5, name: "N5" },
 ]
-const newList = ref(initArr)
+const newList = ref(initArr)  // newList 永远保持最新拖拽完后的排序
 const dList = ref(initArr.map(i => i))
 
 const sortInstance = ref(null)
 const tabA = ref(null)
 const tabB = ref(null)
+
+const iniData = () => {
+    newList.value = initArr
+    dList.value = initArr.map(i => i)
+    forceReoderChild()
+}
 
 const initSort = () => {
     console.log('init sort.........')
@@ -96,10 +106,6 @@ const initSort = () => {
     })
 }
 
-watch(dList, (old, newv) => {
-    console.log('dList changed...')
-})
-
 const handleUpdate = (row) => {
 }
 
@@ -111,7 +117,7 @@ onMounted(() => {
 })
 
 // 强制原生排序
-const forceRecoderChild = () => {
+const forceReoderChild = () => {
     // 找到所有 children
     const childCols = document.querySelectorAll('.attrabcccc')
     let sortArr = []
@@ -138,7 +144,7 @@ const forceRecoderChild = () => {
     })
 
     // 删除原数组数据
-    for (let i=0;i<rootEl.children.length;i++) {
+    for (let i = 0; i < rootEl.children.length; i++) {
         rootEl.removeChild(rootEl.children[i])
     }
 
@@ -148,7 +154,7 @@ const forceRecoderChild = () => {
     })
 }
 
-const savAction = () => {
+const savAction = (forceReorder) => {
     console.log('save action')
 
     const reOrList = toRaw(newList.value).map((item, idx) => {
@@ -158,37 +164,24 @@ const savAction = () => {
         }
     })
     newList.value = reOrList
-
-    console.log('sortable 对象。。。（原生）')
-    console.log(sortInstance.value)
-
-    console.log('期望值')
-    console.log(reOrList)
     dList.value = reOrList
 
-    forceRecoderChild()
-    console.log('table 对象...(vue)')
-    console.log(tabA.value)
+    if (forceReorder) {
+        forceReoderChild()
+    }
 }
 
 const onEnd = (item) => {
-    console.log('oldIdx=' + item.oldIndex + ', newIdx=' + item.newIndex)
-
     const newIdx = item.newIndex
     const oldIdx = item.oldIndex
-
+    // 生成新的排序后列表
     const newOrderList = toRaw(newList.value).map(item => item)
     const currentRow = newOrderList.splice(oldIdx, 1)[0]
     newOrderList.splice(newIdx, 0, currentRow)
-    console.log('最新的orderList')
-    console.log(newOrderList)
-    console.log('原始 orderlist')
-    console.log(initArr)
+
     newList.value = newOrderList
     // dList.value = newOrderList
-    console.log(tabA.value)
 }
-
 </script>
 
 <style></style>
