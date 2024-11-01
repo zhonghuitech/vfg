@@ -10,8 +10,13 @@
 .tips {
     font-size: 1.0rem;
     text-align: center;
-    color: #b3b6bc; /* 黄色： #f7ba2a   淡色：#8a919f*/
+    color: #b3b6bc;
+    /* 黄色： #f7ba2a   淡色：#8a919f*/
     line-height: 22px;
     vertical-align: middle;
     margin-right: 5px;
+}
+
+.elTable tr {
+    cursor: move;
 }
