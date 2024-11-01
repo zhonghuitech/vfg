@@ -11,6 +11,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
     "element-plus": "^2.8.5",
+    "element-plus-table-dragable": "^1.0.0",
     "sortablejs": "^1.15.3",
     "vfg": "^0.1.0",
     "vue": "^3.5.10",

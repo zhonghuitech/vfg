@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-table class="elTable" :data="dList">
+        <el-table :data="dList" v-dragable="dragOptions">
             <el-table-column type="selection" width="55" align="center" />
             <el-table-column label="排序号" width="150px" align="center" fixed prop="num" />
             <el-table-column label="姓名" fixed align="center" prop="name" />
@@ -12,14 +12,38 @@
                 </template>
             </el-table-column>
         </el-table>
-
-        <el-button style="margin-left: 50px;margin-top: 20px;" type="primary" @click="savAction">Save</el-button>
+        <el-button style="margin-left: 50px;margin-top: 20px;" type="primary" @click="savAction">Save2</el-button>
     </div>
 </template>
 
 <script setup>
-import Sortable from 'sortablejs';
 import { onMounted, ref, toRaw } from "vue"
+import { vDragable } from "element-plus-table-dragable"; 
+
+const dragOptions = [
+    {
+        selector: "thead tr", // add drag support for column
+        option: { // sortablejs's option
+            animation: 150,
+            onEnd: (evt) => {
+                /* you can define a 'columns' ref 
+                and use v-for render it in table's slot. 
+                then you can change index of the item in 'column' here 
+                to implement drag column to sort */
+                console.log(evt.oldIndex, evt.newIndex);
+            },
+        },
+    },
+    {
+        selector: "tbody", // add drag support for row
+        option: { // sortablejs's option
+            animation: 150,
+            onEnd: (evt) => {
+                onEnd(evt);
+            },
+        },
+    },
+];
 
 const initArr = [
     { num: 1, name: "N1" },
@@ -30,32 +54,7 @@ const initArr = [
 ]
 const newList = ref(initArr)
 const dList = ref(initArr.map(i => i))
-const sortInstance = ref(null)
 
-const initSort = () => {
-    console.log('init sort.........')
-    const table = document.querySelector(".elTable .el-table__body-wrapper tbody");
-    console.log(table)
-    sortInstance.value = new Sortable(table, {
-        group: 'shared',
-        animation: 150,
-        ghostClass: 'sortable-ghost', //拖拽样式
-        easing: 'cubic-bezier(1, 0, 0, 1)',
-        store: null,
-        onStart: (item) => {
-            console.log(item);
-        },
-        onSort: function (/**Event*/evt) {
-            console.log('onsort...')
-        },
-        // 结束拖动事件
-        onEnd: (item) => {
-            console.log(item);
-            console.log('oldIdx=' + item.oldIndex + ', newIdx=' + item.newIndex)
-            onEnd(item)
-        },
-    })
-}
 
 const handleUpdate = (row) => {
 }
@@ -64,7 +63,6 @@ const handleDelete = (row) => {
 }
 
 onMounted(() => {
-    initSort()
 })
 
 const savAction = () => {
