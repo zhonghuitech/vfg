@@ -9,9 +9,11 @@ import { createMemoryHistory, createWebHistory, createWebHashHistory, createRout
 
 import Live from "/~/components/Live.vue"
 import Index from "/~/pages/Index.vue"
+import VueDraggableDemo from "/~/pages/VueDraggableDemo.vue"
 const routes = [
     { path: '/', component: Index },
     { path: '/live', component: Live },
+    { path: '/demo', component: VueDraggableDemo }
 ]
 
 const router = createRouter({
