@@ -97,10 +97,6 @@ const onEnd = (item) => {
 </script>
 
 <style>
-.el-table__row {
-    cursor: move;
-}
-
 .infinite-list {
     height: 300px;
     padding: 0;
