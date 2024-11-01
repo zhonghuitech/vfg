@@ -10,10 +10,15 @@ import { createMemoryHistory, createWebHistory, createWebHashHistory, createRout
 import Live from "/~/components/Live.vue"
 import Index from "/~/pages/Index.vue"
 import VueDraggableDemo from "/~/pages/VueDraggableDemo.vue"
+import SortableDemo from "/~/pages/SortableDemo.vue"
+import SortTable from "/~/pages/SortTable.vue"
+
 const routes = [
     { path: '/', component: Index },
     { path: '/live', component: Live },
-    { path: '/demo', component: VueDraggableDemo }
+    { path: '/vd', component: VueDraggableDemo },
+    { path: '/sd', component: SortableDemo },
+    { path: '/st', component: SortTable }
 ]
 
 const router = createRouter({
