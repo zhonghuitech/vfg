@@ -19,7 +19,7 @@
                                     <Edit />
                                 </el-icon>
                                 <el-icon style="margin-right: 5px; margin-left: 5px;">
-                                    <Plus @click="addItem(index)"/>
+                                    <Plus @click="addItem(index)" />
                                 </el-icon>
                                 <el-icon>
                                     <Minus @click="delItem(index)" />
@@ -31,14 +31,14 @@
             </el-row>
         </el-form-item>
         <el-form-item style="margin-top: 20px;">
-            <el-button @click.prevent="addItem" type="primary" link>添加选项</el-button>
+            <el-button @click.prevent="addItem(-1)" type="primary" link>添加选项</el-button>
         </el-form-item>
     </el-form>
 </template>
 
 <script>
 import { ref, defineComponent, watch, reactive } from "vue";
-import { deepClone, isNumberType } from "/@/components/VFG/form/utils/func";
+import { deepClone } from "/@/components/VFG/form/utils/func";
 import { Remove } from "@element-plus/icons-vue";
 
 export default defineComponent({
@@ -52,21 +52,15 @@ export default defineComponent({
         const header = reactive(deepClone(modelValue.header));
         const dragList = ref(header)
 
-        // console.log(header)
-        // console.log(dragList.value)
-
         const addItem = function (index) {
             let cont = header.length + 1
-            console.log(header)
-            console.log(index)
             const addItem = { label: "选项" + cont, prop: "" + cont };
-            header.splice(index + 1, 0, addItem);
+            index == -1 ? header.push(addItem) : header.splice(index + 1, 0, addItem);
         };
 
         const delItem = function (index) {
             console.log(index)
             header.splice(index, 1);
-            // dragList.value.splice(index, 1)
         };
 
         watch([header, current], () => {
