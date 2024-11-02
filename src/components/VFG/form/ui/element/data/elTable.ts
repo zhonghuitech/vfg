@@ -48,12 +48,12 @@ export default {
     slots: {
     },
     props: {
-        ":data": [
-            {
-                "id": 1,
-                "name": "张三"
-            }
-        ]
+        // ":data": [
+        //     {
+        //         "id": 1,
+        //         "name": "张三"
+        //     }
+        // ]
     },
     __table__: helper.input_table("列配置", optList),
     childrens: [

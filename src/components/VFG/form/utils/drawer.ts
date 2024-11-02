@@ -149,6 +149,7 @@ const _clone = function (obj: any) {
     return _c;
 };
 
+// 对列表的预处理
 const _pre = function (obj: any) {
     const _c = deepClone(obj) as any;
     if ("__table__" in _c) {
@@ -156,7 +157,7 @@ const _pre = function (obj: any) {
         if (!data) {
             return _c;
         }
-        _c.childrens = data.map(item => {
+        _c.childrens = data.map((item: any) => { 
             return helper.cloneItem(createTabCol(item.prop, item.label))
         })
     }

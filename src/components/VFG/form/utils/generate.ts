@@ -7,6 +7,8 @@ import {
     isObjectUnde
 } from "./func";
 import { getTag } from "./drawer"
+import helper from "/@/components/VFG/form/ui/helper";
+import { createTabCol } from "/@/components/VFG/form/ui/helper";
 
 import beautify from 'js-beautify';
 import * as prettier from "prettier";
@@ -301,7 +303,6 @@ const optParseHandles: any = {
     dynamic: {
         default: function (name: any, opts: any, data: any) {
             let sons = [];
-
             let son: any = {
                 props: {}
             }
@@ -315,13 +316,10 @@ const optParseHandles: any = {
                 default: "{{item.key}}"
             }
             sons.push(son);
-
             return sons;
-
         },
         "el-option": function (name: any, opts: any, data: any) {
             let sons = [];
-
             let son: any = {
                 props: {}
             }
@@ -332,7 +330,6 @@ const optParseHandles: any = {
                 "v-for": `item in UIData.${name}`,
                 ":key": "item.key"
             }
-
             sons.push(son);
             return sons;
         }
@@ -355,7 +352,6 @@ const optParseHandles: any = {
                 sons.push(son);
             }
             return sons;
-
         },
         "el-option": function (name: any, opts: any, data: any) {
             let sons = [];
@@ -368,9 +364,7 @@ const optParseHandles: any = {
                     value: item.value,
                     label: item.key
                 }
-
                 sons.push(son);
-
             }
             return sons;
         }
@@ -448,6 +442,18 @@ const toHtml = function (ele: any, js: any) {
         ele['childrens'] = ele['childrens'].concat(ops);
     }
 
+    if ('__table__' in ele) {
+        console.log(ele['childrens'])
+        if (isObjectArray(ele['childrens']) === false) {
+            ele['childrens'] = [];
+        }
+        const cols = ele.__table__.header.map((item: any) => {
+            return helper.cloneItem(createTabCol(item.prop, item.label))
+        })
+        console.log(cols)
+        ele['childrens'] = toVal(cols);
+    }
+
     let node = "draggable" == tagName ?
         [childrenFormat(ele.childrens, js)]
         :
@@ -466,6 +472,7 @@ export function generate(settings: any, preview: boolean = false) {
     const settingsV = toVal(settings);
     let element = settingsV.formConf;
     element.childrens = settingsV.drawingList;
+    console.log(settings.drawingList)
     console.log(element)
 
     // console.log(typeof element.childrens)
