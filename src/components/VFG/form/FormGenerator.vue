@@ -95,6 +95,7 @@ import {
 } from "./utils/func";
 import { initConf } from "./utils/drawer"
 import { formConf } from "./ui/index";
+import { no_iter_tags } from './ui/tag'
 import { generate, generateAndFormatAsync } from "./utils/generate";
 import {
   Iphone,
@@ -323,6 +324,11 @@ export default defineComponent({
       const finded = isPre ? ele.pre : ele.next
       if (finded) {
         settings.current = finded
+        const findedEle = idarr[finded]
+        if (no_iter_tags.includes(findedEle.tag)) {
+          // 有些子组件不需要遍历，这些记录在 no_iter_tags 里
+          selectNext(isPre)
+        }
       }
     }
 

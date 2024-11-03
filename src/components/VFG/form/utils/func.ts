@@ -117,6 +117,7 @@ export const buildEleTree: any = function (items: any[], parentId: string) {
         tItems.push({
             id: item.__ID,
             index,
+            tag: item.tag,
             parent: parentId,
             preSibling: index == 0 ? undefined : items[index - 1].__ID,
             nextSibling: index == len - 1 ? undefined : items[index + 1].__ID,
