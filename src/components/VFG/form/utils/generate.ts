@@ -398,12 +398,7 @@ const renderBtns = function (ele: any, js: any) {
 }
 
 const renderFooter = function () {
-    return `<template #footer>
-            <div class="dialog-footer">
-                <el-button type="primary" @click="postData(refForm)">确 定</el-button>
-                <el-button @click="cancel">取 消</el-button>
-            </div>
-        </template>`
+    return `<template #footer><div class="dialog-footer"><el-button type="primary" @click="postData(refForm)">确 定</el-button><el-button @click="cancel">取 消</el-button></div></template>`
 }
 
 const childrenFormat = function (childrens: any, js: any) {
@@ -414,8 +409,7 @@ const childrenFormat = function (childrens: any, js: any) {
     let sons = childrens.map((ele: any) => {
         return toHtml(ele, js);
     })
-
-    return sons.join(" ");
+    return sons.join("");
 }
 
 const toHtml = function (ele: any, js: any) {
@@ -463,11 +457,11 @@ const toHtml = function (ele: any, js: any) {
     let node = "draggable" == tagName ?
         [childrenFormat(ele.childrens, js)]
         :
-        ["<", tagName, " ", attrFormat(ele.attrs, ele.props, ele, tagName), " ", ">\n", childrenFormat(ele.childrens, js), slotFormat(ele.slots), renderBtns(ele, js), "\n</", tagName, ">\n"]
+        ["<", tagName, " ", attrFormat(ele.attrs, ele.props, ele, tagName), " ", ">", childrenFormat(ele.childrens, js), slotFormat(ele.slots), renderBtns(ele, js), "</", tagName, ">"]
     if (ele.formItem) {
         node = ["<", "el-form-item", " ", attrFormat(ele.formItem, {
             prop: ele.attrs.fieldName
-        }, ele), " ", ">\n", node.join(""), "\n</", "el-form-item", ">\n"];
+        }, ele), ">", node.join(""), "</", "el-form-item", ">\n"];
     }
 
     return node.join("");
