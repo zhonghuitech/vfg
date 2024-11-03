@@ -308,9 +308,9 @@ export default defineComponent({
       console.log("您按下的按钮的keyCode为：" + e.keyCode + ', current:' + settings.current)
       if (e.keyCode == 46 && settings.current) {
         deleteItem(settings.current)
-      } else if (e.keyCode == 38 || e.keyCode == 40) {
-        // 方向键 up = 38
-        const isUp = e.keyCode == 38
+      } else if (e.keyCode >= 37 && e.keyCode <= 40) {
+        // 方向键 up = 38   left = 37 right 39 down = 40
+        const isUp = e.keyCode == 38 || e.keyCode == 37
         selectNext(isUp)
       }
     }
