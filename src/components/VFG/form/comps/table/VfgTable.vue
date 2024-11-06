@@ -26,7 +26,7 @@
 <script>
 import CompItem from './CompItem.vue'
 import CircleCloseFilled from 'element-plus'
-import { defineComponent, computed, ref, watch, inject, reactive } from "vue";
+import { defineComponent, computed, ref, watch, reactive } from "vue";
 
 export default defineComponent({
     name: "VfgTable",
@@ -36,7 +36,7 @@ export default defineComponent({
     setup(props, ctx) {
         console.log(props)
         function handleSelectionChange(selection) {
-            emit('selection-change', selection)
+            ctx.emit('selection-change', selection)
         }
 
         function filterHeader(isDataHeader = true) {
