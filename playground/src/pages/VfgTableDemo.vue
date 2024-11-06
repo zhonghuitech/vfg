@@ -33,6 +33,7 @@ const vm = ref({
 })
 
 const changAction = () => {
+    // clearn()
     vm.value.header = [
         {
             label: '编号',
@@ -43,4 +44,8 @@ const changAction = () => {
         }
     ]
 }
+
+const clearn = function () {
+    localStorage.removeItem("settings");
+};
 </script>

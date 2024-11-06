@@ -22,7 +22,7 @@ const optList = [
 
 export default {
     __ID: '',            // 这个 ID 应用到页面上会被替换为随机生成的
-    tag: "el-table",     // 组件名，全局唯一
+    tag: "vfg-table",     // 组件名，全局唯一
     tagIcon: "table",   // 组件图标 SVG文件
     name: "表格",         // 组件名
     __openRules: false,  // 验证规则
@@ -44,19 +44,30 @@ export default {
                 value: "较小"
             }], "default"),
         'show-header': helper.input_boolean("显示表头", true),
+        'showSelection': helper.input_boolean("显示多选", true),
     },
     slots: {
     },
     props: {
-        // ":data": [
-        //     {
-        //         "id": 1,
-        //         "name": "张三"
-        //     }
-        // ]
+        dataList: [
+            {
+                "id": 11,
+                "name": "张三"
+            }
+        ],
+        header: [
+            {
+                label: '编号',
+                prop: 'id'
+            }, {
+                label: '姓名',
+                prop: 'name'
+            }
+        ],
+        loading: false,
     },
-    __table__: helper.input_table("列配置", optList),
+    // __table__: helper.input_table("列配置", optList),
     childrens: [
-        ...optList
+        //...optList
     ],
 }
