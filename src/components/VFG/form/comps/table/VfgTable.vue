@@ -4,13 +4,12 @@
         <el-table-column v-for="item in filterHeader(true)" :label="item.label" :align="item.align || 'center'"
             :prop="item.prop">
             <template #default="scope">
-                <dict-tag v-if="item.type === 'dict'" :options="optionsDict[item.dictKey]" :value="scope.row[item.prop]"
-                    debugger />
-                <el-button v-else-if="item.type === 'link'" type="primary" link @click="item.action(scope.row)">{{
+                <!-- <dict-tag v-if="item.type === 'dict'" :options="optionsDict[item.dictKey]" :value="scope.row[item.prop]"
+                    debugger /> -->
+                <el-button v-if="item.type === 'link'" type="primary" link @click="item.action(scope.row)">{{
                     scope.row[item.prop] }}</el-button>
-                <!-- <json-viewer v-else-if="item.type === 'json'" :value="JSON.parse(scope.row[item.prop])"></json-viewer> -->
                 <CompItem v-else-if="item.type === 'comp'" :component="buildCompProps(item, scope.row)"></CompItem>
-                <image-preview v-else-if="item.type === 'image'" :src="scope.row[item.prop]" :width="50" :height="50" />
+                <!-- <image-preview v-else-if="item.type === 'image'" :src="scope.row[item.prop]" :width="50" :height="50" /> -->
                 <span v-else>{{ scope.row[item.prop] }}</span>
             </template>
         </el-table-column>
@@ -26,14 +25,16 @@
 
 <script>
 import CompItem from './CompItem.vue'
-// import JsonViewer from 'vue-json-viewer'
+import CircleCloseFilled from 'element-plus'
+import { defineComponent, computed, ref, watch, inject, reactive } from "vue";
 
 export default defineComponent({
     name: "VfgTable",
     emits: ["update:modelValue"],
-    components: { CircleCloseFilled },
-    props: ["dataList", "header", "loading", "selection-change"],
+    components: { CircleCloseFilled, CompItem },
+    props: ["dataList", "header", "loading", "selection-change", "showSelection"],
     setup(props, ctx) {
+        console.log(props)
         function handleSelectionChange(selection) {
             emit('selection-change', selection)
         }

@@ -13,7 +13,7 @@ import VueDraggableDemo from "/~/pages/VueDraggableDemo.vue"
 import SortableDemo from "/~/pages/SortableDemo.vue"
 import SortTable from "/~/pages/SortTable.vue"
 import SortTable2 from "/~/pages/SortTable2.vue"
-
+import VfgTableDemo from './pages/VfgTableDemo.vue'
 
 const routes = [
     { path: '/', component: Index },
@@ -21,7 +21,8 @@ const routes = [
     { path: '/vd', component: VueDraggableDemo },
     { path: '/sd', component: SortableDemo },
     { path: '/st', component: SortTable },
-    { path: '/st2', component: SortTable2 }
+    { path: '/st2', component: SortTable2 },
+    { path: '/vt', component: VfgTableDemo }
 ]
 
 const router = createRouter({
