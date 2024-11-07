@@ -90,13 +90,21 @@ export default defineComponent({
     });
 
     const updateEleSet = function (val, field) {
-
+      // 每个组件的配置信息更新后，更新下最原始的 ele 信息
+      console.log('attribute update', val, field)
       let ele = findEle(props.modelValue.drawingList, props.modelValue.current);
 
       if (field in ele) {
         ele[field]["__val__"] = val;
         return;
       }
+
+      // TODO 这里后续需要形成一个统一的框架
+      if (field === '__table__') {
+        ele.props.header = val.header
+        return
+      }
+
       for (let k of ["formItem", "attrs"]) {
         if (ele[k] && field in ele[k]) {
           ele[k][field]["__val__"] = val;

@@ -1,5 +1,4 @@
 import helper from "../../helper";
-import { createTabCol } from "/@/components/VFG/form/ui/helper";
 
 const selection = {
     tag: "el-table-column",
@@ -13,12 +12,6 @@ const selection = {
         ':selectable': 'selectable'
     }
 }
-
-const optList = [
-    selection,
-    helper.cloneItem(createTabCol("id", "编号")),
-    helper.cloneItem(createTabCol("name", "姓名"))
-]
 
 export default {
     __ID: '',            // 这个 ID 应用到页面上会被替换为随机生成的
@@ -70,8 +63,6 @@ export default {
         ],
         loading: false,
     },
-    // __table__: helper.input_table("列配置", optList),
     childrens: [
-        //...optList
     ],
 }

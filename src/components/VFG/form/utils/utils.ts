@@ -1,3 +1,4 @@
+import helper from "../ui/helper";
 import {
     isObjectObject
 } from "./func";
@@ -101,7 +102,7 @@ export const eleRenderFormat = function (conf: any, eleName: any) {
     }
     const types: any = initTypes()
 
-        let t = conf.input_type
+    let t = conf.input_type
     if (conf.input_type in types == false) {
         t = 'input_text'
     }
@@ -162,7 +163,7 @@ export const eleRenderSetFormat = function (conf: any) {
         eles.push(opt)
     }
 
-    const tabCol = eleRenderFormat(conf.__table__, '__table__')
+    const tabCol = eleRenderFormat(helper.input_table('列配置', conf.props.header), '__table__')
     if (tabCol && tabCol.formItem) {
         eles.push({ tag: "el-divider", slots: { default: "表格列配置" } });
         tabCol.formItem.label = undefined

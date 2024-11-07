@@ -124,23 +124,17 @@ const input_opt = function (value: string, tag: string) {
     }
 }
 
-const colOptValue = function () {
+const colOptValue = function (optList: any) {
     return {
         type: 'static',
         tag: 'el-checkbox-button',
-        header: [{
-            prop: "id",
-            label: "编号"
-        }, {
-            prop: "name",
-            label: "姓名"
-        }]
+        header: optList
     }
 }
 
 const input_table = function (value: string, optList: any) {
     return {
-        __val__: colOptValue(),
+        __val__: colOptValue(optList),
         input_type: "input_table",
         label: value
     }

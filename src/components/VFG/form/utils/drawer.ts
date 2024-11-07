@@ -77,7 +77,7 @@ const _clone = function (obj: any) {
     const _c = {} as any;
     for (let a in obj) {
         if (isObjectObject(obj[a])) {
-            console.log(`${a} is isObjectObject`)
+            // console.log(`${a} is isObjectObject`)
             if ("__val__" in obj[a]) {
                 _c[a] = obj[a]["__val__"];
             } else {
@@ -86,12 +86,12 @@ const _clone = function (obj: any) {
                 }
             }
         } else if (isObjectArray(obj[a])) {
-            console.log(`${a} is isObjectArray`)
+            // console.log(`${a} is isObjectArray`)
             _c[a] = obj[a].map((x: any) => {
                 return _clone(x);
             });
         } else {
-            console.log(`${a} is else`)
+            // console.log(`${a} is else`)
             // 下面这段代码，why ?
             if (["tagIcon", "__formId", "rule"].includes(a) == false) {
                 _c[a] = obj[a];
