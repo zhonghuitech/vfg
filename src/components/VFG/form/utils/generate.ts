@@ -442,15 +442,19 @@ const toHtml = function (ele: any, js: any) {
         ele['childrens'] = ele['childrens'].concat(ops);
     }
 
-    if ('__table__' in ele) {
+    if (ele.tag === 'vfg-table' || ele.tag === 'ele-table') {
         console.log(ele['childrens'])
         if (isObjectArray(ele['childrens']) === false) {
             ele['childrens'] = [];
         }
-        const cols = ele.__table__.header.map((item: any) => {
-            return helper.cloneItem(createTabCol(item.prop, item.label))
-        })
-        console.log(cols)
+        console.log(ele.props)
+
+        const cols = []
+        for(let e in ele.props.header) {
+            const item = ele.props.header[e]
+            cols.push(helper.cloneItem(createTabCol(item.prop, item.label)))
+        }
+       
         ele['childrens'] = toVal(cols);
     }
 
