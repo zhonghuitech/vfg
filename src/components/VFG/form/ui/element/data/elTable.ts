@@ -42,7 +42,7 @@ export default {
     slots: {
     },
     props: {
-        dataList: [
+        data: [
             {
                 "id": 1,
                 "name": "张三"

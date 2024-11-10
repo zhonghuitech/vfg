@@ -1,5 +1,5 @@
 <template>
-    <el-table v-loading="loading" :data="dataList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="data" @selection-change="handleSelectionChange">
         <el-table-column v-if="showSelection" type="selection" width="55" align="center" />
         <el-table-column v-for="item in filterHeader(true)" :label="item.label" :align="item.align || 'center'"
             :prop="item.prop">
@@ -32,7 +32,7 @@ export default defineComponent({
     name: "VfgTable",
     emits: ["update:modelValue"],
     components: { CircleCloseFilled, CompItem },
-    props: ["dataList", "header", "loading", "selection-change", "showSelection"],
+    props: ["data", "header", "loading", "selection-change", "showSelection"],
     setup(props, ctx) {
         console.log(props)
         function handleSelectionChange(selection) {
