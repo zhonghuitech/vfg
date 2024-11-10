@@ -163,12 +163,14 @@ export const eleRenderSetFormat = function (conf: any) {
         eles.push(opt)
     }
 
-    const tabCol = eleRenderFormat(helper.input_table('列配置', conf.props.header), '__table__')
-    if (tabCol && tabCol.formItem) {
-        eles.push({ tag: "el-divider", slots: { default: "表格列配置" } });
-        tabCol.formItem.label = undefined
-        tabCol.formItem.labelWidth = '1'
-        eles.push(tabCol)
+    if (conf.tag === 'vfg-table' || conf.tag === 'el-table') {
+        const tabCol = eleRenderFormat(helper.input_table('列配置', conf.props.header), '__table__')
+        if (tabCol && tabCol.formItem) {
+            eles.push({ tag: "el-divider", slots: { default: "表格列配置" } });
+            tabCol.formItem.label = undefined
+            tabCol.formItem.labelWidth = '1'
+            eles.push(tabCol)
+        }
     }
     console.log(eles)
     return eles;
