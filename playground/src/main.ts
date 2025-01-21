@@ -16,6 +16,8 @@ import TableDemo from "/~/pages/TableDemo.vue"
 import SortTable from "/~/pages/SortTable.vue"
 import SortTable2 from "/~/pages/SortTable2.vue"
 import VfgTableDemo from './pages/VfgTableDemo.vue'
+import PopoverDemo from './pages/PopoverDemo.vue'
+
 
 const routes = [
     { path: '/', component: Index },
@@ -26,6 +28,7 @@ const routes = [
     { path: '/st2', component: SortTable2 },
     { path: '/vt', component: VfgTableDemo },
     { path: '/td', component: TableDemo },
+    { path: '/popover', component: PopoverDemo },
 ]
 
 const router = createRouter({
