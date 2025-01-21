@@ -160,8 +160,8 @@
                             <template #footer>
                                 <div style="display: flex;justify-content:space-between">
                                     <span>
-                                        <el-button @click="cancel" link>取 消</el-button>
-                                        <el-button type="primary" @click="submitFilterForm">确 定</el-button>
+                                        <el-button @click="cancelNew" link>取 消</el-button>
+                                        <el-button type="primary" @click="submitFilterFormNew">确 定</el-button>
                                     </span>
                                 </div>
                             </template>
@@ -270,6 +270,14 @@ function submitFilterForm() {
 
 function cancel() {
     popoverVisible.value = false
+}
+
+function cancelNew() {
+    popoverVisibleNew.value = false
+} 
+
+function submitFilterFormNew() {
+    popoverVisibleNew.value = false
 }
 
 function cancelFinal() {
